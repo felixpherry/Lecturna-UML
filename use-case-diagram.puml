@@ -1,0 +1,309 @@
+@startuml Lecturna
+left to right direction
+skinparam nodesep 0
+skinparam ranksep 0
+skinparam padding 0
+hide stereotype
+hide circle
+
+package User {
+    actor Admin as A
+    actor Student as S
+    actor Instructor as I
+    actor Parent as P
+}
+
+actor Guest as G
+
+usecase (Register for Trial Class) as UC1
+usecase (Register for Course) as UC2
+usecase (Register as Instructor) as UC3
+
+G --> UC1
+G --> UC2
+G --> UC3
+
+usecase (Login) as UC4
+A --> UC4
+P --> UC4
+I --> UC4
+S --> UC4
+
+usecase (Logout) as UC5
+A --> UC5
+P --> UC5
+I --> UC5
+S --> UC5
+
+usecase (View Dashboard) as UC6
+A --> UC6
+P --> UC6
+I --> UC6
+S --> UC6
+
+' Admin Region
+usecase (Manage Accounts) as UC7
+usecase (Ban User) as UC8
+usecase (Unban User) as UC9
+
+A --> UC7
+UC8 .-> UC7 : extend
+UC9 .-> UC7 : extend
+
+usecase (Manage Class) as UC10
+usecase (Create Class) as UC11
+usecase (Autogenerate Class) as UC12
+usecase (Edit Class) as UC13
+usecase (Delete Class) as UC14
+
+A --> UC10
+UC11 .-> UC10 : extend
+UC12 .-> UC10 : extend
+UC13 .-> UC10 : extend
+UC14 .-> UC10 : extend
+
+usecase (Manage Enrollments) as UC15
+usecase (Approve Enrollment) as UC16
+usecase (Reject Enrollment) as UC17
+
+A --> UC15
+UC16 .-> UC15 : extend
+UC17 .-> UC15 : extend
+
+usecase (Manage FAQ) as UC18
+usecase (Add FAQ) as UC19
+usecase (Edit FAQ) as UC20
+usecase (Delete FAQ) as UC21
+
+A --> UC18
+UC19 .-> UC18 : extend
+UC20 .-> UC18 : extend
+UC21 .-> UC18 : extend
+
+usecase (Manage Hero) as UC22
+usecase (Edit Hero) as UC23
+
+A --> UC22
+UC23 .-> UC22 : extend
+
+usecase (Manage Logo) as UC24
+usecase (Edit Logo) as UC25
+
+A --> UC24
+UC25 .-> UC24 : extend
+
+usecase (Manage Categories) as UC26
+usecase (Add Categories) as UC27
+usecase (Edit Categories) as UC28
+usecase (Delete Categories) as UC29
+
+A --> UC26
+UC27 .-> UC26 : extend
+UC28 .-> UC26 : extend
+UC29 .-> UC26 : extend
+
+usecase (Manage Coupon) as UC30
+usecase (Add Coupon) as UC31
+usecase (Edit Coupon) as UC32
+usecase (Delete Coupon) as UC33
+usecase (Change Coupon Status) as UC34
+
+A --> UC30
+UC31 .-> UC30 : extend
+UC32 .-> UC30 : extend
+UC33 .-> UC30 : extend
+UC34 .-> UC30 : extend
+
+usecase (Manage Day) as UC35
+usecase (Change Day Status) as UC36
+
+A --> UC35
+UC36 .-> UC35 : extend
+
+usecase (Manage Grade) as UC37
+usecase (Add Grade) as UC38
+usecase (Edit Grade) as UC39
+usecase (Delete Grade) as UC40
+usecase (Change Grade Status) as UC41
+
+A --> UC37
+UC38 .-> UC37 : extend
+UC39 .-> UC37 : extend
+UC40 .-> UC37 : extend
+UC41 .-> UC37 : extend
+
+usecase (Manage Period) as UC42
+usecase (Add Period) as UC43
+usecase (Edit Period) as UC44
+usecase (Delete Period) as UC45
+usecase (Change Period Status) as UC46
+
+A --> UC42
+UC43 .-> UC42 : extend
+UC44 .-> UC42 : extend
+UC45 .-> UC42 : extend
+UC46 .-> UC42 : extend
+
+usecase (Manage Shift) as UC47
+usecase (Add Shift) as UC48
+usecase (Edit Shift) as UC49
+usecase (Delete Shift) as UC50
+usecase (Change Shift Status) as UC51
+
+A --> UC47
+UC48 .-> UC47 : extend
+UC49 .-> UC47 : extend
+UC50 .-> UC47 : extend
+UC51 .-> UC47 : extend
+
+usecase (Manage Skill) as UC52
+usecase (Add Skill) as UC53
+usecase (Edit Skill) as UC54
+usecase (Delete Skill) as UC55
+usecase (Change Skill Status) as UC56
+
+A --> UC52
+UC53 .-> UC52 : extend
+UC54 .-> UC52 : extend
+UC55 .-> UC52 : extend
+UC56 .-> UC52 : extend
+
+usecase (Manage Program) as UC57
+usecase (Add Program) as UC58
+usecase (Edit Program) as UC59
+usecase (Delete Program) as UC60
+usecase (Publish Program) as UC61
+usecase (Unpublish Program) as UC62
+
+A --> UC57
+UC58 .-> UC57 : extend
+UC59 .-> UC57 : extend
+UC60 .-> UC57 : extend
+UC61 .-> UC57 : extend
+UC62 .-> UC57 : extend
+
+usecase (Manage Course) as UC63
+usecase (Add Course) as UC64
+usecase (Edit Course) as UC65
+usecase (Delete Course) as UC66
+usecase (Publish Course) as UC67
+usecase (Unpublish Course) as UC68
+
+A --> UC63
+UC64 .-> UC63 : extend
+UC65 .-> UC63 : extend
+UC66 .-> UC63 : extend
+UC67 .-> UC63 : extend
+UC68 .-> UC63 : extend
+
+usecase (Manage Session) as UC69
+usecase (Add Session) as UC70
+usecase (Edit Session) as UC71
+usecase (Delete Session) as UC72
+usecase (Publish Session) as UC73
+usecase (Unpublish Session) as UC74
+
+A --> UC69
+UC70 .-> UC69 : extend
+UC71 .-> UC69 : extend
+UC72 .-> UC69 : extend
+UC73 .-> UC69 : extend
+UC74 .-> UC69 : extend
+
+usecase (Manage Trial Class Registration) as UC75
+usecase (Approve Trial Class Registration) as UC76
+usecase (Reject Trial Class Registration) as UC77
+
+A --> UC75
+UC76 .-> UC75 : extend
+UC77 .-> UC75 : extend
+
+usecase (Manage Instructor Registration) as UC78
+usecase (Approve Instructor Registration) as UC79
+usecase (Reject Instructor Registration) as UC80
+
+A --> UC78
+UC79 .-> UC78 : extend
+UC80 .-> UC78 : extend
+
+usecase (Manage Course Registration) as UC81
+usecase (Approve Course Registration) as UC82
+usecase (Reject Course Registration) as UC83
+
+A --> UC81
+UC82 .-> UC81 : extend
+UC83 .-> UC81 : extend
+
+' Class Region
+usecase (View Classes) as UC84
+usecase (View Class Session) as UC85
+usecase (Add Session Report) as UC86
+usecase (Add Session Attachment) as UC87
+usecase (View Class Score) as UC88
+usecase (View Class Member) as UC89
+usecase (View Class Leaderboard) as UC90
+usecase (Join Class Meeting) as UC91
+usecase (Manage Class Chat) as UC92
+usecase (Add Chat) as UC93
+usecase (Edit Chat) as UC94
+usecase (Delete Chat) as UC95
+
+UC93 .-> UC92 : extend
+UC94 .-> UC92 : extend
+UC95 .-> UC92 : extend
+
+usecase (Manage Assessment) as UC96
+usecase (Add Assessment) as UC97
+
+UC97 .-> UC96 : extend
+
+P --> UC84
+P --> UC88
+P --> UC90
+
+A --> UC84
+A --> UC85
+A --> UC89
+
+S --> UC84
+S --> UC85
+S --> UC88
+S --> UC89
+S --> UC90
+S --> UC91
+S --> UC92
+
+I --> UC84
+I --> UC85
+I --> UC86
+I --> UC87
+I --> UC89
+I --> UC90
+I --> UC91
+I --> UC92
+I --> UC96
+
+' Schedule Region
+usecase (View Schedule) as UC98
+P --> UC98
+I --> UC98
+S --> UC98
+
+' Profile Region
+usecase (Manage Profile) as UC99
+usecase (Edit Profile) as UC100
+
+UC100 .-> UC99 : extend
+
+A --> UC99
+P --> UC99
+I --> UC99
+S --> UC99
+
+usecase (Manage Course Enrollments) as UC101
+usecase (Enroll a New Course) as UC102
+
+UC102 .-> UC101 : extend
+S --> UC101
+
+@enduml
