@@ -1,0 +1,12 @@
+@startuml ManageInstructorRegistration
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Instructor Registration Page;
+|System|
+:Show Instructor Registration Page;
+stop
+@enduml

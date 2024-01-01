@@ -1,0 +1,26 @@
+@startuml Edit Class
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Classes Page;
+|System|
+:Show Classes Page;
+|Admin|
+:Click Edit Button on a Class;
+|System|
+:Show Modal with Edit Form;
+|Admin|
+repeat :Edit Data in Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+->yes;
+|System|
+:Close Modal;
+stop
+@enduml

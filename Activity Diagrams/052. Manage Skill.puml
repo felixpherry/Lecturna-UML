@@ -1,0 +1,12 @@
+@startuml ManageSkill
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Skill Page;
+|System|
+:Show Skill Page;
+stop
+@enduml

@@ -1,0 +1,12 @@
+@startuml ViewSchedule
+|User|
+start
+:Login as Student, Instructor, or Parent;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Schedule Page;
+|System|
+:Show Schedule Page;
+stop
+@enduml

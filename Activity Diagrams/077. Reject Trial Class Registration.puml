@@ -1,0 +1,21 @@
+@startuml RejectTrialClassRegistration
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Trial Class Registration Page;
+|System|
+:Show Trial Class Registration Page;
+|Admin|
+:Select Trial Class Registration to Reject;
+|System|
+:Show Rejection Confirmation Modal;
+|Admin|
+:Confirm Rejection;
+|System|
+:Update Registration Status;
+:Show Success Popup (Rejection Done);
+stop
+@enduml

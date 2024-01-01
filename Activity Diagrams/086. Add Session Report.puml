@@ -1,0 +1,30 @@
+@startuml AddSessionReport
+|Instructor|
+start
+:Login as Instructor;
+|System|
+:Redirect to Dashboard Page;
+|Instructor|
+:Visit Class Details Page;
+|System|
+:Show Class Details Page;
+|Instructor|
+:Click "Session" Tab;
+|System|
+:Show All Sessions for the Class;
+|Instructor|
+:Select a Session;
+|System|
+:Show Session Details;
+|Instructor|
+:Click "Session Report" Section;
+|System|
+:Show Session Report Form;
+|Instructor|
+:Fill Session Report Form;
+:Click Save Button on Form;
+|System|
+:Save Session Report;
+:Show Success Popup;
+stop
+@enduml

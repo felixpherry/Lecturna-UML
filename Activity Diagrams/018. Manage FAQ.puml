@@ -1,0 +1,12 @@
+@startuml Manage FAQ
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit FAQ Page;
+|System|
+:Show FAQ Page;
+stop
+@enduml

@@ -1,0 +1,17 @@
+@startuml EnrollNewCourse
+|Student|
+start
+|Student|
+:Visit Enrollments Page;
+|System|
+:Show Enrollments Page;
+|Student|
+:Click the Register button for a Course;
+|System|
+:Display Confirmation Modal for Enrollment;
+|Student|
+:Confirm Enrollment;
+|System|
+:Display Success Popup;
+stop
+@enduml

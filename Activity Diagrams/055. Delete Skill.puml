@@ -1,0 +1,21 @@
+@startuml DeleteSkill
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Skill Page;
+|System|
+:Show Skill Page;
+|Admin|
+:Click Delete Button;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Confirm Deletion;
+|System|
+:Delete Skill;
+:Show Success Popup (Skill Deleted);
+stop
+@enduml

@@ -1,0 +1,26 @@
+@startuml AddPeriod
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Period Page;
+|System|
+:Show Period Page;
+|Admin|
+:Click Add Button;
+|System|
+:Show Modal with Period Form;
+|Admin|
+repeat :Fill Period Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while (valid?) is (no)
+-> yes;
+:Close Modal;
+:Show Success Popup (Period Added);
+stop
+@enduml

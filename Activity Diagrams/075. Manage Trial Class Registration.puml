@@ -1,0 +1,12 @@
+@startuml ManageTrialClassRegistration
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Trial Class Registration Page;
+|System|
+:Show Trial Class Registration Page;
+stop
+@enduml

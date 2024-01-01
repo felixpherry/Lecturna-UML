@@ -1,0 +1,19 @@
+@startuml AddChat
+|User|
+start
+:Login as Student or Instructor;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Class Chat Page;
+|System|
+:Show Class Chat Page;
+|User|
+repeat :Input Chat in Chatbox;
+:Send Chat;
+|System|
+:Validate Input Data;
+repeat while(valid?) is (no)
+-> yes;
+stop
+@enduml

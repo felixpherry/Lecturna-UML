@@ -1,0 +1,26 @@
+@startuml AddGrade
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Grade Page;
+|System|
+:Show Grade Page;
+|Admin|
+:Click Add Button;
+|System|
+:Show Modal with Grade Form;
+|Admin|
+repeat :Fill Grade Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while (valid?) is (no)
+-> yes;
+:Close Modal;
+:Show Success Popup (Grade Added);
+stop
+@enduml

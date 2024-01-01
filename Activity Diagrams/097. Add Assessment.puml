@@ -1,0 +1,25 @@
+@startuml AddAssessment
+|Instructor|
+start
+:Login as Instructor;
+|System|
+:Redirect to Dashboard Page;
+|Instructor|
+:Visit Class Assessment Page;
+|System|
+:Show Class Assessment Page;
+|Instructor|
+:Click "Add" Button;
+|System|
+:Show Modal with Assessment Form;
+|Instructor|
+repeat :Input Assessment;
+:Click Save Button;
+|System|
+:Validate Input Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+-> yes;
+:Show Success Popup (Assessment Added);
+stop
+@enduml

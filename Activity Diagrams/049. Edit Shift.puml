@@ -1,0 +1,26 @@
+@startuml Edit Shift
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Shift Page;
+|System|
+:Show Shift Page;
+|Admin|
+:Click Edit Button on Shift;
+|System|
+:Show Modal with Shift Form;
+|Admin|
+repeat :Edit Data in Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while (valid?) is (no)
+-> yes;
+:Close Modal;
+:Show Success Popup (Shift Edited);
+stop
+@enduml

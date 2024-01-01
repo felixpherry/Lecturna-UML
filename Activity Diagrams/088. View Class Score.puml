@@ -1,0 +1,16 @@
+@startuml ViewClassScore
+|User|
+start
+:Login as Student or Parent;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Class Details Page;
+|System|
+:Show Class Details Page;
+|User|
+:Click "Score" Tab;
+|System|
+:Show Class Score Details;
+stop
+@enduml

@@ -1,0 +1,26 @@
+@startuml EditSkill
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Skill Page;
+|System|
+:Show Skill Page;
+|Admin|
+:Click Edit Button;
+|System|
+:Show Modal with Skill Form;
+|Admin|
+repeat :Edit Skill in Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+-> yes;
+:Close Modal;
+:Show Success Popup (Skill Edited);
+stop
+@enduml

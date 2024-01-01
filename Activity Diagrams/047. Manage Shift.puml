@@ -1,0 +1,12 @@
+@startuml Manage Shift
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Shift Page;
+|System|
+:Show Shift Page;
+stop
+@enduml

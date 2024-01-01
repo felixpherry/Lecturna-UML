@@ -1,0 +1,12 @@
+@startuml ViewClasses
+|User|
+start
+:Login;
+|System|
+:Redirect to Dashboard;
+|User|
+:Visit Classes Page;
+|System|
+:Show Classes Page;
+stop
+@enduml

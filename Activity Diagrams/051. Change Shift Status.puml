@@ -1,0 +1,22 @@
+@startuml ChangeShiftStatus
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Shift Page;
+|System|
+:Show Shift Page;
+|Admin|
+:Click Change Status Button on Shift;
+|System|
+:Show Status Change Modal;
+|Admin|
+:Select New Status;
+:Click Confirm Button on Modal;
+|System|
+:Change Shift Status;
+:Show Success Popup (Shift Status Changed);
+stop
+@enduml

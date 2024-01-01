@@ -1,0 +1,12 @@
+@startuml ManageLogo
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Logo Page;
+|System|
+:Show Logo Page;
+stop
+@enduml

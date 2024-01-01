@@ -1,0 +1,17 @@
+@startuml PublishCourse
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Course Details Page;
+|System|
+:Show Course Details Page;
+|Admin|
+:Click "Publish Course" Button;
+|System|
+:Publish Course;
+:Show Success Popup (Course Published);
+stop
+@enduml

@@ -1,0 +1,20 @@
+@startuml DeleteFAQ
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit FAQ Page;
+|System|
+:Show FAQ Page;
+|Admin|
+:Click Delete Button on FAQ;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button on Modal;
+|System|
+:Show Success Popup (FAQ Deleted);
+stop
+@enduml

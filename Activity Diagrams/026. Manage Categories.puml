@@ -1,0 +1,12 @@
+@startuml ManageCategories
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Categories Page;
+|System|
+:Show Categories Page;
+stop
+@enduml

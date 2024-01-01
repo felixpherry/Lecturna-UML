@@ -1,0 +1,29 @@
+@startuml Create Class
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Create Classes Page;
+|System|
+:Show Create Classes Page;
+|Admin|
+:Click Add Button on Create Classes Page;
+|System|
+:Show Modal with Class Form;
+|Admin|
+repeat :Fill Class Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error message;
+repeat while (valid?) is (no)
+->yes;
+|Admin|
+:Click Save Button on Create Classes Page;
+|System|
+:Show Success Popup (Classes Added);
+:Redirect to Classes Page;
+stop
+@enduml

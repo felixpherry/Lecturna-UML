@@ -1,0 +1,12 @@
+@startuml ManageCoupon
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Coupon Page;
+|System|
+:Show Coupon Page;
+stop
+@enduml

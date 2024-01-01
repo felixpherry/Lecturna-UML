@@ -1,0 +1,26 @@
+@startuml AddFAQ
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit FAQ Page;
+|System|
+:Show FAQ Page;
+|Admin|
+:Click Add Button on FAQ Page;
+|System|
+:Show Modal with Add FAQ Form;
+|Admin|
+repeat :Fill FAQ Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+->yes;
+:Show Success Popup (FAQ Added);
+:Close Modal;
+stop
+@enduml

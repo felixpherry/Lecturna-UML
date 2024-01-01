@@ -1,0 +1,21 @@
+@startuml DeleteCategory
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Categories Page;
+|System|
+:Show Categories Page;
+|Admin|
+:Click Delete Button on Category;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button;
+|System|
+:Delete Category;
+:Show Success Popup (Category Deleted);
+stop
+@enduml

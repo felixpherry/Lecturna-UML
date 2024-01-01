@@ -1,0 +1,22 @@
+@startuml EditHero
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Hero Page;
+|System|
+:Show Hero Page;
+|Admin|
+repeat :Edit Data in Form;
+:Click Save Button;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+->yes;
+|System|
+:Show Success Popup (Hero Edited);
+stop
+@enduml

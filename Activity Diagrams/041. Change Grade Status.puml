@@ -1,0 +1,17 @@
+@startuml ChangeGradeStatus
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Grade Page;
+|System|
+:Show Grade Page;
+|Admin|
+:Click Change Status Button on Grade;
+|System|
+:Change Grade Status;
+:Show Success Popup (Grade Status Changed);
+stop
+@enduml

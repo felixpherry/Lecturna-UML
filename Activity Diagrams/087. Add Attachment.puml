@@ -1,0 +1,29 @@
+@startuml AddAttachment
+|Instructor|
+start
+:Login as Instructor;
+|System|
+:Redirect to Dashboard Page;
+|Instructor|
+:Visit Class Details Page;
+|System|
+:Show Class Details Page;
+|Instructor|
+:Click "Session" Tab;
+|System|
+:Show All Sessions for the Class;
+|Instructor|
+:Select a Session;
+|System|
+:Show Session Details;
+|Instructor|
+:Click "Add New Resource" Section;
+|System|
+:Show Attachment Upload Modal;
+|Instructor|
+:Upload Attachment;
+:Click Save Button on Modal;
+|System|
+:Show Success Popup;
+stop
+@enduml

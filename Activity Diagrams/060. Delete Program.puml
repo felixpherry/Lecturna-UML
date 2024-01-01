@@ -1,0 +1,21 @@
+@startuml DeleteProgram
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Programs Page;
+|System|
+:Show Programs Page;
+|Admin|
+:Click Delete Button on Program;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Confirm Deletion;
+|System|
+:Delete Program;
+:Show Success Popup (Program Deleted);
+stop
+@enduml

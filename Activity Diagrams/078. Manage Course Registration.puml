@@ -1,0 +1,14 @@
+@startuml ManageCourseRegistration
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Course Registration Page;
+|System|
+:Show Course Registration Page;
+|Admin|
+:View List of Course Registrations;
+stop
+@enduml

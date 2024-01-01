@@ -1,0 +1,21 @@
+@startuml DeleteCoupon
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Coupon Page;
+|System|
+:Show Coupon Page;
+|Admin|
+:Click Delete Button on a Coupon;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Confirm Deletion;
+|System|
+:Delete Coupon;
+:Show Success Popup (Coupon Deleted);
+stop
+@enduml

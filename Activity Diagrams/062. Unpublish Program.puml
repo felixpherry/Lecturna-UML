@@ -1,0 +1,20 @@
+@startuml UnpublishProgram
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Programs Page;
+|System|
+:Show Programs Page;
+|Admin|
+:Click Edit Button on Program;
+|System|
+:Redirect to Program Details Page;
+|Admin|
+:Click Unpublish Button on Program Details Page;
+|System|
+:Show Success Popup (Program Unpublished);
+stop
+@enduml

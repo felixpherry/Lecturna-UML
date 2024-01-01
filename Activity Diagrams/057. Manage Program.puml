@@ -1,0 +1,12 @@
+@startuml ManageProgram
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Programs Page;
+|System|
+:Show Programs Page;
+stop
+@enduml

@@ -1,0 +1,16 @@
+@startuml ViewClassSession
+|User|
+start
+:Login;
+|System|
+:Redirect to Dashboard;
+|User|
+:Visit Class Details Page;
+|System|
+:Show Class Details Page;
+|User|
+:Click "Session" Tab;
+|System|
+:Show All Sessions for the Class;
+stop
+@enduml

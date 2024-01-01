@@ -1,0 +1,16 @@
+@startuml ViewClassMember
+|User|
+start
+:Login as Instructor, Student, or Admin;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Class Details Page;
+|System|
+:Show Class Details Page;
+|User|
+:Click "Member" Tab;
+|System|
+:Show Class Members;
+stop
+@enduml

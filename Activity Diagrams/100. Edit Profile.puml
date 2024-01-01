@@ -1,0 +1,26 @@
+@startuml EditProfile
+|User|
+start
+:Login;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Profile Page;
+|System|
+:Show Profile Page;
+|User|
+:Click Edit Profile Button;
+|System|
+:Show Edit Profile Page;
+|User|
+repeat :Fill Edit Profile Form;
+:Click Save Button on Form;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+-> yes;
+:Update User Profile;
+:Show Success Popup (Profile Edited);
+stop
+@enduml

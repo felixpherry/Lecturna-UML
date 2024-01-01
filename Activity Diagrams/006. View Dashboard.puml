@@ -1,0 +1,12 @@
+@startuml View Dashboard
+|User|
+start
+:Visit Home Page;
+|System|
+:Show Home Page;
+|User|
+:Click "View Dashboard" Button in Hero Section;
+|System|
+:Redirect to Dashboard Page;
+stop
+@enduml

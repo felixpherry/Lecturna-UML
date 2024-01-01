@@ -1,0 +1,14 @@
+@startuml ManageCourse
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Program Details Page;
+|System|
+:Show Program Details Page;
+|Admin|
+:View All Courses in the Program;
+stop
+@enduml

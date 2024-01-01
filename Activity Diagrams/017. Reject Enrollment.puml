@@ -1,0 +1,20 @@
+@startuml Reject Enrollment
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Enrollments Page;
+|System|
+:Show Enrollments Page;
+|Admin|
+:Click Reject Button on an Enrollment;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button in Modal;
+|System|
+:Show Success Popup (Enrollment Rejected);
+stop
+@enduml

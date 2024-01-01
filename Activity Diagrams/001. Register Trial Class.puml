@@ -1,0 +1,21 @@
+@startuml Register Trial Class
+|Guest|
+start
+:Visit Home Page;
+|System|
+:Show Home Page;
+|Guest|
+:Click Register Trial Class Button;
+|System|
+:Redirect to Trial Class Registration Page;
+|Guest|
+repeat :Fill Registration Form;
+:Click Register Button;
+|System|
+:Validate Data;
+backward: Show Error message;
+repeat while (valid?) is (no)
+->yes;
+:Show Success Popup;
+stop
+@enduml

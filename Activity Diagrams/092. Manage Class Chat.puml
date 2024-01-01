@@ -1,0 +1,16 @@
+@startuml ManageClassChat
+|User|
+start
+:Login as Instructor or Student;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Class Details Page;
+|System|
+:Show Class Details Page;
+|User|
+:Click "Chat" Tab;
+|System|
+:Redirect to Class Chat Page;
+stop
+@enduml

@@ -1,0 +1,12 @@
+@startuml Manage Hero
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Hero Page;
+|System|
+:Show Hero Page;
+stop
+@enduml

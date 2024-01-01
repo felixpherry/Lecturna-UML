@@ -1,0 +1,21 @@
+@startuml Delete Shift
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Shift Page;
+|System|
+:Show Shift Page;
+|Admin|
+:Click Delete Button on Shift;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button on Modal;
+|System|
+:Delete Shift;
+:Show Success Popup (Shift Deleted);
+stop
+@enduml

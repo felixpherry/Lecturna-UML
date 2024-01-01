@@ -1,0 +1,21 @@
+@startuml Delete Period
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Period Page;
+|System|
+:Show Period Page;
+|Admin|
+:Click Delete Button on Period;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button on Modal;
+|System|
+:Delete Period;
+:Show Success Popup (Period Deleted);
+stop
+@enduml

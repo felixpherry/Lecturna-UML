@@ -1,0 +1,20 @@
+@startuml Ban User
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Accounts Page;
+|System|
+:Show Accounts Page;
+|Admin|
+:Click Ban Button on an Account;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button in Modal;
+|System|
+:Show Success Popup (User Banned);
+stop
+@enduml

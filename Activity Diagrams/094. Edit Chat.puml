@@ -1,0 +1,24 @@
+@startuml EditChat
+|User|
+start
+:Login as Student or Instructor;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Class Chat Page;
+|System|
+:Show Class Chat Page;
+|User|
+:Press Edit Button on a chat;
+|System|
+:Show Edit Form for the selected chat;
+|User|
+repeat :Edit the chat in the chatbox;
+:Click Save Button;
+|System|
+:Validate Chat;
+repeat while(valid?) is (no)
+-> yes;
+:Update Chat;
+stop
+@enduml

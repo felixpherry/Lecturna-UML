@@ -1,0 +1,21 @@
+@startuml DeleteSession
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Session Details Page;
+|System|
+:Show Session Details Page;
+|Admin|
+:Click "Delete Session" Button;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button on Modal;
+|System|
+:Redirect to Course Details Page;
+:Show Success Popup (Session Deleted);
+stop
+@enduml

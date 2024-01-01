@@ -1,0 +1,21 @@
+@startuml EditLogo
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Logo Page;
+|System|
+:Show Logo Page;
+|Admin|
+repeat :Edit Logo;
+:Click Save Button;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+-> yes;
+:Show Success Popup (Logo Edited);
+stop
+@enduml

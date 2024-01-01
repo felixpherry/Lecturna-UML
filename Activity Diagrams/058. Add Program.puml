@@ -1,0 +1,28 @@
+@startuml AddProgram
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Programs Page;
+|System|
+:Show Programs Page;
+|Admin|
+:Click Add Button;
+|System|
+:Redirect to Add Program Page;
+|Admin|
+repeat :Fill Program Form;
+    :Click Save Button on Form;
+    |System|
+    :Validate Data;
+    backward: Show Error Message;
+repeat while (valid?) is (no)
+-> yes;
+|Admin|
+:Redirect to Program Details Page;
+|System|
+:Show Success Popup (Program Added);
+stop
+@enduml

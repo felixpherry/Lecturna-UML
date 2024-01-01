@@ -1,0 +1,17 @@
+@startuml Logout
+|User|
+start
+:Visit Home Page;
+|System|
+:Show Home Page;
+|User|
+:Click Avatar on Navigation Bar;
+|System|
+:Show Logout Dropdown Menu;
+|User|
+:Click Logout Button in Dropdown Menu;
+|System|
+:Show Success Popup;
+:Redirect to Home Page;
+stop
+@enduml

@@ -1,0 +1,21 @@
+@startuml Register as Instructor
+|Guest|
+start
+:Visit Home Page;
+|System|
+:Show Home Page;
+|Guest|
+:Click Register as Instructor Navlink;
+|System|
+:Redirect to Instructor Registration Page;
+|Guest|
+repeat :Fill Registration Form;
+:Click Register Button;
+|System|
+:Validate Data;
+backward: Show Error message;
+repeat while (valid?) is (no)
+->yes;
+:Show Success Popup;
+stop
+@enduml

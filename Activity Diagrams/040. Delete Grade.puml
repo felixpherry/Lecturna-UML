@@ -1,0 +1,21 @@
+@startuml DeleteGrade
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Grade Page;
+|System|
+:Show Grade Page;
+|Admin|
+:Click Delete Button on Grade;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button on Modal;
+|System|
+:Delete Grade;
+:Show Success Popup (Grade Deleted);
+stop
+@enduml

@@ -1,10 +1,5 @@
 @startuml Lecturna
 left to right direction
-skinparam nodesep 0
-skinparam ranksep 0
-skinparam padding 0
-hide stereotype
-hide circle
 
 package User {
     actor Admin as A

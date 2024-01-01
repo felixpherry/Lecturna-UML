@@ -1,0 +1,16 @@
+@startuml JoinClassMeeting
+|User|
+start
+:Login as Instructor or Student;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Class Details Page;
+|System|
+:Show Class Details Page;
+|User|
+:Click "Meeting" Tab;
+|System|
+:Redirect User to the Meeting;
+stop
+@enduml

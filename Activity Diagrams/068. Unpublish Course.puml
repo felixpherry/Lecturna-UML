@@ -1,0 +1,17 @@
+@startuml UnpublishCourse
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Course Details Page;
+|System|
+:Show Course Details Page;
+|Admin|
+:Click "Unpublish Course" Button;
+|System|
+:Unpublish Course;
+:Show Success Popup (Course Unpublished);
+stop
+@enduml

@@ -1,0 +1,12 @@
+@startuml ManageDay
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Day Page;
+|System|
+:Show Day Page;
+stop
+@enduml

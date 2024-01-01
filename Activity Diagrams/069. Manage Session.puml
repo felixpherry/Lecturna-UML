@@ -1,0 +1,14 @@
+@startuml ManageSession
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Course Details Page;
+|System|
+:Show Course Details Page;
+|Admin|
+:View All Sessions in the Course;
+stop
+@enduml

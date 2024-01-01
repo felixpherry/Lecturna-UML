@@ -1,0 +1,20 @@
+@startuml RejectCourseRegistration
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Course Registration Page;
+|System|
+:Show Course Registration Page;
+|Admin|
+:Click Reject Button on a registration;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Click Confirm Button;
+|System|
+:Show Success Popup (Registration Rejected);
+stop
+@enduml

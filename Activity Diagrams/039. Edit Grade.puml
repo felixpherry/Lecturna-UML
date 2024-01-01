@@ -1,0 +1,26 @@
+@startuml Edit Grade
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Grade Page;
+|System|
+:Show Grade Page;
+|Admin|
+:Click Edit Button on Grade;
+|System|
+:Show Modal with Edit Form;
+|Admin|
+repeat :Edit Data in Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+-> yes;
+:Close Modal;
+:Show Success Popup (Grade Edited);
+stop
+@enduml

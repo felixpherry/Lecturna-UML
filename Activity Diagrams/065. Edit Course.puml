@@ -1,0 +1,26 @@
+@startuml EditCourse
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Course Details Page;
+|System|
+:Show Course Details Page;
+|Admin|
+:Click "Edit Course" Button;
+|System|
+:Show Form for Editing Course;
+|Admin|
+repeat :Edit Course Form;
+:Click Save Button on Form;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while (valid?) is (no)
+-> yes;
+|Admin|
+:Show Success Popup (Course Edited);
+stop
+@enduml

@@ -1,0 +1,16 @@
+@startuml Change Period Status
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Period Page;
+|System|
+:Show Period Page;
+|Admin|
+:Click Change Status Button on Period;
+|System|
+:Show Success Popup (Status Changed);
+stop
+@enduml

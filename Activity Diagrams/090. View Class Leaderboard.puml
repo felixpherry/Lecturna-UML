@@ -1,0 +1,16 @@
+@startuml ViewClassLeaderboard
+|User|
+start
+:Login as Instructor, Student, or Parent;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Class Details Page;
+|System|
+:Show Class Details Page;
+|User|
+:Click "Leaderboard" Tab;
+|System|
+:Show Class Leaderboard;
+stop
+@enduml

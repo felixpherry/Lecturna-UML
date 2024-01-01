@@ -1,0 +1,17 @@
+@startuml ManageAssessment
+|Instructor|
+start
+:Login as Instructor;
+|System|
+:Redirect to Dashboard Page;
+|Instructor|
+:Visit Class Detail Page;
+|System|
+:Show Class Detail Page;
+|Instructor|
+:Click Assessment Tab;
+|System|
+:Redirect to Class Assessment Page;
+|Instructor|
+stop
+@enduml

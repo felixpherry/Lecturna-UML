@@ -1,0 +1,20 @@
+@startuml RejectInstructorRegistration
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Instructor Registration Page;
+|System|
+:Show Instructor Registration Page;
+|Admin|
+:Click Reject Button on a Registration;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Confirm Rejection;
+|System|
+:Show Success Popup;
+stop
+@enduml

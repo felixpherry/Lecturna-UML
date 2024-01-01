@@ -1,0 +1,26 @@
+@startuml EditProgram
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Programs Page;
+|System|
+:Show Programs Page;
+|Admin|
+:Click Edit Button on Program;
+|System|
+:Redirect to Edit Program Page;
+|Admin|
+repeat :Fill Edit Program Form;
+:Click Save Button on Form;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while (valid?) is (no)
+-> yes;
+|Admin|
+:Show Success Popup (Program Edited);
+stop
+@enduml

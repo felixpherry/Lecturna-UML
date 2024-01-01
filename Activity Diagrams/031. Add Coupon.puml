@@ -1,0 +1,25 @@
+@startuml AddCoupon
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Coupon Page;
+|System|
+:Show Coupon Page;
+|Admin|
+:Click Add Button;
+|System|
+:Show Modal with Coupon Form;
+|Admin|
+repeat :Fill Coupon Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+->yes;
+:Show Success Popup (Coupon Added);
+stop
+@enduml

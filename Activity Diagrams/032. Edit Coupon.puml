@@ -1,0 +1,25 @@
+@startuml EditCoupon
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Coupon Page;
+|System|
+:Show Coupon Page;
+|Admin|
+:Click Edit Button on a Coupon;
+|System|
+:Show Modal with Edit Form;
+|Admin|
+repeat :Edit Data in Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+->yes;
+:Show Success Popup (Coupon Edited);
+stop
+@enduml

@@ -1,0 +1,20 @@
+@startuml DeleteChat
+|User|
+start
+:Login as Student or Instructor;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Class Chat Page;
+|System|
+:Show Class Chat Page;
+|User|
+:Press Delete Button on a chat;
+|System|
+:Show Confirmation Modal;
+|User|
+:Click Confirm Button on the modal;
+|System|
+:Delete Chat;
+stop
+@enduml

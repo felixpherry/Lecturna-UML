@@ -1,0 +1,12 @@
+@startuml ManageProfile
+|User|
+start
+:Login;
+|System|
+:Redirect to Dashboard Page;
+|User|
+:Visit Profile Page;
+|System|
+:Show Profile Page;
+stop
+@enduml

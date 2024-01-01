@@ -1,0 +1,27 @@
+@startuml AddCategory
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Categories Page;
+|System|
+:Show Categories Page;
+|Admin|
+:Click Add Button;
+|System|
+:Show Add Category Modal;
+|Admin|
+repeat :Fill Category Form;
+:Click Save Button;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+->yes;
+|System|
+:Show Success Popup (Category Added);
+:Close Modal;
+stop
+@enduml

@@ -1,0 +1,22 @@
+@startuml DeleteCourse
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Course Details Page;
+|System|
+:Show Course Details Page;
+|Admin|
+:Click "Delete Course" Button;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Confirm Deletion;
+|System|
+:Delete Course;
+:Show Success Popup (Course Deleted);
+:Redirect to Program Details Page;
+stop
+@enduml

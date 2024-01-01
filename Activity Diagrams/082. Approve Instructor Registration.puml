@@ -1,0 +1,21 @@
+@startuml ApproveInstructorRegistration
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Instructor Registration Page;
+|System|
+:Show Instructor Registration Page;
+|Admin|
+:Click "Approve" Button on a Registration;
+|System|
+:Show Confirmation Modal;
+|Admin|
+:Confirm Approval;
+|System|
+:Process Approval;
+:Show Success Popup;
+stop
+@enduml

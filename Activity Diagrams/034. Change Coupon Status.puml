@@ -1,0 +1,17 @@
+@startuml ChangeCouponStatus
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit Coupon Page;
+|System|
+:Show Coupon Page;
+|Admin|
+:Click Change Status Button on a Coupon;
+|System|
+:Change Coupon Status;
+:Show Success Popup (Status Changed);
+stop
+@enduml

@@ -1,0 +1,27 @@
+@startuml EditFAQ
+|Admin|
+start
+:Login as Admin;
+|System|
+:Redirect to Dashboard Page;
+|Admin|
+:Visit FAQ Page;
+|System|
+:Show FAQ Page;
+|Admin|
+:Click Edit Button on FAQ;
+|System|
+:Show Modal with Edit Form;
+|Admin|
+repeat :Edit Data in Form;
+:Click Save Button on Modal;
+|System|
+:Validate Data;
+backward: Show Error Message;
+repeat while(valid?) is (no)
+->yes;
+|System|
+:Close Modal;
+:Show Success Popup (FAQ Edited);
+stop
+@enduml

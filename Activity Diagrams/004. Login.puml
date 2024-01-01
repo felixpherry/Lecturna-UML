@@ -1,0 +1,22 @@
+@startuml Register Trial Class
+|User|
+start
+:Visit Home Page;
+|System|
+:Show Home Page;
+|User|
+:Click Login Button;
+|System|
+:Redirect to Login Page;
+|User|
+repeat :Fill Email and Password;
+:Click Login Button;
+|System|
+:Validate Data;
+backward: Show Error message;
+repeat while (valid?) is (no)
+->yes;
+:Show Success Popup;
+:Redirect to Dashboard;
+stop
+@enduml

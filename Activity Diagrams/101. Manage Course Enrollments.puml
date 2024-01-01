@@ -1,0 +1,12 @@
+@startuml ManageCourseEnrollments
+|Student|
+start
+:Login as Student;
+|System|
+:Redirect to Dashboard Page;
+|Student|
+:Visit Enrollments Page;
+|System|
+:Show Enrollments Page;
+stop
+@enduml
