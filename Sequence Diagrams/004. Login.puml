@@ -1,0 +1,53 @@
+@startuml Login
+actor User
+participant HomePageView [
+  <<view>>
+  :HomePage
+]
+
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+activate User
+activate HomePageView
+User -> HomePageView: Visit Home Page
+HomePageView -->> User: Show Home Page
+User -> HomePageView: Click Login Button
+HomePageView -> LoginPageView: Redirect to Login Page
+
+deactivate HomePageView
+activate LoginPageView
+LoginPageView -->> User: Show Login Page
+User -> LoginPageView: Fill Email and Password
+User -> LoginPageView: Click Login Button
+
+participant AuthController [
+  <<controller>>
+  :AuthController
+]
+
+activate AuthController
+LoginPageView -> AuthController: loginUser()
+alt invalid
+AuthController -->> LoginPageView: Return Error Message
+LoginPageView -->> User: showErrorPopup()
+else valid
+AuthController -->> LoginPageView: Return Success Message
+LoginPageView -->> User: showSuccessPopup()
+LoginPageView -->> User: Redirect to Dashboard
+end
+
+deactivate User
+deactivate LoginPageView
+deactivate AuthController
+activate DashboardView
+DashboardView -->> User: Show Dashboard
+deactivate DashboardView
+@enduml

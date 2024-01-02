@@ -1,0 +1,56 @@
+@startuml Register Course
+actor Guest
+participant HomePageView [
+  <<view>>
+  :HomePage
+]
+
+participant CoursesCatalogPageView [
+  <<view>>
+  :CoursesCatalogPage
+]
+
+participant CourseRegistrationPageView [
+  <<view>>
+  :CourseRegistrationPage
+]
+
+activate Guest
+activate HomePageView
+Guest -> HomePageView: Visit Home Page
+HomePageView -->> Guest: Show Home Page
+Guest -> HomePageView: Click Courses Navlink
+HomePageView -> CoursesCatalogPageView: Redirect to Courses Catalog Page
+
+deactivate HomePageView
+activate CoursesCatalogPageView
+CoursesCatalogPageView -->> Guest: Show Courses Catalog Page
+Guest -> CoursesCatalogPageView: Click Register On a Course Card
+CoursesCatalogPageView -> CourseRegistrationPageView: Redirect to Course Registration Page
+
+deactivate CoursesCatalogPageView
+activate CourseRegistrationPageView
+CourseRegistrationPageView -->> Guest: Show Course Registration Page
+Guest -> CourseRegistrationPageView: Fill Registration Form
+Guest -> CourseRegistrationPageView: Click Register Button
+
+participant CourseRegistrationController [
+  <<controller>>
+  :CourseRegistrationController
+]
+
+activate CourseRegistrationController
+CourseRegistrationPageView -> CourseRegistrationController: registerCourse()
+alt invalid
+CourseRegistrationController -->> CourseRegistrationPageView: Return Error Message
+CourseRegistrationPageView -->> Guest: showErrorPopup()
+else valid
+CourseRegistrationController -->> CourseRegistrationPageView: Return Success Message
+CourseRegistrationPageView -->> Guest: showSuccessPopup()
+CourseRegistrationPageView -->> Guest: Redirect to Home Page
+end
+
+deactivate Guest
+deactivate CourseRegistrationPageView
+deactivate CourseRegistrationController
+@enduml

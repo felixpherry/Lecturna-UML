@@ -1,0 +1,45 @@
+@startuml Register Trial Class
+actor Guest
+participant HomePageView [
+  <<view>>
+  :HomePage
+]
+
+participant TrialClassRegistrationPageView [
+  <<view>>
+  :TrialClassRegistrationPage
+]
+
+activate Guest
+activate HomePageView
+Guest -> HomePageView: View Home Page
+HomePageView -->> Guest: Show Home Page
+Guest -> HomePageView: Click Register Trial Class Button
+HomePageView -> TrialClassRegistrationPageView: Redirect to Trial Class Registration Page
+
+deactivate HomePageView
+activate TrialClassRegistrationPageView
+TrialClassRegistrationPageView -->> Guest: Show Trial Class Registration Page
+Guest -> TrialClassRegistrationPageView: Fill Registration Form
+Guest -> TrialClassRegistrationPageView: Click Register Button
+
+participant TrialClassRegistrationController [
+  <<controller>>
+  :TrialClassRegistrationController
+]
+
+activate TrialClassRegistrationController
+TrialClassRegistrationPageView -> TrialClassRegistrationController: registerTrialClass()
+alt invalid
+TrialClassRegistrationController -->> TrialClassRegistrationPageView: Return Error Message
+TrialClassRegistrationPageView -->> Guest: showErrorPopup()
+else valid
+TrialClassRegistrationController -->> TrialClassRegistrationPageView: Return Success Message
+TrialClassRegistrationPageView -->> Guest: showSuccessPopup()
+TrialClassRegistrationPageView -->> Guest: Redirect to Home Page
+end
+
+deactivate Guest
+deactivate TrialClassRegistrationPageView
+deactivate TrialClassRegistrationController
+@enduml

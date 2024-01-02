@@ -1,4 +1,4 @@
-@startuml Register Trial Class
+@startuml Login
 |User|
 start
 :Visit Home Page;

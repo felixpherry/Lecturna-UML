@@ -1,0 +1,48 @@
+@startuml Ban User
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant AccountsView [
+  <<view>>
+  :AccountsPage
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Accounts Page
+activate AccountsView
+DashboardView -> AccountsView: Redirect to Accounts Page
+deactivate DashboardView
+
+AccountsView -->> Admin: Show Accounts Page
+Admin -> AccountsView: Click Ban Button on an Account
+
+participant AccountsController [
+  <<controller>>
+  :AccountsController
+]
+
+activate AccountsController
+AccountsView -> AccountsController: banUser()
+AccountsController -->> AccountsView: Return Success Message
+AccountsView -->> Admin: Show Success Popup (User Banned)
+
+deactivate Admin
+deactivate AccountsView
+deactivate AccountsController
+@enduml

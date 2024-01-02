@@ -1,0 +1,45 @@
+@startuml Register as Instructor
+actor Guest
+participant HomePageView [
+  <<view>>
+  :HomePage
+]
+
+participant InstructorRegistrationPageView [
+  <<view>>
+  :InstructorRegistrationPage
+]
+
+activate Guest
+activate HomePageView
+Guest -> HomePageView: Visit Home Page
+HomePageView -->> Guest: Show Home Page
+Guest -> HomePageView: Click Register as Instructor Navlink
+HomePageView -> InstructorRegistrationPageView: Redirect to Instructor Registration Page
+
+deactivate HomePageView
+activate InstructorRegistrationPageView
+InstructorRegistrationPageView -->> Guest: Show Instructor Registration Page
+Guest -> InstructorRegistrationPageView: Fill Registration Form
+Guest -> InstructorRegistrationPageView: Click Register Button
+
+participant InstructorRegistrationController [
+  <<controller>>
+  :InstructorRegistrationController
+]
+
+activate InstructorRegistrationController
+InstructorRegistrationPageView -> InstructorRegistrationController: registerAsInstructor()
+alt invalid
+InstructorRegistrationController -->> InstructorRegistrationPageView: Return Error Message
+InstructorRegistrationPageView -->> Guest: showErrorPopup()
+else valid
+InstructorRegistrationController -->> InstructorRegistrationPageView: Return Success Message
+InstructorRegistrationPageView -->> Guest: showSuccessPopup()
+InstructorRegistrationPageView -->> Guest: Redirect to Home Page
+end
+
+deactivate Guest
+deactivate InstructorRegistrationPageView
+deactivate InstructorRegistrationController
+@enduml

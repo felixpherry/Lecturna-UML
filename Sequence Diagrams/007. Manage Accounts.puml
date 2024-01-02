@@ -1,0 +1,35 @@
+@startuml Manage Accounts
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant AccountsView [
+  <<view>>
+  :AccountsPage
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Accounts Page
+activate AccountsView
+DashboardView -> AccountsView: Redirect to Accounts Page
+deactivate DashboardView
+AccountsView -->> Admin: Show Accounts Page
+
+deactivate Admin
+deactivate AccountsView
+@enduml

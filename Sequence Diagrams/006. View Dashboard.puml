@@ -1,0 +1,24 @@
+@startuml View Dashboard
+actor User
+participant HomePageView [
+  <<view>>
+  :HomePage
+]
+
+activate User
+activate HomePageView
+User -> HomePageView: Visit Home Page
+HomePageView -->> User: Show Home Page
+User -> HomePageView: Click "View Dashboard" Button in Hero Section
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+HomePageView -> DashboardView: Redirect to Dashboard Page
+
+deactivate User
+deactivate HomePageView
+deactivate DashboardView
+@enduml
