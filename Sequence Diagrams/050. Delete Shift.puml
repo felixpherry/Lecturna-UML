@@ -1,0 +1,58 @@
+@startuml DeleteShift
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ShiftView [
+  <<view>>
+  :ShiftPage
+]
+
+participant DeleteShiftModalView [
+  <<view>>
+  :DeleteShiftModal
+]
+
+participant ShiftController [
+  <<controller>>
+  :ShiftController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Shift Page
+activate ShiftView
+DashboardView -> ShiftView: Redirect to Shift Page
+deactivate DashboardView
+
+ShiftView -->> Admin: Show Shift Page
+
+Admin -> ShiftView: Click Delete Button on Shift
+
+activate DeleteShiftModalView
+ShiftView -> DeleteShiftModalView: Show Confirmation Modal
+
+Admin -> DeleteShiftModalView: Click Confirm Button on Modal
+
+activate ShiftController
+DeleteShiftModalView -> ShiftController: deleteShift()
+DeleteShiftModalView -->> Admin: Show Success Popup (Shift Deleted)
+deactivate ShiftController
+deactivate DeleteShiftModalView
+deactivate Admin
+deactivate ShiftView
+@enduml

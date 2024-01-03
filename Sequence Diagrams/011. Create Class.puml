@@ -1,0 +1,74 @@
+@startuml Create Class
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CreateClassesView [
+  <<view>>
+  :CreateClassesPage
+]
+
+participant ClassFormModalView [
+  <<view>>
+  :ClassFormModal
+]
+
+participant ClassController [
+  <<controller>>
+  :ClassController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Create Classes Page
+activate CreateClassesView
+DashboardView -> CreateClassesView: Redirect to Create Classes Page
+deactivate DashboardView
+
+CreateClassesView -->> Admin: Show Create Classes Page
+Admin -> CreateClassesView: Click Add Button on Create Classes Page
+
+activate ClassFormModalView
+CreateClassesView -> ClassFormModalView: Show Modal with Class Form
+
+Admin -> ClassFormModalView: Fill Class Form
+Admin -> ClassFormModalView: Click Save Button on Modal
+
+activate ClassController
+ClassFormModalView -> ClassController: saveClass()
+alt invalid
+    ClassController -->> ClassFormModalView: Return Validation Result
+    ClassFormModalView -->> Admin: Show Error Message
+else valid
+    ClassController -->> ClassFormModalView: Return Validation Result
+    deactivate ClassController
+
+    Admin -> CreateClassesView: Click Save Button on Create Classes Page
+
+    activate ClassController
+    CreateClassesView -> ClassController: saveClasses()
+    ClassController -->> CreateClassesView: Return Success Message
+    CreateClassesView -->> Admin: Show Success Popup (Classes Added)
+    CreateClassesView -->> Admin: Redirect to Classes Page
+    deactivate ClassController
+end
+
+
+deactivate Admin
+deactivate CreateClassesView
+deactivate ClassFormModalView
+@enduml

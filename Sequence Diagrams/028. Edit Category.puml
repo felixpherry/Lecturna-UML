@@ -1,0 +1,68 @@
+@startuml EditCategory
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CategoriesView [
+  <<view>>
+  :CategoriesPage
+]
+
+participant EditCategoryModalView [
+  <<view>>
+  :EditCategoryModal
+]
+
+participant CategoryController [
+  <<controller>>
+  :CategoryController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Categories Page
+activate CategoriesView
+DashboardView -> CategoriesView: Redirect to Categories Page
+deactivate DashboardView
+
+CategoriesView -->> Admin: Show Categories Page
+
+Admin -> CategoriesView: Click Edit Button on Category
+
+activate EditCategoryModalView
+CategoriesView -> EditCategoryModalView: Show Edit Category Modal
+
+Admin -> EditCategoryModalView: Edit Data in Form
+Admin -> EditCategoryModalView: Click Save Button
+
+activate CategoryController
+EditCategoryModalView -> CategoryController: editCategory()
+alt invalid
+    CategoryController -->> EditCategoryModalView: Return Validation Result
+    EditCategoryModalView -->> Admin: Show Error Message
+else valid
+    CategoryController -->> EditCategoryModalView: Return Validation Result
+    EditCategoryModalView -->> Admin: Show Success Popup (Category Edited)
+    EditCategoryModalView -->> Admin: Close Modal
+end
+
+deactivate CategoryController
+
+deactivate Admin
+deactivate CategoriesView
+deactivate EditCategoryModalView
+@enduml

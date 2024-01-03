@@ -1,0 +1,56 @@
+@startuml EditHero
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant HeroView [
+  <<view>>
+  :HeroPage
+]
+
+participant HeroController [
+  <<controller>>
+  :HeroController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Hero Page
+activate HeroView
+DashboardView -> HeroView: Redirect to Hero Page
+deactivate DashboardView
+
+HeroView -->> Admin: Show Hero Page
+
+Admin -> HeroView: Edit Data in Form
+Admin -> HeroView: Click Save Button
+
+activate HeroController
+HeroView -> HeroController: editHeroContent()
+alt invalid
+    HeroController -->> HeroView: Return Validation Result
+    HeroView -->> Admin: Show Error Message
+else valid
+    HeroController -->> HeroView: Return Validation Result
+    HeroView -->> Admin: Show Success Popup (Hero Edited)
+end
+
+deactivate HeroController
+
+deactivate Admin
+deactivate HeroView
+@enduml

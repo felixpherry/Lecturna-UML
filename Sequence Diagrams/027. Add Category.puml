@@ -1,0 +1,68 @@
+@startuml AddCategory
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CategoriesView [
+  <<view>>
+  :CategoriesPage
+]
+
+participant AddCategoryModalView [
+  <<view>>
+  :AddCategoryModal
+]
+
+participant CategoryController [
+  <<controller>>
+  :CategoryController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Categories Page
+activate CategoriesView
+DashboardView -> CategoriesView: Redirect to Categories Page
+deactivate DashboardView
+
+CategoriesView -->> Admin: Show Categories Page
+
+Admin -> CategoriesView: Click Add Button
+
+activate AddCategoryModalView
+CategoriesView -> AddCategoryModalView: Show Add Category Modal
+
+Admin -> AddCategoryModalView: Fill Category Form
+Admin -> AddCategoryModalView: Click Save Button
+
+activate CategoryController
+AddCategoryModalView -> CategoryController: addCategory()
+alt invalid
+    CategoryController -->> AddCategoryModalView: Return Validation Result
+    AddCategoryModalView -->> Admin: Show Error Message
+else valid
+    CategoryController -->> AddCategoryModalView: Return Validation Result
+    AddCategoryModalView -->> Admin: Show Success Popup (Category Added)
+    AddCategoryModalView -->> Admin: Close Modal
+end
+
+deactivate CategoryController
+
+deactivate Admin
+deactivate CategoriesView
+deactivate AddCategoryModalView
+@enduml

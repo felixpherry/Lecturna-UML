@@ -1,0 +1,68 @@
+@startuml EditGrade
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant GradeView [
+  <<view>>
+  :GradePage
+]
+
+participant EditGradeModalView [
+  <<view>>
+  :EditGradeModal
+]
+
+participant GradeController [
+  <<controller>>
+  :GradeController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Grade Page
+activate GradeView
+DashboardView -> GradeView: Redirect to Grade Page
+deactivate DashboardView
+
+GradeView -->> Admin: Show Grade Page
+
+Admin -> GradeView: Click Edit Button on Grade
+
+activate EditGradeModalView
+GradeView -> EditGradeModalView: Show Modal with Edit Form
+
+Admin -> EditGradeModalView: Edit Data in Form
+Admin -> EditGradeModalView: Click Save Button
+
+activate GradeController
+EditGradeModalView -> GradeController: editGrade()
+alt invalid
+    GradeController -->> EditGradeModalView: Return Validation Result
+    EditGradeModalView -->> Admin: Show Error Message
+else valid
+    GradeController -->> EditGradeModalView: Return Validation Result
+    EditGradeModalView -->> Admin: Close Modal
+    EditGradeModalView -->> Admin: Show Success Popup (Grade Edited)
+end
+
+deactivate GradeController
+
+deactivate Admin
+deactivate GradeView
+deactivate EditGradeModalView
+@enduml

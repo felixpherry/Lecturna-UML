@@ -1,0 +1,59 @@
+@startuml DeletePeriod
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant PeriodView [
+  <<view>>
+  :PeriodPage
+]
+
+participant DeletePeriodModalView [
+  <<view>>
+  :DeletePeriodModal
+]
+
+participant PeriodController [
+  <<controller>>
+  :PeriodController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Period Page
+activate PeriodView
+DashboardView -> PeriodView: Redirect to Period Page
+deactivate DashboardView
+
+PeriodView -->> Admin: Show Period Page
+
+Admin -> PeriodView: Click Delete Button on Period
+
+activate DeletePeriodModalView
+PeriodView -> DeletePeriodModalView: Show Confirmation Modal
+
+Admin -> DeletePeriodModalView: Click Confirm Button
+
+activate PeriodController
+DeletePeriodModalView -> PeriodController: deletePeriod()
+DeletePeriodModalView -->> Admin: Show Success Popup (Period Deleted)
+deactivate PeriodController
+
+deactivate Admin
+deactivate PeriodView
+deactivate DeletePeriodModalView
+@enduml

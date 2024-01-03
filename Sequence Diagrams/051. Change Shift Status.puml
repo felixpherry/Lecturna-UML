@@ -1,0 +1,58 @@
+@startuml ChangeShiftStatus
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ShiftView [
+  <<view>>
+  :ShiftPage
+]
+
+participant ChangeStatusModalView [
+  <<view>>
+  :ChangeStatusModal
+]
+
+participant ShiftController [
+  <<controller>>
+  :ShiftController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Shift Page
+activate ShiftView
+DashboardView -> ShiftView: Redirect to Shift Page
+deactivate DashboardView
+
+ShiftView -->> Admin: Show Shift Page
+
+Admin -> ShiftView: Click Change Status Button on Shift
+
+activate ChangeStatusModalView
+ShiftView -> ChangeStatusModalView: Show Status Change Modal
+
+Admin -> ChangeStatusModalView: Click Confirm Button on Modal
+
+activate ShiftController
+ChangeStatusModalView -> ShiftController: changeShiftStatus()
+ChangeStatusModalView -->> Admin: Show Success Popup (Shift Status Changed)
+deactivate ShiftController
+deactivate ChangeStatusModalView
+deactivate Admin
+deactivate ShiftView
+@enduml

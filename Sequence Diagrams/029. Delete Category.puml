@@ -1,0 +1,60 @@
+@startuml DeleteCategory
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CategoriesView [
+  <<view>>
+  :CategoriesPage
+]
+
+participant DeleteCategoryConfirmationModalView [
+  <<view>>
+  :DeleteCategoryConfirmationModal
+]
+
+participant CategoryController [
+  <<controller>>
+  :CategoryController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Categories Page
+activate CategoriesView
+DashboardView -> CategoriesView: Redirect to Categories Page
+deactivate DashboardView
+
+CategoriesView -->> Admin: Show Categories Page
+
+Admin -> CategoriesView: Click Delete Button on Category
+
+activate DeleteCategoryConfirmationModalView
+CategoriesView -> DeleteCategoryConfirmationModalView: Show Confirmation Modal
+
+Admin -> DeleteCategoryConfirmationModalView: Click Confirm Button
+
+activate CategoryController
+DeleteCategoryConfirmationModalView -> CategoryController: deleteCategory()
+CategoryController -->> DeleteCategoryConfirmationModalView: Return Success Message
+DeleteCategoryConfirmationModalView -->> Admin: Show Success Popup (Category Deleted)
+deactivate CategoryController
+
+deactivate Admin
+deactivate CategoriesView
+deactivate DeleteCategoryConfirmationModalView
+@enduml

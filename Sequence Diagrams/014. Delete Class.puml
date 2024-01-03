@@ -1,0 +1,59 @@
+@startuml Delete Class
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassesView [
+  <<view>>
+  :ClassesPage
+]
+
+participant DeleteConfirmationModalView [
+  <<view>>
+  :DeleteConfirmationModal
+]
+
+participant ClassController [
+  <<controller>>
+  :ClassController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Classes Page
+activate ClassesView
+DashboardView -> ClassesView: Redirect to Classes Page
+deactivate DashboardView
+
+ClassesView -->> Admin: Show Classes Page
+Admin -> ClassesView: Click Delete Button on a Class
+
+activate DeleteConfirmationModalView
+ClassesView -> DeleteConfirmationModalView: Show Confirmation Modal
+
+Admin -> DeleteConfirmationModalView: Click Confirm Button in Modal
+
+activate ClassController
+DeleteConfirmationModalView -> ClassController: deleteClass()
+ClassController -->> DeleteConfirmationModalView: Return Success Message
+DeleteConfirmationModalView -->> Admin: Show Success Popup (Class Deleted)
+deactivate ClassController
+
+deactivate Admin
+deactivate ClassesView
+deactivate DeleteConfirmationModalView
+@enduml

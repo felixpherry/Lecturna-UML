@@ -1,0 +1,49 @@
+@startuml ChangeCouponStatus
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CouponView [
+  <<view>>
+  :CouponPage
+]
+
+participant CouponController [
+  <<controller>>
+  :CouponController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Coupon Page
+activate CouponView
+DashboardView -> CouponView: Redirect to Coupon Page
+deactivate DashboardView
+
+CouponView -->> Admin: Show Coupon Page
+
+Admin -> CouponView: Click Change Status Button on a Coupon
+
+activate CouponController
+CouponView -> CouponController: changeCouponStatus()
+CouponController -->> CouponView: Return Success Message
+CouponView -->> Admin: Show Success Popup (Status Changed)
+deactivate CouponController
+
+deactivate Admin
+deactivate CouponView
+@enduml

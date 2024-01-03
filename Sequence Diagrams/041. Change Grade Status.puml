@@ -1,0 +1,49 @@
+@startuml ChangeGradeStatus
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant GradeView [
+  <<view>>
+  :GradePage
+]
+
+participant GradeController [
+  <<controller>>
+  :GradeController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Grade Page
+activate GradeView
+DashboardView -> GradeView: Redirect to Grade Page
+deactivate DashboardView
+
+GradeView -->> Admin: Show Grade Page
+
+Admin -> GradeView: Click Change Status Button on Grade
+
+activate GradeController
+GradeView -> GradeController: changeGradeStatus()
+GradeController -->> GradeView: Return Success Message
+GradeView -->> Admin: Show Success Popup (Grade Status Changed)
+deactivate GradeController
+
+deactivate Admin
+deactivate GradeView
+@enduml

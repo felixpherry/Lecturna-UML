@@ -1,0 +1,48 @@
+@startuml ChangePeriodStatus
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant PeriodView [
+  <<view>>
+  :PeriodPage
+]
+
+participant PeriodController [
+  <<controller>>
+  :PeriodController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Period Page
+activate PeriodView
+DashboardView -> PeriodView: Redirect to Period Page
+deactivate DashboardView
+
+PeriodView -->> Admin: Show Period Page
+
+Admin -> PeriodView: Click Change Status Button on Period
+
+activate PeriodController
+PeriodView -> PeriodController: changePeriodStatus()
+PeriodController -->> Admin: Show Success Popup (Status Changed)
+deactivate PeriodController
+
+deactivate Admin
+deactivate PeriodView
+@enduml

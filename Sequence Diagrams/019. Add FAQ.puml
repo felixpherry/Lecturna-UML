@@ -1,0 +1,68 @@
+@startuml AddFAQ
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant FAQView [
+  <<view>>
+  :FAQPage
+]
+
+participant AddFAQModalView [
+  <<view>>
+  :AddFAQModal
+]
+
+participant FAQController [
+  <<controller>>
+  :FAQController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit FAQ Page
+activate FAQView
+DashboardView -> FAQView: Redirect to FAQ Page
+deactivate DashboardView
+
+FAQView -->> Admin: Show FAQ Page
+
+Admin -> FAQView: Click Add Button on FAQ Page
+
+activate AddFAQModalView
+FAQView -> AddFAQModalView: Show Modal with Add FAQ Form
+
+Admin -> AddFAQModalView: Fill FAQ Form
+Admin -> AddFAQModalView: Click Save Button on Modal
+
+activate FAQController
+AddFAQModalView -> FAQController: addFAQ()
+alt invalid
+    FAQController -->> AddFAQModalView: Return Validation Result
+    AddFAQModalView -->> Admin: Show Error Message
+else valid
+    FAQController -->> AddFAQModalView: Return Validation Result
+    AddFAQModalView -->> Admin: Show Success Popup (FAQ Added)
+    AddFAQModalView -->> Admin: Close Modal
+end
+
+deactivate FAQController
+
+deactivate Admin
+deactivate FAQView
+deactivate AddFAQModalView
+@enduml

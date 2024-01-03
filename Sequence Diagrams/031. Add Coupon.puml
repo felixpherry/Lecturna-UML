@@ -1,0 +1,68 @@
+@startuml AddCoupon
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CouponView [
+  <<view>>
+  :CouponPage
+]
+
+participant AddCouponModalView [
+  <<view>>
+  :AddCouponModal
+]
+
+participant CouponController [
+  <<controller>>
+  :CouponController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Coupon Page
+activate CouponView
+DashboardView -> CouponView: Redirect to Coupon Page
+deactivate DashboardView
+
+CouponView -->> Admin: Show Coupon Page
+
+Admin -> CouponView: Click Add Button
+
+activate AddCouponModalView
+CouponView -> AddCouponModalView: Show Modal with Coupon Form
+
+Admin -> AddCouponModalView: Fill Coupon Form
+Admin -> AddCouponModalView: Click Save Button
+
+activate CouponController
+AddCouponModalView -> CouponController: addCoupon()
+alt invalid
+    CouponController -->> AddCouponModalView: Return Validation Result
+    AddCouponModalView -->> Admin: Show Error Message
+else valid
+    CouponController -->> AddCouponModalView: Return Validation Result
+    AddCouponModalView -->> Admin: Show Success Popup (Coupon Added)
+    AddCouponModalView -->> Admin: Close Modal
+end
+
+deactivate CouponController
+
+deactivate Admin
+deactivate CouponView
+deactivate AddCouponModalView
+@enduml

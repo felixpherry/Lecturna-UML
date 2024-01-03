@@ -1,0 +1,36 @@
+@startuml Manage Hero
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant HeroView [
+  <<view>>
+  :HeroPage
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Hero Page
+activate HeroView
+DashboardView -> HeroView: Redirect to Hero Page
+deactivate DashboardView
+
+HeroView -->> Admin: Show Hero Page
+
+deactivate Admin
+deactivate HeroView
+@enduml

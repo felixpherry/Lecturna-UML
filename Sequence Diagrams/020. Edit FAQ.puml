@@ -1,0 +1,68 @@
+@startuml EditFAQ
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant FAQView [
+  <<view>>
+  :FAQPage
+]
+
+participant EditFAQModalView [
+  <<view>>
+  :EditFAQModal
+]
+
+participant FAQController [
+  <<controller>>
+  :FAQController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit FAQ Page
+activate FAQView
+DashboardView -> FAQView: Redirect to FAQ Page
+deactivate DashboardView
+
+FAQView -->> Admin: Show FAQ Page
+
+Admin -> FAQView: Click Edit Button on FAQ
+
+activate EditFAQModalView
+FAQView -> EditFAQModalView: Show Modal with Edit Form
+
+Admin -> EditFAQModalView: Edit Data in Form
+Admin -> EditFAQModalView: Click Save Button on Modal
+
+activate FAQController
+EditFAQModalView -> FAQController: editFAQ()
+alt invalid
+    FAQController -->> EditFAQModalView: Return Validation Result
+    EditFAQModalView -->> Admin: Show Error Message
+else valid
+    FAQController -->> EditFAQModalView: Return Validation Result
+    EditFAQModalView -->> Admin: Close Modal
+    EditFAQModalView -->> Admin: Show Success Popup (FAQ Edited)
+end
+
+deactivate FAQController
+
+deactivate Admin
+deactivate FAQView
+deactivate EditFAQModalView
+@enduml

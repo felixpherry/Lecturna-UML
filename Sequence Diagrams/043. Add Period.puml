@@ -1,0 +1,68 @@
+@startuml AddPeriod
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant PeriodView [
+  <<view>>
+  :PeriodPage
+]
+
+participant AddPeriodModalView [
+  <<view>>
+  :AddPeriodModal
+]
+
+participant PeriodController [
+  <<controller>>
+  :PeriodController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Period Page
+activate PeriodView
+DashboardView -> PeriodView: Redirect to Period Page
+deactivate DashboardView
+
+PeriodView -->> Admin: Show Period Page
+
+Admin -> PeriodView: Click Add Button
+
+activate AddPeriodModalView
+PeriodView -> AddPeriodModalView: Show Modal with Period Form
+
+Admin -> AddPeriodModalView: Fill Period Form
+Admin -> AddPeriodModalView: Click Save Button
+
+activate PeriodController
+AddPeriodModalView -> PeriodController: addPeriod()
+alt invalid
+    PeriodController -->> AddPeriodModalView: Return Validation Result
+    AddPeriodModalView -->> Admin: Show Error Message
+else valid
+    PeriodController -->> AddPeriodModalView: Return Validation Result
+    AddPeriodModalView -->> Admin: Close Modal
+    AddPeriodModalView -->> Admin: Show Success Popup (Period Added)
+end
+
+deactivate PeriodController
+
+deactivate Admin
+deactivate PeriodView
+deactivate AddPeriodModalView
+@enduml

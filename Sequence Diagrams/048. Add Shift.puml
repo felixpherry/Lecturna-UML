@@ -1,0 +1,69 @@
+@startuml AddShift
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ShiftView [
+  <<view>>
+  :ShiftPage
+]
+
+participant AddShiftModalView [
+  <<view>>
+  :AddShiftModal
+]
+
+participant ShiftController [
+  <<controller>>
+  :ShiftController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Shift Page
+activate ShiftView
+DashboardView -> ShiftView: Redirect to Shift Page
+deactivate DashboardView
+
+ShiftView -->> Admin: Show Shift Page
+
+Admin -> ShiftView: Click Add Button
+
+activate AddShiftModalView
+ShiftView -> AddShiftModalView: Show Modal with Shift Form
+
+Admin -> AddShiftModalView: Fill Shift Form
+Admin -> AddShiftModalView: Click Save Button on Modal
+
+activate ShiftController
+AddShiftModalView -> ShiftController: addShift()
+alt invalid
+    ShiftController -->> AddShiftModalView: Return Validation Result
+    AddShiftModalView -->> Admin: Show Error Message
+else valid
+    ShiftController -->> AddShiftModalView: Return Validation Result
+    deactivate ShiftController
+
+    Admin -> AddShiftModalView: Close Modal
+
+    AddShiftModalView -->> Admin: Show Success Popup (Shift Added)
+    deactivate AddShiftModalView
+end
+
+deactivate Admin
+deactivate ShiftView
+@enduml

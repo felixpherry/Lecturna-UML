@@ -1,0 +1,60 @@
+@startuml Approve Enrollment
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant EnrollmentsView [
+  <<view>>
+  :EnrollmentsPage
+]
+
+participant ApprovalConfirmationModalView [
+  <<view>>
+  :ApprovalConfirmationModal
+]
+
+participant EnrollmentController [
+  <<controller>>
+  :EnrollmentController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Enrollments Page
+activate EnrollmentsView
+DashboardView -> EnrollmentsView: Redirect to Enrollments Page
+deactivate DashboardView
+
+EnrollmentsView -->> Admin: Show Enrollments Page
+
+Admin -> EnrollmentsView: Click Approve Button on an Enrollment
+
+activate ApprovalConfirmationModalView
+EnrollmentsView -> ApprovalConfirmationModalView: Show Confirmation Modal
+
+Admin -> ApprovalConfirmationModalView: Click Confirm Button in Modal
+
+activate EnrollmentController
+ApprovalConfirmationModalView -> EnrollmentController: approveEnrollment()
+EnrollmentController -->> ApprovalConfirmationModalView: Return Success Message
+ApprovalConfirmationModalView -->> Admin: Show Success Popup (Enrollment Approved)
+deactivate EnrollmentController
+
+deactivate Admin
+deactivate EnrollmentsView
+deactivate ApprovalConfirmationModalView
+@enduml

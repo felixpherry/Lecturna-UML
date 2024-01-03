@@ -1,0 +1,36 @@
+@startuml Manage Enrollments
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant EnrollmentsView [
+  <<view>>
+  :EnrollmentsPage
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Enrollments Page
+activate EnrollmentsView
+DashboardView -> EnrollmentsView: Redirect to Enrollments Page
+deactivate DashboardView
+
+EnrollmentsView -->> Admin: Show Enrollments Page
+
+deactivate Admin
+deactivate EnrollmentsView
+@enduml

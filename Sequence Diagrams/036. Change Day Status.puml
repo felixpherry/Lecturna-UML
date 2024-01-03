@@ -1,0 +1,49 @@
+@startuml ChangeDayStatus
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant DayView [
+  <<view>>
+  :DayPage
+]
+
+participant DayController [
+  <<controller>>
+  :DayController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Day Page
+activate DayView
+DashboardView -> DayView: Redirect to Day Page
+deactivate DashboardView
+
+DayView -->> Admin: Show Day Page
+
+Admin -> DayView: Click Change Status Button on a Day
+
+activate DayController
+DayView -> DayController: changeDayStatus()
+DayController -->> DayView: Return Success Message
+DayView -->> Admin: Show Success Popup (Status Changed)
+deactivate DayController
+
+deactivate Admin
+deactivate DayView
+@enduml

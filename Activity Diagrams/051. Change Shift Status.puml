@@ -13,7 +13,6 @@ start
 |System|
 :Show Status Change Modal;
 |Admin|
-:Select New Status;
 :Click Confirm Button on Modal;
 |System|
 :Change Shift Status;

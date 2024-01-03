@@ -1,0 +1,56 @@
+@startuml EditLogo
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant LogoView [
+  <<view>>
+  :LogoPage
+]
+
+participant LogoController [
+  <<controller>>
+  :LogoController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Logo Page
+activate LogoView
+DashboardView -> LogoView: Redirect to Logo Page
+deactivate DashboardView
+
+LogoView -->> Admin: Show Logo Page
+
+Admin -> LogoView: Edit Logo
+Admin -> LogoView: Click Save Button
+
+activate LogoController
+LogoView -> LogoController: editLogo()
+alt invalid
+    LogoController -->> LogoView: Return Validation Result
+    LogoView -->> Admin: Show Error Message
+else valid
+    LogoController -->> LogoView: Return Validation Result
+    LogoView -->> Admin: Show Success Popup (Logo Edited)
+end
+
+deactivate LogoController
+
+deactivate Admin
+deactivate LogoView
+@enduml

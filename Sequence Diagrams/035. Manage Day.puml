@@ -1,0 +1,36 @@
+@startuml ManageDay
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant DayView [
+  <<view>>
+  :DayPage
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Day Page
+activate DayView
+DashboardView -> DayView: Redirect to Day Page
+deactivate DashboardView
+
+DayView -->> Admin: Show Day Page
+
+deactivate Admin
+deactivate DayView
+@enduml

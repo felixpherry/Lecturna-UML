@@ -10,11 +10,6 @@ participant LoginPageView [
   :LoginPage
 ]
 
-participant DashboardView [
-  <<view>>
-  :Dashboard
-]
-
 activate User
 activate HomePageView
 User -> HomePageView: Visit Home Page
@@ -47,7 +42,4 @@ end
 deactivate User
 deactivate LoginPageView
 deactivate AuthController
-activate DashboardView
-DashboardView -->> User: Show Dashboard
-deactivate DashboardView
 @enduml

@@ -1,0 +1,68 @@
+@startuml EditPeriod
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant PeriodView [
+  <<view>>
+  :PeriodPage
+]
+
+participant EditPeriodModalView [
+  <<view>>
+  :EditPeriodModal
+]
+
+participant PeriodController [
+  <<controller>>
+  :PeriodController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Period Page
+activate PeriodView
+DashboardView -> PeriodView: Redirect to Period Page
+deactivate DashboardView
+
+PeriodView -->> Admin: Show Period Page
+
+Admin -> PeriodView: Click Edit Button on Period
+
+activate EditPeriodModalView
+PeriodView -> EditPeriodModalView: Show Modal with Period Form for Editing
+
+Admin -> EditPeriodModalView: Edit Data in Form
+Admin -> EditPeriodModalView: Click Save Button
+
+activate PeriodController
+EditPeriodModalView -> PeriodController: editPeriod()
+alt invalid
+    PeriodController -->> EditPeriodModalView: Return Validation Result
+    EditPeriodModalView -->> Admin: Show Error Message
+else valid
+    PeriodController -->> EditPeriodModalView: Return Validation Result
+    EditPeriodModalView -->> Admin: Close Modal
+    EditPeriodModalView -->> Admin: Show Success Popup (Period Edited)
+end
+
+deactivate PeriodController
+
+deactivate Admin
+deactivate PeriodView
+deactivate EditPeriodModalView
+@enduml
