@@ -1,0 +1,58 @@
+@startuml UnpublishProgram
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ProgramsView [
+  <<view>>
+  :ProgramsPage
+]
+
+participant ProgramDetailsView [
+  <<view>>
+  :ProgramDetailsPage
+]
+
+participant ProgramController [
+  <<controller>>
+  :ProgramController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Programs Page
+activate ProgramsView
+ProgramsView -->> Admin: Show Programs Page
+deactivate DashboardView
+
+Admin -> ProgramsView: Click Edit Button on Program
+
+activate ProgramDetailsView
+ProgramsView -> ProgramDetailsView: Redirect to Program Details Page
+
+Admin -> ProgramDetailsView: Click Unpublish Button
+
+activate ProgramController
+ProgramDetailsView -> ProgramController: unpublishProgram()
+ProgramController -->> ProgramDetailsView: Return Unpublishing Result
+ProgramDetailsView -->> Admin: Show Success Popup (Program Unpublished)
+deactivate ProgramController
+
+deactivate Admin
+deactivate ProgramsView
+deactivate ProgramDetailsView
+@enduml

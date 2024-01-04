@@ -1,0 +1,33 @@
+@startuml ManageProgram
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ProgramsView [
+  <<view>>
+  :ProgramsPage
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Programs Page
+activate ProgramsView
+ProgramsView -->> Admin: Show Programs Page
+deactivate ProgramsView
+deactivate Admin
+deactivate DashboardView
+@enduml

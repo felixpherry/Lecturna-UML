@@ -1,0 +1,70 @@
+@startuml AddProgram
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ProgramsView [
+  <<view>>
+  :ProgramsPage
+]
+
+participant AddProgramPageView [
+  <<view>>
+  :AddProgramPage
+]
+
+participant ProgramDetailsPageView [
+  <<view>>
+  :ProgramDetailsPage
+]
+
+participant ProgramController [
+  <<controller>>
+  :ProgramController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Programs Page
+activate ProgramsView
+ProgramsView -->> Admin: Show Programs Page
+deactivate DashboardView
+
+Admin -> ProgramsView: Click Add Button
+
+activate AddProgramPageView
+ProgramsView -> AddProgramPageView: Redirect to Add Program Page
+
+Admin -> AddProgramPageView: Fill Program Form
+Admin -> AddProgramPageView: Click Save Button
+
+activate ProgramController
+AddProgramPageView -> ProgramController: addProgram()
+alt invalid
+    ProgramController -->> AddProgramPageView: Return Validation Result
+    AddProgramPageView -->> Admin: Show Error Message
+else valid
+    ProgramController -->> AddProgramPageView: Return Validation Result
+    AddProgramPageView -->> Admin: Redirect to Program Details Page
+    AddProgramPageView -->> Admin: Show Success Popup (Program Added)
+end
+
+deactivate ProgramController
+deactivate Admin
+deactivate ProgramsView
+deactivate AddProgramPageView
+@enduml

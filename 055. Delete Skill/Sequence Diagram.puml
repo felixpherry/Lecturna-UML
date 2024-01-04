@@ -1,0 +1,58 @@
+@startuml DeleteSkill
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant SkillView [
+  <<view>>
+  :SkillPage
+]
+
+participant DeleteConfirmationModalView [
+  <<view>>
+  :DeleteConfirmationModal
+]
+
+participant SkillController [
+  <<controller>>
+  :SkillController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Skill Page
+activate SkillView
+SkillView -->> Admin: Show Skill Page
+deactivate DashboardView
+
+Admin -> SkillView: Click Delete Button
+
+activate DeleteConfirmationModalView
+SkillView -> DeleteConfirmationModalView: Show Confirmation Modal
+
+Admin -> DeleteConfirmationModalView: Confirm Deletion
+
+activate SkillController
+DeleteConfirmationModalView -> SkillController: deleteSkill()
+SkillController -->> DeleteConfirmationModalView: Return Deletion Result
+DeleteConfirmationModalView -->> Admin: Show Success Popup (Skill Deleted)
+deactivate SkillController
+
+deactivate Admin
+deactivate SkillView
+deactivate DeleteConfirmationModalView
+@enduml

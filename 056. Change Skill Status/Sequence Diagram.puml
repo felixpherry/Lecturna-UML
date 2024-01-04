@@ -1,0 +1,47 @@
+@startuml ChangeSkillStatus
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant SkillView [
+  <<view>>
+  :SkillPage
+]
+
+participant SkillController [
+  <<controller>>
+  :SkillController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Skill Page
+activate SkillView
+SkillView -->> Admin: Show Skill Page
+deactivate DashboardView
+
+Admin -> SkillView: Click Change Status Button
+
+activate SkillController
+SkillView -> SkillController: changeSkillStatus()
+SkillController -->> SkillView: Return Status Change Result
+SkillView -->> Admin: Show Success Popup (Status Changed)
+deactivate SkillController
+
+deactivate Admin
+deactivate SkillView
+@enduml

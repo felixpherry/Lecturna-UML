@@ -1,0 +1,58 @@
+@startuml DeleteProgram
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ProgramsView [
+  <<view>>
+  :ProgramsPage
+]
+
+participant DeleteConfirmationModalView [
+  <<view>>
+  :DeleteConfirmationModal
+]
+
+participant ProgramController [
+  <<controller>>
+  :ProgramController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Programs Page
+activate ProgramsView
+ProgramsView -->> Admin: Show Programs Page
+deactivate DashboardView
+
+Admin -> ProgramsView: Click Delete Button on Program
+
+activate DeleteConfirmationModalView
+ProgramsView -> DeleteConfirmationModalView: Show Confirmation Modal
+
+Admin -> DeleteConfirmationModalView: Confirm Deletion
+
+activate ProgramController
+DeleteConfirmationModalView -> ProgramController: deleteProgram()
+ProgramController -->> DeleteConfirmationModalView: Return Deletion Result
+DeleteConfirmationModalView -->> Admin: Show Success Popup (Program Deleted)
+deactivate ProgramController
+
+deactivate Admin
+deactivate ProgramsView
+deactivate DeleteConfirmationModalView
+@enduml

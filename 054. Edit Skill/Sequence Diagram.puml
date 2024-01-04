@@ -1,0 +1,65 @@
+@startuml EditSkill
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant SkillView [
+  <<view>>
+  :SkillPage
+]
+
+participant EditSkillModalView [
+  <<view>>
+  :EditSkillModal
+]
+
+participant SkillController [
+  <<controller>>
+  :SkillController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Skill Page
+activate SkillView
+SkillView -->> Admin: Show Skill Page
+deactivate DashboardView
+
+Admin -> SkillView: Click Edit Button
+
+activate EditSkillModalView
+SkillView -> EditSkillModalView: Show Modal with Skill Form
+
+Admin -> EditSkillModalView: Edit Skill in Form
+Admin -> EditSkillModalView: Click Save Button
+
+activate SkillController
+EditSkillModalView -> SkillController: editSkill()
+alt invalid
+    SkillController -->> EditSkillModalView: Return Validation Result
+    EditSkillModalView -->> Admin: Show Error Message
+else valid
+    SkillController -->> EditSkillModalView: Return Validation Result
+    EditSkillModalView -->> Admin: Close Modal
+    EditSkillModalView -->> Admin: Show Success Popup (Skill Edited)
+end
+
+deactivate SkillController
+deactivate Admin
+deactivate SkillView
+deactivate EditSkillModalView
+@enduml

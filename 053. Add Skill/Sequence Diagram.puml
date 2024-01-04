@@ -1,0 +1,65 @@
+@startuml AddSkill
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant SkillView [
+  <<view>>
+  :SkillPage
+]
+
+participant AddSkillModalView [
+  <<view>>
+  :AddSkillModal
+]
+
+participant SkillController [
+  <<controller>>
+  :SkillController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Skill Page
+activate SkillView
+SkillView -->> Admin: Show Skill Page
+deactivate DashboardView
+
+Admin -> SkillView: Click Add Button
+
+activate AddSkillModalView
+SkillView -> AddSkillModalView: Show Modal with Skill Form
+
+Admin -> AddSkillModalView: Fill Skill Form
+Admin -> AddSkillModalView: Click Save Button
+
+activate SkillController
+AddSkillModalView -> SkillController: addSkill()
+alt invalid
+    SkillController -->> AddSkillModalView: Return Validation Result
+    AddSkillModalView -->> Admin: Show Error Message
+else valid
+    SkillController -->> AddSkillModalView: Return Validation Result
+    AddSkillModalView -->> Admin: Close Modal
+    AddSkillModalView -->> Admin: Show Success Popup (Skill Added)
+end
+
+deactivate SkillController
+deactivate Admin
+deactivate SkillView
+deactivate AddSkillModalView
+@enduml

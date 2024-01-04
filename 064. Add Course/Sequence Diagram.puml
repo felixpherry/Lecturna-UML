@@ -1,0 +1,72 @@
+@startuml AddCourse
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ProgramDetailsView [
+  <<view>>
+  :ProgramDetailsPage
+]
+
+participant AddCourseFormView [
+  <<view>>
+  :AddCourseForm
+]
+
+participant CourseDetailsView [
+  <<view>>
+  :CourseDetailsPage
+]
+
+participant CoursesController [
+  <<controller>>
+  :CoursesController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Program Details Page
+activate ProgramDetailsView
+DashboardView -> ProgramDetailsView: Redirect to Program Details Page
+deactivate DashboardView
+
+ProgramDetailsView -->> Admin: Show Program Details Page
+
+Admin -> ProgramDetailsView: Click "Add a New Course" Button
+
+activate AddCourseFormView
+ProgramDetailsView -> AddCourseFormView: Show Form for New Course
+
+Admin -> AddCourseFormView: Fill Course Form
+Admin -> AddCourseFormView: Click Save Button
+
+activate CoursesController
+AddCourseFormView -> CoursesController: addNewCourse()
+alt invalid
+    CoursesController -->> AddCourseFormView: Return Validation Result
+    AddCourseFormView -->> Admin: Show Error Message
+else valid
+    CoursesController -->> AddCourseFormView: Return Validation Result
+    AddCourseFormView -->> Admin: Redirect to Course Details Page
+    AddCourseFormView -->> Admin: Show Success Popup (Course Added)
+end
+
+deactivate CoursesController
+deactivate Admin
+deactivate ProgramDetailsView
+deactivate AddCourseFormView
+@enduml

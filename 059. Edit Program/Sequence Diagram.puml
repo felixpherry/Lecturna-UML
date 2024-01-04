@@ -1,0 +1,64 @@
+@startuml EditProgram
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ProgramsView [
+  <<view>>
+  :ProgramsPage
+]
+
+participant EditProgramPageView [
+  <<view>>
+  :EditProgramPage
+]
+
+participant ProgramController [
+  <<controller>>
+  :ProgramController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Programs Page
+activate ProgramsView
+ProgramsView -->> Admin: Show Programs Page
+deactivate DashboardView
+
+Admin -> ProgramsView: Click Edit Button on Program
+
+activate EditProgramPageView
+ProgramsView -> EditProgramPageView: Redirect to Edit Program Page
+
+Admin -> EditProgramPageView: Fill Edit Program Form
+Admin -> EditProgramPageView: Click Save Button
+
+activate ProgramController
+EditProgramPageView -> ProgramController: editProgram()
+alt invalid
+    ProgramController -->> EditProgramPageView: Return Validation Result
+    EditProgramPageView -->> Admin: Show Error Message
+else valid
+    ProgramController -->> EditProgramPageView: Return Validation Result
+    EditProgramPageView -->> Admin: Show Success Popup (Program Edited)
+end
+
+deactivate ProgramController
+deactivate Admin
+deactivate ProgramsView
+deactivate EditProgramPageView
+@enduml
