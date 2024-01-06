@@ -11,6 +11,6 @@ start
 |Admin|
 :Click "Publish Session" Button;
 |System|
-:Show Success Popup (Session Published);
+:Show Success Popup;
 stop
 @enduml

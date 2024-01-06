@@ -23,7 +23,7 @@ repeat while (valid?) is (no)
 |Admin|
 :Click Save Button on Create Classes Page;
 |System|
-:Show Success Popup (Classes Added);
+:Show Success Popup;
 :Redirect to Classes Page;
 stop
 @enduml

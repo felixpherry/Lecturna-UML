@@ -20,7 +20,7 @@ repeat :Fill Session Form;
   backward: Show Error Message;
 repeat while (valid?)
 |System|
+:Show Success Popup;
 :Redirect to Session Details Page;
-:Show Success Popup (Session Added);
 stop
 @enduml

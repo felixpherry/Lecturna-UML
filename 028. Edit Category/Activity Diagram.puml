@@ -20,7 +20,7 @@ repeat :Edit Data in Form;
 backward: Show Error Message;
 repeat while(valid?) is (no)
 -> yes;
-:Show Success Popup (Category Edited);
+:Show Success Popup;
 :Close Modal;
 stop
 @enduml

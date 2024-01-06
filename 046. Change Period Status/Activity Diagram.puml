@@ -11,6 +11,6 @@ start
 |Admin|
 :Click Change Status Button on Period;
 |System|
-:Show Success Popup (Status Changed);
+:Show Success Popup;
 stop
 @enduml

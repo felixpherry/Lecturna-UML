@@ -16,6 +16,6 @@ start
 :Click Confirm Button on Modal;
 |System|
 :Delete Grade;
-:Show Success Popup (Grade Deleted);
+:Show Success Popup;
 stop
 @enduml

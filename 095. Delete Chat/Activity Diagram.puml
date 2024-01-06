@@ -9,7 +9,7 @@ start
 |System|
 :Show Class Chat Page;
 |User|
-:Press Delete Button on a chat;
+:Click Delete Button on a chat;
 |System|
 :Show Confirmation Modal;
 |User|

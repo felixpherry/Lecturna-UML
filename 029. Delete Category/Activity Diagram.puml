@@ -16,6 +16,6 @@ start
 :Click Confirm Button;
 |System|
 :Delete Category;
-:Show Success Popup (Category Deleted);
+:Show Success Popup;
 stop
 @enduml

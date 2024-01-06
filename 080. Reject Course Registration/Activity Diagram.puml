@@ -15,6 +15,7 @@ start
 |Admin|
 :Click Confirm Button;
 |System|
-:Show Success Popup (Registration Rejected);
+:Update Registration Status;
+:Show Success Popup;
 stop
 @enduml

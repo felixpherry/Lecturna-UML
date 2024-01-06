@@ -21,6 +21,6 @@ backward: Show Error Message;
 repeat while (valid?) is (no)
 -> yes;
 :Close Modal;
-:Show Success Popup (Grade Added);
+:Show Success Popup;
 stop
 @enduml

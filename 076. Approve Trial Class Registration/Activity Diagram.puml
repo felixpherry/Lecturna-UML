@@ -16,6 +16,6 @@ start
 :Confirm Approval;
 |System|
 :Update Registration Status;
-:Show Success Popup (Approval Done);
+:Show Success Popup;
 stop
 @enduml

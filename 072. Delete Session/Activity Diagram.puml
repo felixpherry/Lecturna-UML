@@ -15,7 +15,7 @@ start
 |Admin|
 :Click Confirm Button on Modal;
 |System|
+:Show Success Popup;
 :Redirect to Course Details Page;
-:Show Success Popup (Session Deleted);
 stop
 @enduml

@@ -16,6 +16,6 @@ start
 :Confirm Deletion;
 |System|
 :Delete Program;
-:Show Success Popup (Program Deleted);
+:Show Success Popup;
 stop
 @enduml

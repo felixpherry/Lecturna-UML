@@ -20,6 +20,6 @@ repeat :Fill Coupon Form;
 backward: Show Error Message;
 repeat while(valid?) is (no)
 ->yes;
-:Show Success Popup (Coupon Added);
+:Show Success Popup;
 stop
 @enduml

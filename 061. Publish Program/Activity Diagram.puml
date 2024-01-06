@@ -15,6 +15,6 @@ start
 |Admin|
 :Click Publish Button on Program Details Page;
 |System|
-:Show Success Popup (Program Published);
+:Show Success Popup;
 stop
 @enduml

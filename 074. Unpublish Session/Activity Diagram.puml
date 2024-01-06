@@ -11,6 +11,6 @@ start
 |Admin|
 :Click "Unpublish Session" Button;
 |System|
-:Show Success Popup (Session Unpublished);
+:Show Success Popup;
 stop
 @enduml

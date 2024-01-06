@@ -21,7 +21,7 @@ backward: Show Error Message;
 repeat while(valid?) is (no)
 ->yes;
 |System|
-:Show Success Popup (Category Added);
+:Show Success Popup;
 :Close Modal;
 stop
 @enduml

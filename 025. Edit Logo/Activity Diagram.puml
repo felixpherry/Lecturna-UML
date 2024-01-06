@@ -16,6 +16,6 @@ repeat :Edit Logo;
 backward: Show Error Message;
 repeat while(valid?) is (no)
 -> yes;
-:Show Success Popup (Logo Edited);
+:Show Success Popup;
 stop
 @enduml

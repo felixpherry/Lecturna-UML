@@ -16,6 +16,6 @@ start
 :Click Confirm Button on Modal;
 |System|
 :Delete Shift;
-:Show Success Popup (Shift Deleted);
+:Show Success Popup;
 stop
 @enduml

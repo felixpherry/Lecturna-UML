@@ -12,6 +12,5 @@ start
 :Click Assessment Tab;
 |System|
 :Redirect to Class Assessment Page;
-|Instructor|
 stop
 @enduml

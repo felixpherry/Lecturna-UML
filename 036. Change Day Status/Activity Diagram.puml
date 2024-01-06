@@ -12,6 +12,6 @@ start
 :Click Change Status Button on a Day;
 |System|
 :Change Status of Day;
-:Show Success Popup (Status Changed);
+:Show Success Popup;
 stop
 @enduml

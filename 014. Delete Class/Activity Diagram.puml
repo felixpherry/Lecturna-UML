@@ -15,6 +15,6 @@ start
 |Admin|
 :Click Confirm Button in Modal;
 |System|
-:Show Success Popup (Class Deleted);
+:Show Success Popup;
 stop
 @enduml

@@ -16,6 +16,6 @@ start
 :Confirm Deletion;
 |System|
 :Delete Coupon;
-:Show Success Popup (Coupon Deleted);
+:Show Success Popup;
 stop
 @enduml

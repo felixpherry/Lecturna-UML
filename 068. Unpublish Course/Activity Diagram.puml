@@ -12,6 +12,6 @@ start
 :Click "Unpublish Course" Button;
 |System|
 :Unpublish Course;
-:Show Success Popup (Course Unpublished);
+:Show Success Popup;
 stop
 @enduml

@@ -20,6 +20,6 @@ repeat :Input Assessment;
 backward: Show Error Message;
 repeat while(valid?) is (no)
 -> yes;
-:Show Success Popup (Assessment Added);
+:Show Success Popup;
 stop
 @enduml

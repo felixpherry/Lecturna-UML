@@ -11,6 +11,6 @@ start
 |User|
 :Click "Meeting" Tab;
 |System|
-:Redirect User to the Meeting;
+:Redirect User to Class Meeting Page;
 stop
 @enduml

@@ -21,6 +21,6 @@ backward: Show Error Message;
 repeat while(valid?) is (no)
 -> yes;
 :Update User Profile;
-:Show Success Popup (Profile Edited);
+:Show Success Popup;
 stop
 @enduml

@@ -12,6 +12,6 @@ start
 :Click Change Status Button on Grade;
 |System|
 :Change Grade Status;
-:Show Success Popup (Grade Status Changed);
+:Show Success Popup;
 stop
 @enduml

@@ -20,9 +20,8 @@ repeat :Fill Program Form;
     backward: Show Error Message;
 repeat while (valid?) is (no)
 -> yes;
-|Admin|
-:Redirect to Program Details Page;
 |System|
-:Show Success Popup (Program Added);
+:Show Success Popup;
+:Redirect to Program Details Page;
 stop
 @enduml

@@ -20,6 +20,6 @@ repeat :Edit Data in Form;
 backward: Show Error Message;
 repeat while(valid?) is (no)
 ->yes;
-:Show Success Popup (Coupon Edited);
+:Show Success Popup;
 stop
 @enduml

@@ -17,6 +17,6 @@ backward: Show Error Message;
 repeat while(valid?) is (no)
 ->yes;
 |System|
-:Show Success Popup (Hero Edited);
+:Show Success Popup;
 stop
 @enduml

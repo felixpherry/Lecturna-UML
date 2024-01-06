@@ -5,8 +5,8 @@ start
 |System|
 :Redirect to Dashboard Page;
 |Admin|
-:Visit Instructor Registration Page;
+:Visit Instructor Registration List Page;
 |System|
-:Show Instructor Registration Page;
+:Show Instructor Registration List Page;
 stop
 @enduml

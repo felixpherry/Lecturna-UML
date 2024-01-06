@@ -12,6 +12,6 @@ start
 :Click "Publish Course" Button;
 |System|
 :Publish Course;
-:Show Success Popup (Course Published);
+:Show Success Popup;
 stop
 @enduml

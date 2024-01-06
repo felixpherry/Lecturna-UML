@@ -16,6 +16,6 @@ start
 :Click Confirm Button on Modal;
 |System|
 :Change Shift Status;
-:Show Success Popup (Shift Status Changed);
+:Show Success Popup;
 stop
 @enduml

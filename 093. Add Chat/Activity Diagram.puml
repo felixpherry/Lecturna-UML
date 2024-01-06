@@ -15,5 +15,6 @@ repeat :Input Chat in Chatbox;
 :Validate Input Data;
 repeat while(valid?) is (no)
 -> yes;
+:Show New Chat;
 stop
 @enduml

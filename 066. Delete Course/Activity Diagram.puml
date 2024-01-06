@@ -16,7 +16,7 @@ start
 :Confirm Deletion;
 |System|
 :Delete Course;
-:Show Success Popup (Course Deleted);
+:Show Success Popup;
 :Redirect to Program Details Page;
 stop
 @enduml

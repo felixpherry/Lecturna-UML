@@ -12,6 +12,7 @@ start
 |Student|
 :Confirm Enrollment;
 |System|
+:Process Enrollment;
 :Display Success Popup;
 stop
 @enduml

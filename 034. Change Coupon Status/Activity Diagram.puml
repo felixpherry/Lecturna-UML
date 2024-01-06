@@ -12,6 +12,6 @@ start
 :Click Change Status Button on a Coupon;
 |System|
 :Change Coupon Status;
-:Show Success Popup (Status Changed);
+:Show Success Popup;
 stop
 @enduml

@@ -5,10 +5,8 @@ start
 |System|
 :Redirect to Dashboard Page;
 |Admin|
-:Visit Course Registration Page;
+:Visit Course Registration List Page;
 |System|
-:Show Course Registration Page;
-|Admin|
-:View List of Course Registrations;
+:Show Course Registration List Page;
 stop
 @enduml

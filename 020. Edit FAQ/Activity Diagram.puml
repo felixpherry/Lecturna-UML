@@ -22,6 +22,6 @@ repeat while(valid?) is (no)
 ->yes;
 |System|
 :Close Modal;
-:Show Success Popup (FAQ Edited);
+:Show Success Popup;
 stop
 @enduml

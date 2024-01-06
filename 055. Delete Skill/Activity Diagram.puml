@@ -16,6 +16,6 @@ start
 :Confirm Deletion;
 |System|
 :Delete Skill;
-:Show Success Popup (Skill Deleted);
+:Show Success Popup;
 stop
 @enduml

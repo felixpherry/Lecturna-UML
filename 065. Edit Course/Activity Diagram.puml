@@ -20,7 +20,6 @@ repeat :Edit Course Form;
 backward: Show Error Message;
 repeat while (valid?) is (no)
 -> yes;
-|Admin|
-:Show Success Popup (Course Edited);
+:Show Success Popup;
 stop
 @enduml

@@ -5,8 +5,8 @@ start
 |System|
 :Redirect to Dashboard Page;
 |Admin|
-:Visit Trial Class Registration Page;
+:Visit Trial Class Registration List Page;
 |System|
-:Show Trial Class Registration Page;
+:Show Trial Class Registration List Page;
 stop
 @enduml

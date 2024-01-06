@@ -15,6 +15,6 @@ start
 |Admin|
 :Click Unpublish Button on Program Details Page;
 |System|
-:Show Success Popup (Program Unpublished);
+:Show Success Popup;
 stop
 @enduml

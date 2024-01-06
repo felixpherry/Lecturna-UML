@@ -20,7 +20,6 @@ repeat :Fill Edit Program Form;
 backward: Show Error Message;
 repeat while (valid?) is (no)
 -> yes;
-|Admin|
-:Show Success Popup (Program Edited);
+:Show Success Popup;
 stop
 @enduml

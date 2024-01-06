@@ -20,9 +20,8 @@ repeat :Fill Course Form;
 backward: Show Error Message;
 repeat while (valid?) is (no)
 -> yes;
-|Admin|
-:Redirect to Course Details Page;
 |System|
-:Show Success Popup (Course Added);
+:Show Success Popup;
+:Redirect to Course Details Page;
 stop
 @enduml
