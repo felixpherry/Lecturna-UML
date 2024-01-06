@@ -1,0 +1,67 @@
+@startuml EditSession
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant SessionDetailsView [
+  <<view>>
+  :SessionDetailsPage
+]
+
+participant EditSessionFormView [
+  <<view>>
+  :EditSessionForm
+]
+
+participant SessionController [
+  <<controller>>
+  :SessionController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Session Details Page
+activate SessionDetailsView
+DashboardView -> SessionDetailsView: Redirect to Session Details Page
+deactivate DashboardView
+
+SessionDetailsView -->> Admin: Show Session Details Page
+
+Admin -> SessionDetailsView: Click "Edit Session" Button
+activate EditSessionFormView
+SessionDetailsView -> EditSessionFormView: Show Edit Session Form
+
+Admin -> EditSessionFormView: Edit Session Form
+Admin -> EditSessionFormView: Click Save Button on Form
+
+activate SessionController
+EditSessionFormView -> SessionController: editSession()
+alt invalid
+    SessionController -->> EditSessionFormView: Return Validation Result
+    EditSessionFormView -->> Admin: Show Error Message
+else valid
+    SessionController -->> EditSessionFormView: Return Validation Result
+    deactivate SessionController
+
+    EditSessionFormView -->> Admin: Redirect to Edited Session Details Page
+    EditSessionFormView -->> Admin: Show Success Popup (Session Edited)
+end
+
+deactivate Admin
+deactivate SessionDetailsView
+deactivate EditSessionFormView
+@enduml

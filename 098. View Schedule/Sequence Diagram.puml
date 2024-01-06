@@ -1,0 +1,36 @@
+@startuml ViewSchedule
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant SchedulePageView [
+  <<view>>
+  :SchedulePage
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login as Student, Instructor, or Parent
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Schedule Page
+activate SchedulePageView
+DashboardView -> SchedulePageView: Show Schedule Page
+deactivate DashboardView
+
+SchedulePageView -->> User: Show Schedule Page
+
+deactivate User
+deactivate SchedulePageView
+@enduml

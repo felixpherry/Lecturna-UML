@@ -1,0 +1,65 @@
+@startuml EditProfile
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ProfilePageView [
+  <<view>>
+  :ProfilePage
+]
+
+participant EditProfilePageView [
+  <<view>>
+  :EditProfilePage
+]
+
+participant ProfileController [
+  <<controller>>
+  :ProfileController
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Profile Page
+activate ProfilePageView
+DashboardView -> ProfilePageView: Show Profile Page
+deactivate DashboardView
+
+ProfilePageView -->> User: Show Profile Page
+
+User -> ProfilePageView: Click Edit Profile Button
+ProfilePageView -> EditProfilePageView: Show Edit Profile Page
+activate EditProfilePageView
+
+EditProfilePageView -->> User: Show Edit Profile Page
+
+User -> EditProfilePageView: Fill Edit Profile Form
+EditProfilePageView -> ProfileController: saveProfileChanges()
+activate ProfileController
+ProfileController -->> EditProfilePageView: Validate Data
+alt Valid Data
+    EditProfilePageView -->> User: Close Edit Profile Page
+    User -->> ProfilePageView: Show Success Popup (Profile Edited)
+else Invalid Data
+    EditProfilePageView -->> User: Show Error Message
+end
+
+deactivate User
+deactivate ProfilePageView
+deactivate EditProfilePageView
+deactivate ProfileController
+@enduml

@@ -1,0 +1,44 @@
+@startuml DeleteChat
+actor User
+participant ClassChatPageView [
+    <<view>>
+    :ClassChatPage
+]
+
+participant ConfirmationModalView [
+    <<view>>
+    :ConfirmationModal
+]
+
+participant ChatController [
+    <<controller>>
+    :ChatController
+]
+
+activate User
+User -> ClassChatPageView: Login as Student or Instructor
+User -> ClassChatPageView: Redirect to Dashboard Page
+deactivate User
+
+ClassChatPageView -->> User: Show Dashboard Page
+
+User -> ClassChatPageView: Visit Class Chat Page
+activate ClassChatPageView
+ClassChatPageView -->> User: Show Class Chat Page
+deactivate ClassChatPageView
+
+User -> ClassChatPageView: Press Delete Button on a chat
+ClassChatPageView -> ConfirmationModalView: Show Confirmation Modal
+activate ConfirmationModalView
+ConfirmationModalView -->> User: Show Confirmation Modal
+deactivate ConfirmationModalView
+
+User -> ConfirmationModalView: Click Confirm Button on the modal
+ConfirmationModalView -> ChatController: deleteChat()
+activate ChatController
+ChatController -->> ClassChatPageView: Delete Chat
+deactivate ChatController
+
+ClassChatPageView -->> User: Show Updated Class Chat Page
+deactivate ClassChatPageView
+@enduml

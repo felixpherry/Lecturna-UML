@@ -1,0 +1,49 @@
+@startuml UnpublishSession
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant SessionDetailsView [
+  <<view>>
+  :SessionDetailsPage
+]
+
+participant SessionController [
+  <<controller>>
+  :SessionController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Session Details Page
+activate SessionDetailsView
+DashboardView -> SessionDetailsView: Redirect to Session Details Page
+deactivate DashboardView
+
+SessionDetailsView -->> Admin: Show Session Details Page
+
+Admin -> SessionDetailsView: Click "Unpublish Session" Button
+
+activate SessionController
+SessionDetailsView -> SessionController: unpublishSession()
+deactivate SessionDetailsView
+
+SessionController -->> Admin: Show Success Popup (Session Unpublished)
+
+deactivate Admin
+deactivate SessionController
+@enduml

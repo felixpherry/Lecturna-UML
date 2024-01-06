@@ -1,0 +1,52 @@
+@startuml AddChat
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassChatPageView [
+    <<view>>
+    :ClassChatPage
+]
+
+participant ChatController [
+  <<controller>>
+  :ChatController
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login as Student or Instructor
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Class Chat Page
+activate ClassChatPageView
+DashboardView -> ClassChatPageView: Redirect to Class Chat Page
+deactivate DashboardView
+
+ClassChatPageView -->> User: Show Class Chat Page
+
+User -> ClassChatPageView: Input Chat in Chatbox
+ClassChatPageView -> ChatController: sendChat(message)
+activate ChatController
+ChatController -> ChatController: Validate Input Data
+alt Valid Input Data
+    ChatController -->> ClassChatPageView: Show Updated Class Chat Page
+else Invalid Input Data
+    ChatController -->> ClassChatPageView: Show Error Message
+end
+
+deactivate User
+deactivate ClassChatPageView
+deactivate ChatController
+@enduml

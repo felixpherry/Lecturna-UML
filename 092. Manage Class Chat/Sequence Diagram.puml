@@ -1,0 +1,49 @@
+@startuml ManageClassChat
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassDetailsPageView [
+  <<view>>
+  :ClassDetailsPage
+]
+
+participant ClassChatPageView [
+    <<view>>
+    :ClassChatPage
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login as Instructor or Student
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Class Details Page
+activate ClassDetailsPageView
+DashboardView -> ClassDetailsPageView: Redirect to Class Details Page
+deactivate DashboardView
+
+ClassDetailsPageView -->> User: Show Class Details Page
+
+User -> ClassDetailsPageView: Click "Chat" Tab
+
+activate ClassChatPageView
+ClassDetailsPageView -> ClassChatPageView: Redirect to Class Chat Page
+deactivate ClassDetailsPageView
+
+ClassChatPageView -->> User: Show Class Chat Page
+
+deactivate User
+deactivate ClassDetailsPageView
+@enduml

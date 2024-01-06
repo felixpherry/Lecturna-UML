@@ -1,0 +1,38 @@
+@startuml ManageAssessment
+actor Instructor
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassDetailsPageView [
+  <<view>>
+  :ClassDetailsPage
+]
+
+activate Instructor
+Instructor -> LoginPageView: Login as Instructor
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> Instructor: Show Dashboard
+
+Instructor -> DashboardView: Visit Class Detail Page
+activate ClassDetailsPageView
+DashboardView -> ClassDetailsPageView: Redirect to Class Details Page
+deactivate DashboardView
+
+ClassDetailsPageView -->> Instructor: Show Class Details Page
+
+Instructor -> ClassDetailsPageView: Click Assessment Tab
+ClassDetailsPageView -->> Instructor: Redirect to Class Assessment Page
+
+deactivate Instructor
+deactivate ClassDetailsPageView
+@enduml

@@ -1,0 +1,50 @@
+@startuml ViewClassSession
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassDetailsPageView [
+  <<view>>
+  :ClassDetailsPage
+]
+
+participant SessionDetailsPageView [
+  <<view>>
+  :SessionDetailsPage
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Class Details Page
+activate ClassDetailsPageView
+DashboardView -> ClassDetailsPageView: Redirect to Class Details Page
+deactivate DashboardView
+
+ClassDetailsPageView -->> User: Show Class Details Page
+
+User -> ClassDetailsPageView: Select a Session from the Session Tab
+
+activate SessionDetailsPageView
+ClassDetailsPageView -> SessionDetailsPageView: Redirect to Session Details Page
+deactivate ClassDetailsPageView
+
+
+SessionDetailsPageView -->> User: Show Session Details Page
+
+deactivate User
+deactivate SessionDetailsPageView
+@enduml

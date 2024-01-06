@@ -1,0 +1,67 @@
+@startuml AddSession
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CourseDetailsView [
+  <<view>>
+  :CourseDetailsPage
+]
+
+participant SessionFormView [
+  <<view>>
+  :SessionForm
+]
+
+participant SessionController [
+  <<controller>>
+  :SessionController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Course Details Page
+activate CourseDetailsView
+DashboardView -> CourseDetailsView: Redirect to Course Details Page
+deactivate DashboardView
+
+CourseDetailsView -->> Admin: Show Course Details Page
+
+Admin -> CourseDetailsView: Click "Add a New Session" Button
+activate SessionFormView
+CourseDetailsView -> SessionFormView: Show Session Form
+
+Admin -> SessionFormView: Fill Session Form
+Admin -> SessionFormView: Click Save Button on Form
+
+activate SessionController
+SessionFormView -> SessionController: addSession()
+alt invalid
+    SessionController -->> SessionFormView: Return Validation Result
+    SessionFormView -->> Admin: Show Error Message
+else valid
+    SessionController -->> SessionFormView: Return Validation Result
+    deactivate SessionController
+
+    SessionFormView -->> Admin: Redirect to Session Details Page
+    SessionFormView -->> Admin: Show Success Popup (Session Added)
+end
+
+deactivate Admin
+deactivate CourseDetailsView
+deactivate SessionFormView
+@enduml

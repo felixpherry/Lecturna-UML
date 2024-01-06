@@ -1,0 +1,47 @@
+@startuml ViewClassScore
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassDetailsPageView [
+  <<view>>
+  :ClassDetailsPage
+]
+
+participant ClassScoreDetailsView [
+  <<view>>
+  :ClassScoreDetailsPage
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login as Student or Parent
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Class Details Page
+activate ClassDetailsPageView
+DashboardView -> ClassDetailsPageView: Redirect to Class Details Page
+deactivate DashboardView
+
+ClassDetailsPageView -->> User: Show Class Details Page
+
+User -> ClassDetailsPageView: Click "Score" Tab
+ClassDetailsPageView -> ClassScoreDetailsView: Redirect to Class Score Details Page
+deactivate ClassDetailsPageView
+
+ClassScoreDetailsView -->> User: Show Class Score Details
+
+deactivate User
+deactivate ClassScoreDetailsView
+@enduml

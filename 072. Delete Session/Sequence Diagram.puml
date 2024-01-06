@@ -1,0 +1,60 @@
+@startuml DeleteSession
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant SessionDetailsView [
+  <<view>>
+  :SessionDetailsPage
+]
+
+participant ConfirmationModalView [
+  <<view>>
+  :ConfirmationModal
+]
+
+participant SessionController [
+  <<controller>>
+  :SessionController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Session Details Page
+activate SessionDetailsView
+DashboardView -> SessionDetailsView: Redirect to Session Details Page
+deactivate DashboardView
+
+SessionDetailsView -->> Admin: Show Session Details Page
+
+Admin -> SessionDetailsView: Click "Delete Session" Button
+activate ConfirmationModalView
+SessionDetailsView -> ConfirmationModalView: Show Confirmation Modal
+
+Admin -> ConfirmationModalView: Click Confirm Button on Modal
+
+activate SessionController
+ConfirmationModalView -> SessionController: deleteSession()
+deactivate ConfirmationModalView
+
+SessionController -->> Admin: Redirect to Course Details Page
+SessionController -->> Admin: Show Success Popup (Session Deleted)
+
+deactivate Admin
+deactivate SessionDetailsView
+deactivate SessionController
+@enduml

@@ -1,0 +1,51 @@
+@startuml ApproveCourseRegistration
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CourseRegistrationView [
+  <<view>>
+  :CourseRegistrationPage
+]
+
+participant CourseController [
+  <<controller>>
+  :CourseController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Course Registration Page
+activate CourseRegistrationView
+DashboardView -> CourseRegistrationView: Show Course Registration Page
+deactivate DashboardView
+
+CourseRegistrationView -->> Admin: Click Approve Button on a Registration
+
+Admin -> CourseRegistrationView: Click Approve Button on a Registration
+activate CourseRegistrationView
+
+CourseRegistrationView -->> CourseController: Show Confirmation Modal
+
+Admin -> CourseController: Click Confirm Button
+
+CourseController -->> CourseRegistrationView: Show Success Popup (Registration Approved)
+
+deactivate Admin
+deactivate CourseRegistrationView
+deactivate CourseController
+@enduml

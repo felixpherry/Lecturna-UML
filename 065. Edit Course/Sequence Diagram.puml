@@ -1,0 +1,68 @@
+@startuml EditCourse
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CourseDetailsView [
+  <<view>>
+  :CourseDetailsPage
+]
+
+participant EditCourseFormModalView [
+  <<view>>
+  :EditCourseFormModal
+]
+
+participant CourseController [
+  <<controller>>
+  :CourseController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Course Details Page
+activate CourseDetailsView
+DashboardView -> CourseDetailsView: Redirect to Course Details Page
+deactivate DashboardView
+
+CourseDetailsView -->> Admin: Show Course Details Page
+
+Admin -> CourseDetailsView: Click "Edit Course" Button
+
+activate EditCourseFormModalView
+CourseDetailsView -> EditCourseFormModalView: Show Form for Editing Course
+
+Admin -> EditCourseFormModalView: Edit Course Form
+Admin -> EditCourseFormModalView: Click Save Button on Form
+
+activate CourseController
+EditCourseFormModalView -> CourseController: editCourse()
+alt invalid
+    CourseController -->> EditCourseFormModalView: Return Validation Result
+    EditCourseFormModalView -->> Admin: Show Error Message
+else valid
+    CourseController -->> EditCourseFormModalView: Return Validation Result
+    deactivate CourseController
+
+    Admin -->> EditCourseFormModalView: Show Success Popup (Course Edited)
+    EditCourseFormModalView -->> Admin: Close Modal
+end
+
+deactivate Admin
+deactivate CourseDetailsView
+deactivate EditCourseFormModalView
+@enduml

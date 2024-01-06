@@ -1,0 +1,48 @@
+@startuml JoinClassMeeting
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassDetailsPageView [
+  <<view>>
+  :ClassDetailsPage
+]
+
+participant ClassMeetingPageView [
+    <<view>>
+    :ClassMeetingPage
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login as Instructor or Student
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Class Details Page
+activate ClassDetailsPageView
+DashboardView -> ClassDetailsPageView: Redirect to Class Details Page
+deactivate DashboardView
+
+ClassDetailsPageView -->> User: Show Class Details Page
+
+User -> ClassDetailsPageView: Click "Meeting" Tab
+activate ClassMeetingPageView
+ClassDetailsPageView -> ClassMeetingPageView: Redirect User to the Meeting
+deactivate ClassDetailsPageView
+
+ClassMeetingPageView -->> User: Show Class Meeting Page
+
+deactivate User
+deactivate ClassDetailsPageView
+@enduml

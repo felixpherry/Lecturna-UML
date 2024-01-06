@@ -1,0 +1,63 @@
+@startuml AddAssessment
+actor Instructor
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassAssessmentPageView [
+  <<view>>
+  :ClassAssessmentPage
+]
+
+participant AssessmentModalView [
+  <<view>>
+  :AssessmentModal
+]
+
+participant AssessmentController [
+  <<controller>>
+  :AssessmentController
+]
+
+activate Instructor
+Instructor -> LoginPageView: Login as Instructor
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> Instructor: Show Dashboard
+
+Instructor -> DashboardView: Visit Class Assessment Page
+activate ClassAssessmentPageView
+DashboardView -> ClassAssessmentPageView: Show Class Assessment Page
+deactivate DashboardView
+
+ClassAssessmentPageView -->> Instructor: Show Class Assessment Page
+
+Instructor -> ClassAssessmentPageView: Click "Add" Button
+ClassAssessmentPageView -> AssessmentModalView: Show Modal with Assessment Form
+activate AssessmentModalView
+AssessmentModalView -->> Instructor: Show Modal with Assessment Form
+deactivate AssessmentModalView
+
+Instructor -> AssessmentModalView: Input Assessment
+AssessmentModalView -> AssessmentController: saveAssessment()
+activate AssessmentController
+AssessmentController -->> AssessmentModalView: Validate Input Data
+alt Valid Input Data
+    AssessmentController -->> ClassAssessmentPageView: Show Success Popup (Assessment Added)
+else Invalid Input Data
+    AssessmentController -->> AssessmentModalView: Show Error Message
+end
+
+deactivate Instructor
+deactivate ClassAssessmentPageView
+deactivate AssessmentModalView
+deactivate AssessmentController
+@enduml

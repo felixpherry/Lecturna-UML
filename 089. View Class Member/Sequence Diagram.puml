@@ -1,0 +1,48 @@
+@startuml ViewClassMember
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassDetailsPageView [
+  <<view>>
+  :ClassDetailsPage
+]
+
+participant ClassMembersView [
+  <<view>>
+  :ClassMembersPage
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login as Instructor, Student, or Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Class Details Page
+activate ClassDetailsPageView
+DashboardView -> ClassDetailsPageView: Redirect to Class Details Page
+deactivate DashboardView
+
+ClassDetailsPageView -->> User: Show Class Details Page
+
+User -> ClassDetailsPageView: Click "Member" Tab
+activate ClassMembersView
+ClassDetailsPageView -> ClassMembersView: Redirect to Class Members Page
+deactivate ClassDetailsPageView
+
+ClassMembersView -->> User: Show Class Members
+
+deactivate User
+deactivate ClassMembersView
+@enduml

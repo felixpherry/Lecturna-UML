@@ -1,0 +1,57 @@
+@startuml EditChat
+actor User
+participant System
+participant ClassChatPageView [
+    <<view>>
+    :ClassChatPage
+]
+
+participant EditChatFormView [
+    <<view>>
+    :EditChatForm
+]
+
+participant ChatController [
+    <<controller>>
+    :ChatController
+]
+
+activate User
+User -> System: Login as Student or Instructor
+User -> System: Redirect to Dashboard Page
+deactivate User
+
+System -->> User: Show Dashboard Page
+
+User -> System: Visit Class Chat Page
+activate ClassChatPageView
+System -> ClassChatPageView: Show Class Chat Page
+deactivate System
+
+ClassChatPageView -->> User: Show Class Chat Page
+
+User -> ClassChatPageView: Press Edit Button on a chat
+ClassChatPageView -> System: Show Edit Form for the selected chat
+activate EditChatFormView
+System -> EditChatFormView: Show Edit Chat Form
+deactivate System
+
+EditChatFormView -->> User: Show Edit Chat Form
+
+User -> EditChatFormView: Edit the chat in the chatbox
+User -> EditChatFormView: Click Save Button
+EditChatFormView -> ChatController: updateChat(message)
+
+activate ChatController
+ChatController -->> EditChatFormView: Validate Chat
+alt Valid Chat
+    EditChatFormView -->> EditChatFormView: Show Updated Class Chat Page
+else Invalid Chat
+    EditChatFormView -->> EditChatFormView: Show Error Message
+end
+
+deactivate User
+deactivate ClassChatPageView
+deactivate EditChatFormView
+deactivate ChatController
+@enduml

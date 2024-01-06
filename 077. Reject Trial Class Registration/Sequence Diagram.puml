@@ -1,0 +1,59 @@
+@startuml RejectTrialClassRegistration
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant TrialClassRegistrationView [
+  <<view>>
+  :TrialClassRegistrationPage
+]
+
+participant RejectionConfirmationModalView [
+  <<view>>
+  :RejectionConfirmationModal
+]
+
+participant TrialClassController [
+  <<controller>>
+  :TrialClassController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Trial Class Registration Page
+activate TrialClassRegistrationView
+DashboardView -> TrialClassRegistrationView: Redirect to Trial Class Registration Page
+deactivate DashboardView
+
+TrialClassRegistrationView -->> Admin: Show Trial Class Registration Page
+
+Admin -> TrialClassRegistrationView: Select Trial Class Registration to Reject
+TrialClassRegistrationView -> TrialClassController: rejectTrialClassRegistration()
+activate RejectionConfirmationModalView
+TrialClassController -->> RejectionConfirmationModalView: Show Rejection Confirmation Modal
+deactivate RejectionConfirmationModalView
+
+RejectionConfirmationModalView -->> Admin: Confirm Rejection
+
+Admin -> TrialClassController: confirmRejection()
+TrialClassController -->> TrialClassRegistrationView: Update Registration Status
+TrialClassRegistrationView -->> Admin: Show Success Popup (Rejection Done)
+
+deactivate Admin
+deactivate TrialClassRegistrationView
+deactivate TrialClassController
+@enduml

@@ -1,0 +1,36 @@
+@startuml ViewClasses
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ClassesPageView [
+  <<view>>
+  :ClassesPage
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Classes Page
+activate ClassesPageView
+DashboardView -> ClassesPageView: Redirect to Classes Page
+deactivate DashboardView
+
+ClassesPageView -->> User: Show Classes Page
+
+deactivate User
+deactivate ClassesPageView
+@enduml

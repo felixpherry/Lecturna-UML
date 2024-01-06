@@ -1,0 +1,59 @@
+@startuml ApproveInstructorRegistration
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant InstructorRegistrationView [
+  <<view>>
+  :InstructorRegistrationPage
+]
+
+participant ApprovalConfirmationModalView [
+  <<view>>
+  :ApprovalConfirmationModal
+]
+
+participant InstructorRegistrationController [
+  <<controller>>
+  :InstructorRegistrationController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Instructor Registration Page
+activate InstructorRegistrationView
+DashboardView -> InstructorRegistrationView: Redirect to Instructor Registration Page
+deactivate DashboardView
+
+InstructorRegistrationView -->> Admin: Show Instructor Registration Page
+
+Admin -> InstructorRegistrationView: Select Instructor Registration to Approve
+InstructorRegistrationView -> InstructorRegistrationController: approveInstructorRegistration()
+activate ApprovalConfirmationModalView
+InstructorRegistrationController -->> ApprovalConfirmationModalView: Show Approval Confirmation Modal
+deactivate ApprovalConfirmationModalView
+
+ApprovalConfirmationModalView -->> Admin: Confirm Approval
+
+Admin -> InstructorRegistrationController: confirmApproval()
+InstructorRegistrationController -->> InstructorRegistrationView: Update Registration Status
+InstructorRegistrationView -->> Admin: Show Success Popup (Approval Done)
+
+deactivate Admin
+deactivate InstructorRegistrationView
+deactivate InstructorRegistrationController
+@enduml

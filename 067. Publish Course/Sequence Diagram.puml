@@ -1,0 +1,50 @@
+@startuml PublishCourse
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CourseDetailsView [
+  <<view>>
+  :CourseDetailsPage
+]
+
+participant CourseController [
+  <<controller>>
+  :CourseController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Course Details Page
+activate CourseDetailsView
+DashboardView -> CourseDetailsView: Redirect to Course Details Page
+deactivate DashboardView
+
+CourseDetailsView -->> Admin: Show Course Details Page
+
+Admin -> CourseDetailsView: Click "Publish Course" Button
+
+activate CourseController
+CourseDetailsView -> CourseController: publishCourse()
+CourseController -->> CourseDetailsView: Return Publishing Result
+deactivate CourseController
+
+CourseDetailsView -->> Admin: Show Success Popup (Course Published)
+
+deactivate Admin
+deactivate CourseDetailsView
+@enduml

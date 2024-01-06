@@ -1,0 +1,63 @@
+@startuml DeleteCourse
+actor Admin
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant CourseDetailsView [
+  <<view>>
+  :CourseDetailsPage
+]
+
+participant DeleteCourseConfirmationModalView [
+  <<view>>
+  :DeleteCourseConfirmationModal
+]
+
+participant CourseController [
+  <<controller>>
+  :CourseController
+]
+
+activate Admin
+activate LoginPageView
+Admin -> LoginPageView: Login as Admin
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard Page
+deactivate LoginPageView
+
+DashboardView -->> Admin: Show Dashboard Page
+
+Admin -> DashboardView: Visit Course Details Page
+activate CourseDetailsView
+DashboardView -> CourseDetailsView: Redirect to Course Details Page
+deactivate DashboardView
+
+CourseDetailsView -->> Admin: Show Course Details Page
+
+Admin -> CourseDetailsView: Click "Delete Course" Button
+
+activate DeleteCourseConfirmationModalView
+CourseDetailsView -> DeleteCourseConfirmationModalView: Show Confirmation Modal
+
+Admin -> DeleteCourseConfirmationModalView: Confirm Deletion
+
+activate CourseController
+DeleteCourseConfirmationModalView -> CourseController: deleteCourse()
+CourseController -->> DeleteCourseConfirmationModalView: Return Deletion Result
+deactivate CourseController
+
+DeleteCourseConfirmationModalView -->> Admin: Close Modal
+Admin -->> CourseDetailsView: Show Success Popup (Course Deleted)
+CourseDetailsView -->> Admin: Redirect to Program Details Page
+
+deactivate Admin
+deactivate CourseDetailsView
+deactivate DeleteCourseConfirmationModalView
+@enduml

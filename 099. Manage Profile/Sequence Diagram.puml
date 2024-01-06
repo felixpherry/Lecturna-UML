@@ -1,0 +1,36 @@
+@startuml ManageProfile
+actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
+participant ProfilePageView [
+  <<view>>
+  :ProfilePage
+]
+
+activate User
+activate LoginPageView
+User -> LoginPageView: Login
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
+
+DashboardView -->> User: Show Dashboard
+
+User -> DashboardView: Visit Profile Page
+activate ProfilePageView
+DashboardView -> ProfilePageView: Show Profile Page
+deactivate DashboardView
+
+ProfilePageView -->> User: Show Profile Page
+
+deactivate User
+deactivate ProfilePageView
+@enduml
