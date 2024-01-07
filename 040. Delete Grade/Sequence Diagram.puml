@@ -15,6 +15,11 @@ participant GradeView [
   :GradePage
 ]
 
+participant DeleteGradeConfirmationModalView [
+  <<view>>
+  :DeleteGradeConfirmationModal
+]
+
 participant GradeController [
   <<controller>>
   :GradeController
@@ -36,20 +41,19 @@ deactivate DashboardView
 
 GradeView -->> Admin: Show Grade Page
 
-Admin -> GradeView: Click Delete Button on Grade
+Admin -> GradeView: Click Delete Button on a Grade
+
+activate DeleteGradeConfirmationModalView
+GradeView -> DeleteGradeConfirmationModalView: Open Confirmation Modal
+DeleteGradeConfirmationModalView -->> Admin: Show Confirmation Modal
+
+Admin -> DeleteGradeConfirmationModalView: Confirm Deletion
 
 activate GradeController
-GradeView -> GradeController: deleteGrade()
-alt confirm
-    GradeController -->> GradeView: Return Confirmation Modal
-    Admin -> GradeView: Click Confirm Button on Modal
-    GradeController -->> GradeView: Return Success Message
-    GradeView -->> Admin: Show Success Popup (Grade Deleted)
-else cancel
-    Admin -->> GradeView: Click Cancel Button on Modal
-    GradeController -->> GradeView: Return Cancel Message
-end
-
+DeleteGradeConfirmationModalView -> GradeController: deleteGrade()
+deactivate DeleteGradeConfirmationModalView
+GradeController -->> GradeView: Return Success Message
+GradeView -->> Admin: showSuccessPopup()
 deactivate GradeController
 
 deactivate Admin

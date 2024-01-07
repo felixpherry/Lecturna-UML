@@ -44,17 +44,17 @@ CourseDetailsView -->> Admin: Show Course Details Page
 Admin -> CourseDetailsView: Click "Delete Course" Button
 
 activate DeleteCourseConfirmationModalView
-CourseDetailsView -> DeleteCourseConfirmationModalView: Show Confirmation Modal
+CourseDetailsView -> DeleteCourseConfirmationModalView: Open Confirmation Modal
+DeleteCourseConfirmationModalView -->> Admin: Show Confirmation Modal
 
 Admin -> DeleteCourseConfirmationModalView: Confirm Deletion
 
 activate CourseController
 DeleteCourseConfirmationModalView -> CourseController: deleteCourse()
-CourseController -->> DeleteCourseConfirmationModalView: Return Deletion Result
+CourseController -->> CourseDetailsView: Return Success Message
 deactivate CourseController
 
-DeleteCourseConfirmationModalView -->> Admin: Close Modal
-Admin -->> CourseDetailsView: Show Success Popup (Course Deleted)
+CourseDetailsView -->> Admin: showSuccessPopup()
 CourseDetailsView -->> Admin: Redirect to Program Details Page
 
 deactivate Admin

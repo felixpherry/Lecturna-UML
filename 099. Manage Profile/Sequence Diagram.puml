@@ -26,7 +26,7 @@ DashboardView -->> User: Show Dashboard
 
 User -> DashboardView: Visit Profile Page
 activate ProfilePageView
-DashboardView -> ProfilePageView: Show Profile Page
+DashboardView -> ProfilePageView: Redirect to Profile Page
 deactivate DashboardView
 
 ProfilePageView -->> User: Show Profile Page

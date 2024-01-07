@@ -47,19 +47,18 @@ activate EditCourseFormModalView
 CourseDetailsView -> EditCourseFormModalView: Show Form for Editing Course
 
 Admin -> EditCourseFormModalView: Edit Course Form
-Admin -> EditCourseFormModalView: Click Save Button on Form
+Admin -> EditCourseFormModalView: Click Save Button
 
 activate CourseController
 EditCourseFormModalView -> CourseController: editCourse()
 alt invalid
-    CourseController -->> EditCourseFormModalView: Return Validation Result
-    EditCourseFormModalView -->> Admin: Show Error Message
+    CourseController -->> EditCourseFormModalView: Return Error Message
+    EditCourseFormModalView -->> Admin: showErrorPopup()
 else valid
-    CourseController -->> EditCourseFormModalView: Return Validation Result
+    CourseController -->> EditCourseFormModalView: Return Success Message
     deactivate CourseController
 
-    Admin -->> EditCourseFormModalView: Show Success Popup (Course Edited)
-    EditCourseFormModalView -->> Admin: Close Modal
+    EditCourseFormModalView-->> Admin: showSuccessPopup()
 end
 
 deactivate Admin

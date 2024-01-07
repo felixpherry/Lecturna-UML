@@ -24,12 +24,12 @@ deactivate LoginPageView
 
 DashboardView -->> Admin: Show Dashboard Page
 
-Admin -> DashboardView: Visit Course Registration Page
+Admin -> DashboardView: Visit Course Registration List Page
 activate CourseRegistrationView
-DashboardView -> CourseRegistrationView: Show Course Registration Page
+DashboardView -> CourseRegistrationView: Redirect to Course Registration List Page
 deactivate DashboardView
 
-CourseRegistrationView -->> Admin: View List of Course Registrations
+CourseRegistrationView -->> Admin: Show Course Registration List Page
 
 deactivate Admin
 deactivate CourseRegistrationView

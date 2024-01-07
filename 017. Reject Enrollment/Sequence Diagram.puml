@@ -44,17 +44,18 @@ EnrollmentsView -->> Admin: Show Enrollments Page
 Admin -> EnrollmentsView: Click Reject Button on an Enrollment
 
 activate RejectionConfirmationModalView
-EnrollmentsView -> RejectionConfirmationModalView: Show Confirmation Modal
+EnrollmentsView -> RejectionConfirmationModalView: Open Confirmation Modal
+RejectionConfirmationModalView -->> Admin: Show Confirmation Modal
 
-Admin -> RejectionConfirmationModalView: Click Confirm Button in Modal
+Admin -> RejectionConfirmationModalView: Click Confirm Button
 
 activate EnrollmentController
 RejectionConfirmationModalView -> EnrollmentController: rejectEnrollment()
-EnrollmentController -->> RejectionConfirmationModalView: Return Success Message
-RejectionConfirmationModalView -->> Admin: Show Success Popup (Enrollment Rejected)
+deactivate RejectionConfirmationModalView
+EnrollmentController -->> EnrollmentsView: Return Success Message
+EnrollmentsView -->> Admin: showSuccessPopup()
 deactivate EnrollmentController
 
 deactivate Admin
 deactivate EnrollmentsView
-deactivate RejectionConfirmationModalView
 @enduml

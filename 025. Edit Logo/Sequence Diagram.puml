@@ -42,11 +42,11 @@ Admin -> LogoView: Click Save Button
 activate LogoController
 LogoView -> LogoController: editLogo()
 alt invalid
-    LogoController -->> LogoView: Return Validation Result
-    LogoView -->> Admin: Show Error Message
+    LogoController -->> LogoView: Return Error Message
+    LogoView -->> Admin: showErrorPopup()
 else valid
-    LogoController -->> LogoView: Return Validation Result
-    LogoView -->> Admin: Show Success Popup (Logo Edited)
+    LogoController -->> LogoView: Return Success Message
+    LogoView -->> Admin: showSuccessPopup()
 end
 
 deactivate LogoController

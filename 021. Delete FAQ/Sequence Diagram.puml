@@ -44,17 +44,18 @@ FAQView -->> Admin: Show FAQ Page
 Admin -> FAQView: Click Delete Button on FAQ
 
 activate DeleteFAQConfirmationModalView
-FAQView -> DeleteFAQConfirmationModalView: Show Confirmation Modal
+FAQView -> DeleteFAQConfirmationModalView: Open Confirmation Modal
+DeleteFAQConfirmationModalView -->> Admin: Show Confirmation Modal
 
 Admin -> DeleteFAQConfirmationModalView: Click Confirm Button on Modal
 
 activate FAQController
 DeleteFAQConfirmationModalView -> FAQController: deleteFAQ()
-FAQController -->> DeleteFAQConfirmationModalView: Return Success Message
-DeleteFAQConfirmationModalView -->> Admin: Show Success Popup (FAQ Deleted)
+deactivate DeleteFAQConfirmationModalView
+FAQController -->> FAQView: Return Success Message
+FAQView -->> Admin: showSuccessPopup()
 deactivate FAQController
 
 deactivate Admin
 deactivate FAQView
-deactivate DeleteFAQConfirmationModalView
 @enduml

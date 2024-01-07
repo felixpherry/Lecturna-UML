@@ -42,24 +42,24 @@ deactivate DashboardView
 Admin -> SkillView: Click Add Button
 
 activate AddSkillModalView
-SkillView -> AddSkillModalView: Show Modal with Skill Form
+SkillView -> AddSkillModalView: Open Skill Form Modal
+AddSkillModalView -->> Admin: Show Skill Form Modal
 
 Admin -> AddSkillModalView: Fill Skill Form
 Admin -> AddSkillModalView: Click Save Button
 
 activate SkillController
 AddSkillModalView -> SkillController: addSkill()
+deactivate AddSkillModalView
 alt invalid
-    SkillController -->> AddSkillModalView: Return Validation Result
-    AddSkillModalView -->> Admin: Show Error Message
+    SkillController -->> SkillView: Return Validation Result
+    SkillView -->> Admin: showErrorMessage()
 else valid
-    SkillController -->> AddSkillModalView: Return Validation Result
-    AddSkillModalView -->> Admin: Close Modal
-    AddSkillModalView -->> Admin: Show Success Popup (Skill Added)
+    SkillController -->> SkillView: Return Validation Result
+    SkillView -->> Admin: showSuccessPopup()
 end
 
 deactivate SkillController
 deactivate Admin
 deactivate SkillView
-deactivate AddSkillModalView
 @enduml

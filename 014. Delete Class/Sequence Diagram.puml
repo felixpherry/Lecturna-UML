@@ -43,15 +43,16 @@ ClassesView -->> Admin: Show Classes Page
 Admin -> ClassesView: Click Delete Button on a Class
 
 activate DeleteConfirmationModalView
-ClassesView -> DeleteConfirmationModalView: Show Confirmation Modal
+ClassesView -> DeleteConfirmationModalView: Open Confirmation Modal
+DeleteConfirmationModalView -->> Admin: Show Confirmation Modal
 
-Admin -> DeleteConfirmationModalView: Click Confirm Button in Modal
+Admin -> DeleteConfirmationModalView: Click Confirm Button
 
 activate ClassController
 DeleteConfirmationModalView -> ClassController: deleteClass()
-ClassController -->> DeleteConfirmationModalView: Return Success Message
-DeleteConfirmationModalView -->> Admin: Show Success Popup (Class Deleted)
+ClassController -->> ClassesView: Return Success Message
 deactivate ClassController
+DeleteConfirmationModalView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate ClassesView

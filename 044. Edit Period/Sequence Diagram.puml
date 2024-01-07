@@ -44,25 +44,25 @@ PeriodView -->> Admin: Show Period Page
 Admin -> PeriodView: Click Edit Button on Period
 
 activate EditPeriodModalView
-PeriodView -> EditPeriodModalView: Show Modal with Period Form for Editing
+PeriodView -> EditPeriodModalView: Open Edit Period Form Modal
+EditPeriodModalView -->> Admin: Show Edit Period Form Modal
 
 Admin -> EditPeriodModalView: Edit Data in Form
 Admin -> EditPeriodModalView: Click Save Button
 
 activate PeriodController
 EditPeriodModalView -> PeriodController: editPeriod()
+deactivate EditPeriodModalView
 alt invalid
-    PeriodController -->> EditPeriodModalView: Return Validation Result
-    EditPeriodModalView -->> Admin: Show Error Message
+    PeriodController -->> PeriodView: Return Error Message
+    PeriodView -->> Admin: showErrorPopup()
 else valid
-    PeriodController -->> EditPeriodModalView: Return Validation Result
-    EditPeriodModalView -->> Admin: Close Modal
-    EditPeriodModalView -->> Admin: Show Success Popup (Period Edited)
+    PeriodController -->> PeriodView: Return Success Message
+    PeriodView -->> Admin: showSuccessPopup()
 end
 
 deactivate PeriodController
 
 deactivate Admin
 deactivate PeriodView
-deactivate EditPeriodModalView
 @enduml

@@ -44,25 +44,25 @@ CategoriesView -->> Admin: Show Categories Page
 Admin -> CategoriesView: Click Edit Button on Category
 
 activate EditCategoryModalView
-CategoriesView -> EditCategoryModalView: Show Edit Category Modal
+CategoriesView -> EditCategoryModalView: Open Edit Category Form Modal
+EditCategoryModalView -->> Admin: Show Edit Category Form Modal
 
 Admin -> EditCategoryModalView: Edit Data in Form
 Admin -> EditCategoryModalView: Click Save Button
 
 activate CategoryController
 EditCategoryModalView -> CategoryController: editCategory()
+deactivate EditCategoryModalView
 alt invalid
-    CategoryController -->> EditCategoryModalView: Return Validation Result
-    EditCategoryModalView -->> Admin: Show Error Message
+    CategoryController -->> CategoriesView: Return Error Message
+    CategoriesView -->> Admin: showErrorPopup()
 else valid
-    CategoryController -->> EditCategoryModalView: Return Validation Result
-    EditCategoryModalView -->> Admin: Show Success Popup (Category Edited)
-    EditCategoryModalView -->> Admin: Close Modal
+    CategoryController -->> CategoriesView: Return Success Message
+    CategoriesView -->> Admin: showSuccessPopup()
 end
 
 deactivate CategoryController
 
 deactivate Admin
 deactivate CategoriesView
-deactivate EditCategoryModalView
 @enduml

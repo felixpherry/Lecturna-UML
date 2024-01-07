@@ -26,8 +26,9 @@ DashboardView -->> Admin: Show Dashboard Page
 
 Admin -> DashboardView: Visit Programs Page
 activate ProgramsView
+DashboardView -> ProgramsView: Redirect to Programs Page
+deactivate DashboardView
 ProgramsView -->> Admin: Show Programs Page
 deactivate ProgramsView
 deactivate Admin
-deactivate DashboardView
 @enduml

@@ -1,6 +1,15 @@
 @startuml EditChat
 actor User
-participant System
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
 participant ClassChatPageView [
     <<view>>
     :ClassChatPage
@@ -12,46 +21,47 @@ participant EditChatFormView [
 ]
 
 participant ChatController [
-    <<controller>>
-    :ChatController
+  <<controller>>
+  :ChatController
 ]
 
 activate User
-User -> System: Login as Student or Instructor
-User -> System: Redirect to Dashboard Page
-deactivate User
+activate LoginPageView
+User -> LoginPageView: Login as Student or Instructor
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
 
-System -->> User: Show Dashboard Page
+DashboardView -->> User: Show Dashboard
 
-User -> System: Visit Class Chat Page
+User -> DashboardView: Visit Class Chat Page
 activate ClassChatPageView
-System -> ClassChatPageView: Show Class Chat Page
-deactivate System
+DashboardView -> ClassChatPageView: Redirect to Class Chat Page
+deactivate DashboardView
 
 ClassChatPageView -->> User: Show Class Chat Page
 
-User -> ClassChatPageView: Press Edit Button on a chat
-ClassChatPageView -> System: Show Edit Form for the selected chat
+User -> ClassChatPageView: Click Edit Button on a Chat
 activate EditChatFormView
-System -> EditChatFormView: Show Edit Chat Form
-deactivate System
+ClassChatPageView -> EditChatFormView: Toggle Edit Form for the selected Chat
+deactivate ClassChatPageView
 
-EditChatFormView -->> User: Show Edit Chat Form
+EditChatFormView -->> User: Show Edit Form for the selected Chat
 
-User -> EditChatFormView: Edit the chat in the chatbox
+User -> EditChatFormView: Edit the Chat in the Chatbox
 User -> EditChatFormView: Click Save Button
-EditChatFormView -> ChatController: updateChat(message)
 
 activate ChatController
-ChatController -->> EditChatFormView: Validate Chat
-alt Valid Chat
-    EditChatFormView -->> EditChatFormView: Show Updated Class Chat Page
-else Invalid Chat
-    EditChatFormView -->> EditChatFormView: Show Error Message
+EditChatFormView -> ChatController: editChat()
+alt invalid
+    ChatController -->> EditChatFormView: Return Error Message
+    EditChatFormView -->> User: showErrorPopup()
+else valid
+    ChatController -->> EditChatFormView: Return Success Message
+    EditChatFormView -->> User: Update Chat List
 end
 
 deactivate User
-deactivate ClassChatPageView
 deactivate EditChatFormView
 deactivate ChatController
 @enduml

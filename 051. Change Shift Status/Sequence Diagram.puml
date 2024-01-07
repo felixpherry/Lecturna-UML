@@ -15,11 +15,6 @@ participant ShiftView [
   :ShiftPage
 ]
 
-participant ChangeStatusModalView [
-  <<view>>
-  :ChangeStatusModal
-]
-
 participant ShiftController [
   <<controller>>
   :ShiftController
@@ -43,16 +38,13 @@ ShiftView -->> Admin: Show Shift Page
 
 Admin -> ShiftView: Click Change Status Button on Shift
 
-activate ChangeStatusModalView
-ShiftView -> ChangeStatusModalView: Show Status Change Modal
-
-Admin -> ChangeStatusModalView: Click Confirm Button on Modal
-
 activate ShiftController
-ChangeStatusModalView -> ShiftController: changeShiftStatus()
-ChangeStatusModalView -->> Admin: Show Success Popup (Shift Status Changed)
+ShiftView -> ShiftController: changeShiftStatus()
+ShiftController -->> ShiftView: Return Success Message
+ShiftView -->> Admin: showSuccessPopup()
+
+deactivate ShiftView
 deactivate ShiftController
-deactivate ChangeStatusModalView
 deactivate Admin
 deactivate ShiftView
 @enduml

@@ -44,25 +44,25 @@ CouponView -->> Admin: Show Coupon Page
 Admin -> CouponView: Click Edit Button on a Coupon
 
 activate EditCouponModalView
-CouponView -> EditCouponModalView: Show Modal with Edit Form
+CouponView -> EditCouponModalView: Open Edit Form Modal
+EditCouponModalView -->> Admin: Show Edit Form Modal
 
 Admin -> EditCouponModalView: Edit Data in Form
 Admin -> EditCouponModalView: Click Save Button
 
 activate CouponController
 EditCouponModalView -> CouponController: editCoupon()
+deactivate EditCouponModalView
 alt invalid
-    CouponController -->> EditCouponModalView: Return Validation Result
-    EditCouponModalView -->> Admin: Show Error Message
+    CouponController -->> CouponView: Return Error Message
+    CouponView -->> Admin: showErrorPopup()
 else valid
-    CouponController -->> EditCouponModalView: Return Validation Result
-    EditCouponModalView -->> Admin: Show Success Popup (Coupon Edited)
-    EditCouponModalView -->> Admin: Close Modal
+    CouponController -->> CouponView: Return Success Message
+    CouponView -->> Admin: showSuccessPopup()
 end
 
 deactivate CouponController
 
 deactivate Admin
 deactivate CouponView
-deactivate EditCouponModalView
 @enduml

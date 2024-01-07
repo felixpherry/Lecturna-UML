@@ -44,25 +44,25 @@ FAQView -->> Admin: Show FAQ Page
 Admin -> FAQView: Click Edit Button on FAQ
 
 activate EditFAQModalView
-FAQView -> EditFAQModalView: Show Modal with Edit Form
+FAQView -> EditFAQModalView: Open Edit FAQ Form Modal
+EditFAQModalView -->> Admin: Show Edit FAQ Form Modal
 
 Admin -> EditFAQModalView: Edit Data in Form
 Admin -> EditFAQModalView: Click Save Button on Modal
 
 activate FAQController
 EditFAQModalView -> FAQController: editFAQ()
+deactivate EditFAQModalView
 alt invalid
-    FAQController -->> EditFAQModalView: Return Validation Result
-    EditFAQModalView -->> Admin: Show Error Message
+    FAQController -->> FAQView: Return Error Message
+    FAQView -->> Admin: showErrorPopup()
 else valid
-    FAQController -->> EditFAQModalView: Return Validation Result
-    EditFAQModalView -->> Admin: Close Modal
-    EditFAQModalView -->> Admin: Show Success Popup (FAQ Edited)
+    FAQController -->> FAQView: Return Success Message
+    FAQView -->> Admin: showSuccessPopup()
 end
 
 deactivate FAQController
 
 deactivate Admin
 deactivate FAQView
-deactivate EditFAQModalView
 @enduml

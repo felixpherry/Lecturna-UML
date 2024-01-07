@@ -46,11 +46,11 @@ CourseRegistrationController -->> CourseRegistrationPageView: Return Error Messa
 CourseRegistrationPageView -->> Guest: showErrorPopup()
 else valid
 CourseRegistrationController -->> CourseRegistrationPageView: Return Success Message
+deactivate CourseRegistrationController
 CourseRegistrationPageView -->> Guest: showSuccessPopup()
 CourseRegistrationPageView -->> Guest: Redirect to Home Page
 end
 
 deactivate Guest
 deactivate CourseRegistrationPageView
-deactivate CourseRegistrationController
 @enduml

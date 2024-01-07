@@ -44,25 +44,25 @@ FAQView -->> Admin: Show FAQ Page
 Admin -> FAQView: Click Add Button on FAQ Page
 
 activate AddFAQModalView
-FAQView -> AddFAQModalView: Show Modal with Add FAQ Form
+FAQView -> AddFAQModalView: Open FAQ Form Modal
+AddFAQModalView -->> Admin: Show FAQ Form Modal
 
 Admin -> AddFAQModalView: Fill FAQ Form
 Admin -> AddFAQModalView: Click Save Button on Modal
 
 activate FAQController
 AddFAQModalView -> FAQController: addFAQ()
+deactivate AddFAQModalView
 alt invalid
-    FAQController -->> AddFAQModalView: Return Validation Result
-    AddFAQModalView -->> Admin: Show Error Message
+    FAQController -->> FAQView: Return Error Message
+    FAQView -->> Admin: showErrorPopup()
 else valid
-    FAQController -->> AddFAQModalView: Return Validation Result
-    AddFAQModalView -->> Admin: Show Success Popup (FAQ Added)
-    AddFAQModalView -->> Admin: Close Modal
+    FAQController -->> FAQView: Return Success Message
+    FAQView -->> Admin: showSuccessPopup()
 end
 
 deactivate FAQController
 
 deactivate Admin
 deactivate FAQView
-deactivate AddFAQModalView
 @enduml

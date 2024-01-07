@@ -38,9 +38,9 @@ Admin -> SkillView: Click Change Status Button
 
 activate SkillController
 SkillView -> SkillController: changeSkillStatus()
-SkillController -->> SkillView: Return Status Change Result
-SkillView -->> Admin: Show Success Popup (Status Changed)
+SkillController -->> SkillView: Return Success Message
 deactivate SkillController
+SkillView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate SkillView

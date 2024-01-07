@@ -35,11 +35,11 @@ AuthController -->> LoginPageView: Return Error Message
 LoginPageView -->> User: showErrorPopup()
 else valid
 AuthController -->> LoginPageView: Return Success Message
+deactivate AuthController
 LoginPageView -->> User: showSuccessPopup()
 LoginPageView -->> User: Redirect to Dashboard
 end
 
 deactivate User
 deactivate LoginPageView
-deactivate AuthController
 @enduml

@@ -44,17 +44,18 @@ CategoriesView -->> Admin: Show Categories Page
 Admin -> CategoriesView: Click Delete Button on Category
 
 activate DeleteCategoryConfirmationModalView
-CategoriesView -> DeleteCategoryConfirmationModalView: Show Confirmation Modal
+CategoriesView -> DeleteCategoryConfirmationModalView: Open Confirmation Modal
+DeleteCategoryConfirmationModalView -->> Admin: Show Confirmation Modal
 
 Admin -> DeleteCategoryConfirmationModalView: Click Confirm Button
 
 activate CategoryController
 DeleteCategoryConfirmationModalView -> CategoryController: deleteCategory()
-CategoryController -->> DeleteCategoryConfirmationModalView: Return Success Message
-DeleteCategoryConfirmationModalView -->> Admin: Show Success Popup (Category Deleted)
+deactivate DeleteCategoryConfirmationModalView
+CategoryController -->> CategoriesView: Return Success Message
+CategoriesView -->> Admin: showSuccessPopup()
 deactivate CategoryController
 
 deactivate Admin
 deactivate CategoriesView
-deactivate DeleteCategoryConfirmationModalView
 @enduml

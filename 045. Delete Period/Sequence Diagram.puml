@@ -44,16 +44,18 @@ PeriodView -->> Admin: Show Period Page
 Admin -> PeriodView: Click Delete Button on Period
 
 activate DeletePeriodModalView
-PeriodView -> DeletePeriodModalView: Show Confirmation Modal
+PeriodView -> DeletePeriodModalView: Open Confirmation Modal
+DeletePeriodModalView -->> Admin: Show Confirmation Modal
 
 Admin -> DeletePeriodModalView: Click Confirm Button
 
 activate PeriodController
 DeletePeriodModalView -> PeriodController: deletePeriod()
-DeletePeriodModalView -->> Admin: Show Success Popup (Period Deleted)
+deactivate DeletePeriodModalView
+PeriodController -->> PeriodView: Return Success Message
+PeriodView -->> Admin: showSuccessPopup()
 deactivate PeriodController
 
 deactivate Admin
 deactivate PeriodView
-deactivate DeletePeriodModalView
 @enduml

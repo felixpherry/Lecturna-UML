@@ -44,25 +44,25 @@ CategoriesView -->> Admin: Show Categories Page
 Admin -> CategoriesView: Click Add Button
 
 activate AddCategoryModalView
-CategoriesView -> AddCategoryModalView: Show Add Category Modal
+CategoriesView -> AddCategoryModalView: Open Add Category Form Modal
+AddCategoryModalView -->> Admin: Show Add Category Form Modal
 
 Admin -> AddCategoryModalView: Fill Category Form
 Admin -> AddCategoryModalView: Click Save Button
 
 activate CategoryController
 AddCategoryModalView -> CategoryController: addCategory()
+deactivate AddCategoryModalView
 alt invalid
-    CategoryController -->> AddCategoryModalView: Return Validation Result
-    AddCategoryModalView -->> Admin: Show Error Message
+    CategoryController -->> CategoriesView: Return Error Message
+    CategoriesView -->> Admin: showErrorPopup()
 else valid
-    CategoryController -->> AddCategoryModalView: Return Validation Result
-    AddCategoryModalView -->> Admin: Show Success Popup (Category Added)
-    AddCategoryModalView -->> Admin: Close Modal
+    CategoryController -->> CategoriesView: Return Success Message
+    CategoriesView -->> Admin: showSuccessPopup()
 end
 
 deactivate CategoryController
 
 deactivate Admin
 deactivate CategoriesView
-deactivate AddCategoryModalView
 @enduml

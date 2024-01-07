@@ -44,17 +44,18 @@ EnrollmentsView -->> Admin: Show Enrollments Page
 Admin -> EnrollmentsView: Click Approve Button on an Enrollment
 
 activate ApprovalConfirmationModalView
-EnrollmentsView -> ApprovalConfirmationModalView: Show Confirmation Modal
+EnrollmentsView -> ApprovalConfirmationModalView: Open Confirmation Modal
+ApprovalConfirmationModalView -->> Admin: Show Confirmation Modal
 
-Admin -> ApprovalConfirmationModalView: Click Confirm Button in Modal
+Admin -> ApprovalConfirmationModalView: Click Confirm Button
 
 activate EnrollmentController
 ApprovalConfirmationModalView -> EnrollmentController: approveEnrollment()
-EnrollmentController -->> ApprovalConfirmationModalView: Return Success Message
-ApprovalConfirmationModalView -->> Admin: Show Success Popup (Enrollment Approved)
+deactivate ApprovalConfirmationModalView
+EnrollmentController -->> EnrollmentsView: Return Success Message
+EnrollmentsView -->> Admin: showSuccessPopup()
 deactivate EnrollmentController
 
 deactivate Admin
 deactivate EnrollmentsView
-deactivate ApprovalConfirmationModalView
 @enduml

@@ -41,7 +41,7 @@ Admin -> GradeView: Click Change Status Button on Grade
 activate GradeController
 GradeView -> GradeController: changeGradeStatus()
 GradeController -->> GradeView: Return Success Message
-GradeView -->> Admin: Show Success Popup (Grade Status Changed)
+GradeView -->> Admin: showSuccessPopup()
 deactivate GradeController
 
 deactivate Admin

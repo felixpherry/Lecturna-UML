@@ -40,10 +40,11 @@ Admin -> SessionDetailsView: Click "Unpublish Session" Button
 
 activate SessionController
 SessionDetailsView -> SessionController: unpublishSession()
-deactivate SessionDetailsView
-
-SessionController -->> Admin: Show Success Popup (Session Unpublished)
-
-deactivate Admin
+SessionController -->> SessionDetailsView: Return Success Message
 deactivate SessionController
+
+SessionDetailsView -->> Admin: showSuccessPopup()
+
+deactivate SessionDetailsView
+deactivate Admin
 @enduml

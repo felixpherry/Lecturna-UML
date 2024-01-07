@@ -15,9 +15,14 @@ participant CourseRegistrationView [
   :CourseRegistrationPage
 ]
 
-participant RejectionConfirmationModalView [
+participant ConfirmationModalView [
   <<view>>
-  :RejectionConfirmationModal
+  :ConfirmationModal
+]
+
+participant CourseRegistrationController [
+  <<controller>>
+  :CourseRegistrationController
 ]
 
 activate Admin
@@ -36,13 +41,18 @@ deactivate DashboardView
 
 CourseRegistrationView -->> Admin: Show Course Registration Page
 
-Admin -> CourseRegistrationView: Click Reject Button on a registration
-CourseRegistrationView -> RejectionConfirmationModalView: Show Confirmation Modal
-activate RejectionConfirmationModalView
-RejectionConfirmationModalView -->> Admin: Click Confirm Button
-deactivate RejectionConfirmationModalView
+Admin -> CourseRegistrationView: Click Reject Button on a Registration
+activate ConfirmationModalView
+CourseRegistrationView -> ConfirmationModalView: Open Confirmation Modal
+ConfirmationModalView -->> Admin: Show Confirmation Modal
+Admin -> ConfirmationModalView: Click Confirm Button
+activate CourseRegistrationController
+ConfirmationModalView -> CourseRegistrationController: rejectRegistration()
+deactivate ConfirmationModalView
 
-Admin -> CourseRegistrationView: Show Success Popup (Registration Rejected)
+CourseRegistrationController -->> CourseRegistrationView: Return Success Message
+deactivate CourseRegistrationController
+CourseRegistrationView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate CourseRegistrationView

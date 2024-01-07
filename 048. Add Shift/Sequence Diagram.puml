@@ -44,24 +44,23 @@ ShiftView -->> Admin: Show Shift Page
 Admin -> ShiftView: Click Add Button
 
 activate AddShiftModalView
-ShiftView -> AddShiftModalView: Show Modal with Shift Form
+ShiftView -> AddShiftModalView: Open Shift Form Modal
+AddShiftModalView -->> Admin: Show Shift Form Modal
 
 Admin -> AddShiftModalView: Fill Shift Form
 Admin -> AddShiftModalView: Click Save Button on Modal
 
 activate ShiftController
 AddShiftModalView -> ShiftController: addShift()
+deactivate AddShiftModalView
 alt invalid
-    ShiftController -->> AddShiftModalView: Return Validation Result
-    AddShiftModalView -->> Admin: Show Error Message
+    ShiftController -->> ShiftView: Return Error Message
+    ShiftView -->> Admin: showErrorPopup()
 else valid
-    ShiftController -->> AddShiftModalView: Return Validation Result
+    ShiftController -->> ShiftView: Return Success Message
     deactivate ShiftController
 
-    Admin -> AddShiftModalView: Close Modal
-
-    AddShiftModalView -->> Admin: Show Success Popup (Shift Added)
-    deactivate AddShiftModalView
+    ShiftView -->> Admin: showSuccessPopup()
 end
 
 deactivate Admin

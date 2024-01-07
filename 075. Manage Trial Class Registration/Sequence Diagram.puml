@@ -24,12 +24,12 @@ deactivate LoginPageView
 
 DashboardView -->> Admin: Show Dashboard Page
 
-Admin -> DashboardView: Visit Trial Class Registration Page
+Admin -> DashboardView: Visit Trial Class Registration List Page
 activate TrialClassRegistrationView
-DashboardView -> TrialClassRegistrationView: Redirect to Trial Class Registration Page
+DashboardView -> TrialClassRegistrationView: Redirect to Trial Class Registration List Page
 deactivate DashboardView
 
-TrialClassRegistrationView -->> Admin: Show Trial Class Registration Page
+TrialClassRegistrationView -->> Admin: Show Trial Class Registration List Page
 
 deactivate Admin
 deactivate TrialClassRegistrationView

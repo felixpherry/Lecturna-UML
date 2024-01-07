@@ -43,7 +43,8 @@ ClassesView -->> Admin: Show Classes Page
 Admin -> ClassesView: Click Edit Button on a Class
 
 activate EditClassModalView
-ClassesView -> EditClassModalView: Show Modal with Edit Form
+ClassesView -> EditClassModalView: Open Edit Class Form Modal
+EditClassModalView -->> Admin: Show Edit Class Form Modal
 
 Admin -> EditClassModalView: Edit Data in Form
 Admin -> EditClassModalView: Click Save Button on Modal
@@ -51,14 +52,14 @@ Admin -> EditClassModalView: Click Save Button on Modal
 activate ClassController
 EditClassModalView -> ClassController: editClassData()
 alt invalid
-    ClassController -->> EditClassModalView: Return Validation Result
-    EditClassModalView -->> Admin: Show Error Message
+    ClassController -->> EditClassModalView: Return Error Message
+    EditClassModalView -->> Admin: showErrorPopup()
 else valid
-    ClassController -->> EditClassModalView: Return Validation Result
-    EditClassModalView -->> Admin: Close Modal
+    ClassController -->> EditClassModalView: Return Success Message
+    deactivate ClassController
+    EditClassModalView -->> Admin: showSuccessPopup()
 end
 
-deactivate ClassController
 
 deactivate Admin
 deactivate ClassesView

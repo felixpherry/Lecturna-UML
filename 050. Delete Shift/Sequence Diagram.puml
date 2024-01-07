@@ -44,13 +44,16 @@ ShiftView -->> Admin: Show Shift Page
 Admin -> ShiftView: Click Delete Button on Shift
 
 activate DeleteShiftModalView
-ShiftView -> DeleteShiftModalView: Show Confirmation Modal
+ShiftView -> DeleteShiftModalView: Open Confirmation Modal
+DeleteShiftModalView -->> Admin: Show Confirmation Modal
 
-Admin -> DeleteShiftModalView: Click Confirm Button on Modal
+Admin -> DeleteShiftModalView: Click Confirm Button
 
 activate ShiftController
 DeleteShiftModalView -> ShiftController: deleteShift()
-DeleteShiftModalView -->> Admin: Show Success Popup (Shift Deleted)
+ShiftController -->> ShiftView: Return Success Message
+ShiftView -->> Admin: showSuccessPopup()
+
 deactivate ShiftController
 deactivate DeleteShiftModalView
 deactivate Admin

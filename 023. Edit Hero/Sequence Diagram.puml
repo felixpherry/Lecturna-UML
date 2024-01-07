@@ -42,11 +42,11 @@ Admin -> HeroView: Click Save Button
 activate HeroController
 HeroView -> HeroController: editHeroContent()
 alt invalid
-    HeroController -->> HeroView: Return Validation Result
-    HeroView -->> Admin: Show Error Message
+    HeroController -->> HeroView: Return Error Message
+    HeroView -->> Admin: showErrorPopup()
 else valid
-    HeroController -->> HeroView: Return Validation Result
-    HeroView -->> Admin: Show Success Popup (Hero Edited)
+    HeroController -->> HeroView: Return Success Message
+    HeroView -->> Admin: showSuccessPopup()
 end
 
 deactivate HeroController

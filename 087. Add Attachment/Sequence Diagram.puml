@@ -25,9 +25,9 @@ participant AttachmentUploadModalView [
   :AttachmentUploadModal
 ]
 
-participant SessionController [
+participant OtherAttachmentController [
   <<controller>>
-  :SessionController
+  :OtherAttachmentController
 ]
 
 activate Instructor
@@ -58,21 +58,21 @@ SessionDetailsPageView -->> Instructor: Show Session Details
 
 Instructor -> SessionDetailsPageView: Click "Add New Resource" Section
 activate AttachmentUploadModalView
-SessionDetailsPageView -> AttachmentUploadModalView: Show Attachment Upload Modal
-deactivate SessionDetailsPageView
-
+SessionDetailsPageView -> AttachmentUploadModalView: Open Attachment Upload Modal
 AttachmentUploadModalView -->> Instructor: Show Attachment Upload Modal
 
 Instructor -> AttachmentUploadModalView: Upload Attachment
-Instructor -> SessionController: saveAttachment()
+Instructor -> AttachmentUploadModalView: Click Save Button
+activate OtherAttachmentController
+AttachmentUploadModalView -> OtherAttachmentController: saveAttachment()
 deactivate AttachmentUploadModalView
 
-SessionController -->> SessionDetailsPageView: Save Attachment
-SessionDetailsPageView -->> Instructor: Show Success Popup
+OtherAttachmentController -->> SessionDetailsPageView: Return Success Message
+SessionDetailsPageView -->> Instructor: showSuccessPopup()
 
 deactivate Instructor
 deactivate ClassDetailsPageView
 deactivate SessionDetailsPageView
 deactivate AttachmentUploadModalView
-deactivate SessionController
+deactivate OtherAttachmentController
 @enduml

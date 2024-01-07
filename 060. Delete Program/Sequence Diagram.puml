@@ -36,23 +36,25 @@ DashboardView -->> Admin: Show Dashboard Page
 
 Admin -> DashboardView: Visit Programs Page
 activate ProgramsView
+DashboardView -> ProgramsView: Redirect to Programs Page
 ProgramsView -->> Admin: Show Programs Page
 deactivate DashboardView
 
 Admin -> ProgramsView: Click Delete Button on Program
 
 activate DeleteConfirmationModalView
-ProgramsView -> DeleteConfirmationModalView: Show Confirmation Modal
+ProgramsView -> DeleteConfirmationModalView: Open Confirmation Modal
+DeleteConfirmationModalView -->> Admin: Show Confirmation Modal
 
 Admin -> DeleteConfirmationModalView: Confirm Deletion
 
 activate ProgramController
 DeleteConfirmationModalView -> ProgramController: deleteProgram()
-ProgramController -->> DeleteConfirmationModalView: Return Deletion Result
-DeleteConfirmationModalView -->> Admin: Show Success Popup (Program Deleted)
+deactivate DeleteConfirmationModalView
+ProgramController -->> ProgramsView: Return Success Message
+ProgramsView -->> Admin: showSuccessPopup()
 deactivate ProgramController
 
 deactivate Admin
 deactivate ProgramsView
-deactivate DeleteConfirmationModalView
 @enduml

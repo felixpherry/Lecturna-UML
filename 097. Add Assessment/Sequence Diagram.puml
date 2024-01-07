@@ -10,7 +10,7 @@ participant DashboardView [
   :Dashboard
 ]
 
-participant ClassAssessmentPageView [
+participant AssessmentPageView [
   <<view>>
   :ClassAssessmentPage
 ]
@@ -26,38 +26,44 @@ participant AssessmentController [
 ]
 
 activate Instructor
+activate LoginPageView
 Instructor -> LoginPageView: Login as Instructor
 activate DashboardView
-LoginPageView -> DashboardView: Redirect to Dashboard
+LoginPageView -> DashboardView: Redirect to Dashboard Page
 deactivate LoginPageView
 
-DashboardView -->> Instructor: Show Dashboard
+DashboardView -->> Instructor: Show Dashboard Page
 
 Instructor -> DashboardView: Visit Class Assessment Page
-activate ClassAssessmentPageView
-DashboardView -> ClassAssessmentPageView: Show Class Assessment Page
+activate AssessmentPageView
+DashboardView -> AssessmentPageView: Redirect to Class Assessment Page
 deactivate DashboardView
 
-ClassAssessmentPageView -->> Instructor: Show Class Assessment Page
+AssessmentPageView -->> Instructor: Show Class Assessment Page
 
-Instructor -> ClassAssessmentPageView: Click "Add" Button
-ClassAssessmentPageView -> AssessmentModalView: Show Modal with Assessment Form
+Instructor -> AssessmentPageView: Click "Add" Button
 activate AssessmentModalView
-AssessmentModalView -->> Instructor: Show Modal with Assessment Form
-deactivate AssessmentModalView
+AssessmentPageView -> AssessmentModalView: Open Assessment Form Modal
+deactivate AssessmentPageView
+
+AssessmentModalView -->> Instructor: Show Assessment Form Modal
 
 Instructor -> AssessmentModalView: Input Assessment
-AssessmentModalView -> AssessmentController: saveAssessment()
+Instructor -> AssessmentModalView: Click Save Button
+
 activate AssessmentController
-AssessmentController -->> AssessmentModalView: Validate Input Data
-alt Valid Input Data
-    AssessmentController -->> ClassAssessmentPageView: Show Success Popup (Assessment Added)
-else Invalid Input Data
-    AssessmentController -->> AssessmentModalView: Show Error Message
+AssessmentModalView -> AssessmentController: saveAssessment()
+
+alt invalid
+  AssessmentController -->> AssessmentModalView: Return Error Message
+  AssessmentModalView -->> Instructor: showErrorPopup()
+else valid
+  AssessmentController -->> AssessmentModalView: Return Success Message
+  AssessmentModalView -->> Instructor: showSuccessPopup()
 end
+deactivate AssessmentModalView
 
 deactivate Instructor
-deactivate ClassAssessmentPageView
 deactivate AssessmentModalView
 deactivate AssessmentController
 @enduml

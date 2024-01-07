@@ -40,31 +40,32 @@ DashboardView -> CreateClassesView: Redirect to Create Classes Page
 deactivate DashboardView
 
 CreateClassesView -->> Admin: Show Create Classes Page
-Admin -> CreateClassesView: Click Add Button on Create Classes Page
+Admin -> CreateClassesView: Click Add Button
 
 activate ClassFormModalView
-CreateClassesView -> ClassFormModalView: Show Modal with Class Form
+CreateClassesView -> ClassFormModalView: Open Class Form Modal
+ClassFormModalView -->> Admin: Show Class Form Modal
 
 Admin -> ClassFormModalView: Fill Class Form
-Admin -> ClassFormModalView: Click Save Button on Modal
+Admin -> ClassFormModalView: Click Save Button
 
 activate ClassController
 ClassFormModalView -> ClassController: saveClass()
 alt invalid
-    ClassController -->> ClassFormModalView: Return Validation Result
-    ClassFormModalView -->> Admin: Show Error Message
+    ClassController -->> ClassFormModalView: Return Error Message
+    ClassFormModalView -->> Admin: showErrorPopup()
 else valid
-    ClassController -->> ClassFormModalView: Return Validation Result
+    ClassController -->> ClassFormModalView: Return Success Message
     deactivate ClassController
 
-    Admin -> CreateClassesView: Click Save Button on Create Classes Page
+    Admin -> CreateClassesView: Click Save Button on the Page
 
     activate ClassController
     CreateClassesView -> ClassController: saveClasses()
     ClassController -->> CreateClassesView: Return Success Message
-    CreateClassesView -->> Admin: Show Success Popup (Classes Added)
-    CreateClassesView -->> Admin: Redirect to Classes Page
     deactivate ClassController
+    CreateClassesView -->> Admin: showSuccessPopup()
+    CreateClassesView -->> Admin: Redirect to Classes Page
 end
 
 

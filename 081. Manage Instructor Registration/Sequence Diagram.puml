@@ -24,12 +24,12 @@ deactivate LoginPageView
 
 DashboardView -->> Admin: Show Dashboard Page
 
-Admin -> DashboardView: Visit Instructor Registration Page
+Admin -> DashboardView: Visit Instructor Registration List Page
 activate InstructorRegistrationView
-DashboardView -> InstructorRegistrationView: Redirect to Instructor Registration Page
+DashboardView -> InstructorRegistrationView: Redirect to Instructor Registration List Page
 deactivate DashboardView
 
-InstructorRegistrationView -->> Admin: Show Instructor Registration Page
+InstructorRegistrationView -->> Admin: Show Instructor Registration List Page
 
 deactivate Admin
 deactivate InstructorRegistrationView

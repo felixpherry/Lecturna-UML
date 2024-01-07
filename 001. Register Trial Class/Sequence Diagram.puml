@@ -35,11 +35,11 @@ TrialClassRegistrationController -->> TrialClassRegistrationPageView: Return Err
 TrialClassRegistrationPageView -->> Guest: showErrorPopup()
 else valid
 TrialClassRegistrationController -->> TrialClassRegistrationPageView: Return Success Message
+deactivate TrialClassRegistrationController
 TrialClassRegistrationPageView -->> Guest: showSuccessPopup()
 TrialClassRegistrationPageView -->> Guest: Redirect to Home Page
 end
 
 deactivate Guest
 deactivate TrialClassRegistrationPageView
-deactivate TrialClassRegistrationController
 @enduml

@@ -36,6 +36,7 @@ DashboardView -->> Admin: Show Dashboard Page
 
 Admin -> DashboardView: Visit Programs Page
 activate ProgramsView
+DashboardView -> ProgramsView: Redirect to Programs Page
 ProgramsView -->> Admin: Show Programs Page
 deactivate DashboardView
 
@@ -43,6 +44,7 @@ Admin -> ProgramsView: Click Edit Button on Program
 
 activate EditProgramPageView
 ProgramsView -> EditProgramPageView: Redirect to Edit Program Page
+EditProgramPageView -->> Admin: Show Edit Program Page
 
 Admin -> EditProgramPageView: Fill Edit Program Form
 Admin -> EditProgramPageView: Click Save Button
@@ -50,14 +52,14 @@ Admin -> EditProgramPageView: Click Save Button
 activate ProgramController
 EditProgramPageView -> ProgramController: editProgram()
 alt invalid
-    ProgramController -->> EditProgramPageView: Return Validation Result
-    EditProgramPageView -->> Admin: Show Error Message
+    ProgramController -->> EditProgramPageView: Return Error Message
+    EditProgramPageView -->> Admin: showErrorPopup()
 else valid
-    ProgramController -->> EditProgramPageView: Return Validation Result
-    EditProgramPageView -->> Admin: Show Success Popup (Program Edited)
+    ProgramController -->> EditProgramPageView: Return Success Message
+    deactivate ProgramController
+    EditProgramPageView -->> Admin: showSuccessPopup()
 end
 
-deactivate ProgramController
 deactivate Admin
 deactivate ProgramsView
 deactivate EditProgramPageView

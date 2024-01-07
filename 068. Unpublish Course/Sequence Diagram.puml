@@ -40,10 +40,10 @@ Admin -> CourseDetailsView: Click "Unpublish Course" Button
 
 activate CourseController
 CourseDetailsView -> CourseController: unpublishCourse()
-CourseController -->> CourseDetailsView: Return Unpublishing Result
+CourseController -->> CourseDetailsView: Return Success Message
 deactivate CourseController
 
-CourseDetailsView -->> Admin: Show Success Popup (Course Unpublished)
+CourseDetailsView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate CourseDetailsView

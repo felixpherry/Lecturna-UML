@@ -42,24 +42,25 @@ deactivate DashboardView
 Admin -> SkillView: Click Edit Button
 
 activate EditSkillModalView
-SkillView -> EditSkillModalView: Show Modal with Skill Form
+SkillView -> EditSkillModalView: Open Edit Skill Form Modal
+EditSkillModalView -->> Admin: Show Edit Skill Form Modal
 
 Admin -> EditSkillModalView: Edit Skill in Form
 Admin -> EditSkillModalView: Click Save Button
 
 activate SkillController
 EditSkillModalView -> SkillController: editSkill()
+deactivate EditSkillModalView
 alt invalid
-    SkillController -->> EditSkillModalView: Return Validation Result
-    EditSkillModalView -->> Admin: Show Error Message
+    SkillController -->> SkillView: Return Validation Result
+    SkillView -->> Admin: Show Error Message
 else valid
-    SkillController -->> EditSkillModalView: Return Validation Result
-    EditSkillModalView -->> Admin: Close Modal
-    EditSkillModalView -->> Admin: Show Success Popup (Skill Edited)
+    SkillController -->> SkillView: Return Validation Result
+    SkillView -->> Admin: Close Modal
+    SkillView -->> Admin: Show Success Popup (Skill Edited)
 end
 
 deactivate SkillController
 deactivate Admin
 deactivate SkillView
-deactivate EditSkillModalView
 @enduml

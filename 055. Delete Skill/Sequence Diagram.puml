@@ -42,17 +42,18 @@ deactivate DashboardView
 Admin -> SkillView: Click Delete Button
 
 activate DeleteConfirmationModalView
-SkillView -> DeleteConfirmationModalView: Show Confirmation Modal
+SkillView -> DeleteConfirmationModalView: Open Confirmation Modal
+DeleteConfirmationModalView -->> Admin: Show Confirmation Modal
 
 Admin -> DeleteConfirmationModalView: Confirm Deletion
 
 activate SkillController
 DeleteConfirmationModalView -> SkillController: deleteSkill()
-SkillController -->> DeleteConfirmationModalView: Return Deletion Result
-DeleteConfirmationModalView -->> Admin: Show Success Popup (Skill Deleted)
+deactivate DeleteConfirmationModalView
+SkillController -->> SkillView: Return Success Message
+SkillView -->> Admin: showSuccessPopup()
 deactivate SkillController
 
 deactivate Admin
 deactivate SkillView
-deactivate DeleteConfirmationModalView
 @enduml

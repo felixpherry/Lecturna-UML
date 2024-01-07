@@ -36,6 +36,7 @@ DashboardView -->> Admin: Show Dashboard Page
 
 Admin -> DashboardView: Visit Programs Page
 activate ProgramsView
+DashboardView -> ProgramsView: Redirect to Programs Page
 ProgramsView -->> Admin: Show Programs Page
 deactivate DashboardView
 
@@ -43,14 +44,15 @@ Admin -> ProgramsView: Click Edit Button on Program
 
 activate ProgramDetailsView
 ProgramsView -> ProgramDetailsView: Redirect to Program Details Page
+ProgramDetailsView -->> Admin: Show Program Details Page
 
 Admin -> ProgramDetailsView: Click Publish Button
 
 activate ProgramController
 ProgramDetailsView -> ProgramController: publishProgram()
-ProgramController -->> ProgramDetailsView: Return Publishing Result
-ProgramDetailsView -->> Admin: Show Success Popup (Program Published)
+ProgramController -->> ProgramDetailsView: Return Success Message
 deactivate ProgramController
+ProgramDetailsView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate ProgramsView

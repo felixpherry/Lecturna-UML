@@ -26,7 +26,7 @@ DashboardView -->> Student: Show Dashboard
 
 Student -> DashboardView: Visit Enrollments Page
 activate EnrollmentsPageView
-DashboardView -> EnrollmentsPageView: Show Enrollments Page
+DashboardView -> EnrollmentsPageView: Redirect to Enrollments Page
 deactivate DashboardView
 
 EnrollmentsPageView -->> Student: Show Enrollments Page

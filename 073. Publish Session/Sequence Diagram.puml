@@ -40,10 +40,11 @@ Admin -> SessionDetailsView: Click "Publish Session" Button
 
 activate SessionController
 SessionDetailsView -> SessionController: publishSession()
-deactivate SessionDetailsView
-
-SessionController -->> Admin: Show Success Popup (Session Published)
-
-deactivate Admin
+SessionController -->> SessionDetailsView: Return Success Message
 deactivate SessionController
+
+SessionDetailsView -->> Admin: showSuccessPopup()
+
+deactivate SessionDetailsView
+deactivate Admin
 @enduml

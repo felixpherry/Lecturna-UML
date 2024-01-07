@@ -44,17 +44,18 @@ CouponView -->> Admin: Show Coupon Page
 Admin -> CouponView: Click Delete Button on a Coupon
 
 activate DeleteCouponConfirmationModalView
-CouponView -> DeleteCouponConfirmationModalView: Show Confirmation Modal
+CouponView -> DeleteCouponConfirmationModalView: Open Confirmation Modal
+DeleteCouponConfirmationModalView -->> Admin: Show Confirmation Modal
 
 Admin -> DeleteCouponConfirmationModalView: Confirm Deletion
 
 activate CouponController
 DeleteCouponConfirmationModalView -> CouponController: deleteCoupon()
-CouponController -->> DeleteCouponConfirmationModalView: Return Success Message
-DeleteCouponConfirmationModalView -->> Admin: Show Success Popup (Coupon Deleted)
+deactivate DeleteCouponConfirmationModalView
+CouponController -->> CouponView: Return Success Message
+CouponView -->> Admin: showSuccessPopup()
 deactivate CouponController
 
 deactivate Admin
 deactivate CouponView
-deactivate DeleteCouponConfirmationModalView
 @enduml

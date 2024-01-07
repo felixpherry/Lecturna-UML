@@ -20,46 +20,50 @@ participant EditProfilePageView [
   :EditProfilePage
 ]
 
-participant ProfileController [
+participant AccountController [
   <<controller>>
-  :ProfileController
+  :AccountController
 ]
 
 activate User
 activate LoginPageView
 User -> LoginPageView: Login
 activate DashboardView
-LoginPageView -> DashboardView: Redirect to Dashboard
+LoginPageView -> DashboardView: Redirect to Dashboard Page
 deactivate LoginPageView
 
-DashboardView -->> User: Show Dashboard
+DashboardView -->> User: Show Dashboard Page
 
 User -> DashboardView: Visit Profile Page
 activate ProfilePageView
-DashboardView -> ProfilePageView: Show Profile Page
+DashboardView -> ProfilePageView: Redirect to Profile Page
 deactivate DashboardView
 
 ProfilePageView -->> User: Show Profile Page
 
 User -> ProfilePageView: Click Edit Profile Button
-ProfilePageView -> EditProfilePageView: Show Edit Profile Page
 activate EditProfilePageView
+ProfilePageView -> EditProfilePageView: Redirect to Edit Profile Page
+deactivate ProfilePageView
 
 EditProfilePageView -->> User: Show Edit Profile Page
 
 User -> EditProfilePageView: Fill Edit Profile Form
-EditProfilePageView -> ProfileController: saveProfileChanges()
-activate ProfileController
-ProfileController -->> EditProfilePageView: Validate Data
-alt Valid Data
-    EditProfilePageView -->> User: Close Edit Profile Page
-    User -->> ProfilePageView: Show Success Popup (Profile Edited)
-else Invalid Data
-    EditProfilePageView -->> User: Show Error Message
+User -> EditProfilePageView: Click Save Button
+
+activate AccountController
+EditProfilePageView -> AccountController: editAccount()
+
+alt invalid
+  AccountController -->> EditProfilePageView: Return Error Message
+  EditProfilePageView -->> User: showErrorPopup()
+else valid
+  AccountController -->> EditProfilePageView: Return Success Message
+  EditProfilePageView -->> User: showSuccessPopup()
 end
 
-deactivate User
-deactivate ProfilePageView
 deactivate EditProfilePageView
-deactivate ProfileController
+deactivate User
+deactivate EditProfilePageView
+deactivate AccountController
 @enduml

@@ -1,5 +1,15 @@
 @startuml DeleteChat
 actor User
+participant LoginPageView [
+  <<view>>
+  :LoginPage
+]
+
+participant DashboardView [
+  <<view>>
+  :Dashboard
+]
+
 participant ClassChatPageView [
     <<view>>
     :ClassChatPage
@@ -11,34 +21,39 @@ participant ConfirmationModalView [
 ]
 
 participant ChatController [
-    <<controller>>
-    :ChatController
+  <<controller>>
+  :ChatController
 ]
 
 activate User
-User -> ClassChatPageView: Login as Student or Instructor
-User -> ClassChatPageView: Redirect to Dashboard Page
-deactivate User
+activate LoginPageView
+User -> LoginPageView: Login as Student or Instructor
+activate DashboardView
+LoginPageView -> DashboardView: Redirect to Dashboard
+deactivate LoginPageView
 
-ClassChatPageView -->> User: Show Dashboard Page
+DashboardView -->> User: Show Dashboard
 
-User -> ClassChatPageView: Visit Class Chat Page
+User -> DashboardView: Visit Class Chat Page
 activate ClassChatPageView
-ClassChatPageView -->> User: Show Class Chat Page
-deactivate ClassChatPageView
+DashboardView -> ClassChatPageView: Redirect to Class Chat Page
+deactivate DashboardView
 
-User -> ClassChatPageView: Press Delete Button on a chat
-ClassChatPageView -> ConfirmationModalView: Show Confirmation Modal
+ClassChatPageView -->> User: Show Class Chat Page
+
+User -> ClassChatPageView: Click Delete Button on a Chat
 activate ConfirmationModalView
+ClassChatPageView -> ConfirmationModalView: Open Confirmation Modal
 ConfirmationModalView -->> User: Show Confirmation Modal
+User -> ConfirmationModalView: Click Confirm Button
+activate ChatController
+ConfirmationModalView -> ChatController: deleteChat()
 deactivate ConfirmationModalView
 
-User -> ConfirmationModalView: Click Confirm Button on the modal
-ConfirmationModalView -> ChatController: deleteChat()
-activate ChatController
-ChatController -->> ClassChatPageView: Delete Chat
+ChatController -->> ClassChatPageView: Return Success Message
 deactivate ChatController
+ClassChatPageView -->> User: Update Chat List
 
-ClassChatPageView -->> User: Show Updated Class Chat Page
+deactivate User
 deactivate ClassChatPageView
 @enduml

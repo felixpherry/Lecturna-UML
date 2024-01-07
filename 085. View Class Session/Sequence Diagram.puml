@@ -10,14 +10,9 @@ participant DashboardView [
   :Dashboard
 ]
 
-participant ClassDetailsPageView [
+participant ClassDetailsView [
   <<view>>
   :ClassDetailsPage
-]
-
-participant SessionDetailsPageView [
-  <<view>>
-  :SessionDetailsPage
 ]
 
 activate User
@@ -30,21 +25,12 @@ deactivate LoginPageView
 DashboardView -->> User: Show Dashboard
 
 User -> DashboardView: Visit Class Details Page
-activate ClassDetailsPageView
-DashboardView -> ClassDetailsPageView: Redirect to Class Details Page
+activate ClassDetailsView
+DashboardView -> ClassDetailsView: Redirect to Class Details Page
 deactivate DashboardView
 
-ClassDetailsPageView -->> User: Show Class Details Page
+ClassDetailsView -->> User: Show Class Details Page
 
-User -> ClassDetailsPageView: Select a Session from the Session Tab
-
-activate SessionDetailsPageView
-ClassDetailsPageView -> SessionDetailsPageView: Redirect to Session Details Page
-deactivate ClassDetailsPageView
-
-
-SessionDetailsPageView -->> User: Show Session Details Page
-
-deactivate User
-deactivate SessionDetailsPageView
+User -> ClassDetailsView: Click "Session" Tab
+ClassDetailsView -->> User: Show All Sessions for the Class
 @enduml

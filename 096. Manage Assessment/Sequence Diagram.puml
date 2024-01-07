@@ -10,29 +10,37 @@ participant DashboardView [
   :Dashboard
 ]
 
-participant ClassDetailsPageView [
+participant ClassDetailView [
   <<view>>
-  :ClassDetailsPage
+  :ClassDetailPage
+]
+
+participant AssessmentPageView [
+  <<view>>
+  :ClassAssessmentPage
 ]
 
 activate Instructor
+activate LoginPageView
 Instructor -> LoginPageView: Login as Instructor
 activate DashboardView
-LoginPageView -> DashboardView: Redirect to Dashboard
+LoginPageView -> DashboardView: Redirect to Dashboard Page
 deactivate LoginPageView
 
-DashboardView -->> Instructor: Show Dashboard
+DashboardView -->> Instructor: Show Dashboard Page
 
 Instructor -> DashboardView: Visit Class Detail Page
-activate ClassDetailsPageView
-DashboardView -> ClassDetailsPageView: Redirect to Class Details Page
+activate ClassDetailView
+DashboardView -> ClassDetailView: Redirect to Class Detail Page
 deactivate DashboardView
 
-ClassDetailsPageView -->> Instructor: Show Class Details Page
+ClassDetailView -->> Instructor: Show Class Detail Page
 
-Instructor -> ClassDetailsPageView: Click Assessment Tab
-ClassDetailsPageView -->> Instructor: Redirect to Class Assessment Page
+Instructor -> ClassDetailView: Click Assessment Tab
+activate AssessmentPageView
+ClassDetailView -> AssessmentPageView: Redirect to Class Assessment Page
+deactivate ClassDetailView
 
-deactivate Instructor
-deactivate ClassDetailsPageView
+AssessmentPageView -->> Instructor: Show Class Assessment Page
+
 @enduml

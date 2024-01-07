@@ -15,11 +15,6 @@ participant ProgramDetailsView [
   :ProgramDetailsPage
 ]
 
-participant CoursesController [
-  <<controller>>
-  :CoursesController
-]
-
 activate Admin
 activate LoginPageView
 Admin -> LoginPageView: Login as Admin
@@ -37,12 +32,6 @@ deactivate DashboardView
 ProgramDetailsView -->> Admin: Show Program Details Page
 
 Admin -> ProgramDetailsView: View All Courses in the Program
-
-activate CoursesController
-ProgramDetailsView -> CoursesController: viewAllCourses()
-CoursesController -->> ProgramDetailsView: Return Course Data
-ProgramDetailsView -->> Admin: Display All Courses in the Program
-deactivate CoursesController
 
 deactivate Admin
 deactivate ProgramDetailsView

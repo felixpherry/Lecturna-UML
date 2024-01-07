@@ -46,19 +46,19 @@ activate SessionFormView
 CourseDetailsView -> SessionFormView: Show Session Form
 
 Admin -> SessionFormView: Fill Session Form
-Admin -> SessionFormView: Click Save Button on Form
+Admin -> SessionFormView: Click Save Button
 
 activate SessionController
 SessionFormView -> SessionController: addSession()
 alt invalid
-    SessionController -->> SessionFormView: Return Validation Result
-    SessionFormView -->> Admin: Show Error Message
+    SessionController -->> SessionFormView: Return Error Message
+    SessionFormView -->> Admin: showErrorPopup()
 else valid
-    SessionController -->> SessionFormView: Return Validation Result
+    SessionController -->> SessionFormView: Return Success Message
     deactivate SessionController
 
+    SessionFormView -->> Admin: showSuccessPopup()
     SessionFormView -->> Admin: Redirect to Session Details Page
-    SessionFormView -->> Admin: Show Success Popup (Session Added)
 end
 
 deactivate Admin

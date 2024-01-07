@@ -40,9 +40,9 @@ participant AccountsController [
 activate AccountsController
 AccountsView -> AccountsController: unbanUser()
 AccountsController -->> AccountsView: Return Success Message
+deactivate AccountsController
 AccountsView -->> Admin: Show Success Popup (User Unbanned)
 
 deactivate Admin
 deactivate AccountsView
-deactivate AccountsController
 @enduml

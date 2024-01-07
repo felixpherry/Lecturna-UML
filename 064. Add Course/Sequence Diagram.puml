@@ -20,11 +20,6 @@ participant AddCourseFormView [
   :AddCourseForm
 ]
 
-participant CourseDetailsView [
-  <<view>>
-  :CourseDetailsPage
-]
-
 participant CoursesController [
   <<controller>>
   :CoursesController
@@ -57,12 +52,12 @@ Admin -> AddCourseFormView: Click Save Button
 activate CoursesController
 AddCourseFormView -> CoursesController: addNewCourse()
 alt invalid
-    CoursesController -->> AddCourseFormView: Return Validation Result
-    AddCourseFormView -->> Admin: Show Error Message
+    CoursesController -->> AddCourseFormView: Return Error Message
+    AddCourseFormView -->> Admin: showErrorPopup()
 else valid
-    CoursesController -->> AddCourseFormView: Return Validation Result
+    CoursesController -->> AddCourseFormView: Return Success Message
+    AddCourseFormView -->> Admin: showSuccessPopup()
     AddCourseFormView -->> Admin: Redirect to Course Details Page
-    AddCourseFormView -->> Admin: Show Success Popup (Course Added)
 end
 
 deactivate CoursesController

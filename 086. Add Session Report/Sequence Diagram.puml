@@ -20,14 +20,14 @@ participant SessionDetailsPageView [
   :SessionDetailsPage
 ]
 
-participant SessionReportFormView [
+participant SessionReportFormModalView [
   <<view>>
-  :SessionReportForm
+  :SessionReportFormModal
 ]
 
-participant SessionController [
+participant SessionReportController [
   <<controller>>
-  :SessionController
+  :SessionReportController
 ]
 
 activate Instructor
@@ -57,22 +57,23 @@ deactivate ClassDetailsPageView
 SessionDetailsPageView -->> Instructor: Show Session Details
 
 Instructor -> SessionDetailsPageView: Click "Session Report" Section
-activate SessionReportFormView
-SessionDetailsPageView -> SessionReportFormView: Redirect to Session Report Form
+activate SessionReportFormModalView
+SessionDetailsPageView -> SessionReportFormModalView: Open Session Report Form Modal
+
+SessionReportFormModalView -->> Instructor: Show Session Report Form Modal
+
+Instructor -> SessionReportFormModalView: Fill Session Report Form
+Instructor -> SessionReportFormModalView: Click Save Button
+activate SessionReportController
+SessionReportFormModalView -> SessionReportController: saveSessionReport()
+SessionReportController -->> SessionDetailsPageView: Return Success Message
+deactivate SessionReportController
+deactivate SessionReportFormModalView
+SessionDetailsPageView -->> Instructor: showSuccessPopup()
+
 deactivate SessionDetailsPageView
-
-SessionReportFormView -->> Instructor: Show Session Report Form
-
-Instructor -> SessionReportFormView: Fill Session Report Form
-Instructor -> SessionController: saveSessionReport()
-deactivate SessionReportFormView
-
-SessionController -->> SessionDetailsPageView: Save Session Report
-SessionDetailsPageView -->> Instructor: Show Success Popup
-
 deactivate Instructor
 deactivate ClassDetailsPageView
 deactivate SessionDetailsPageView
-deactivate SessionReportFormView
-deactivate SessionController
+deactivate SessionReportFormModalView
 @enduml

@@ -15,9 +15,9 @@ participant InstructorRegistrationView [
   :InstructorRegistrationPage
 ]
 
-participant RejectionConfirmationModalView [
+participant ConfirmationModalView [
   <<view>>
-  :RejectionConfirmationModal
+  :ConfirmationModal
 ]
 
 participant InstructorRegistrationController [
@@ -42,16 +42,18 @@ deactivate DashboardView
 InstructorRegistrationView -->> Admin: Show Instructor Registration Page
 
 Admin -> InstructorRegistrationView: Click Reject Button on a Registration
-InstructorRegistrationView -> RejectionConfirmationModalView: Show Confirmation Modal
-activate RejectionConfirmationModalView
-RejectionConfirmationModalView -->> Admin: Confirm Rejection
-deactivate RejectionConfirmationModalView
+activate ConfirmationModalView
+InstructorRegistrationView -> ConfirmationModalView: Open Confirmation Modal
+ConfirmationModalView -->> Admin: Show Confirmation Modal
+Admin -> ConfirmationModalView: Confirm Rejection
+activate InstructorRegistrationController
+ConfirmationModalView -> InstructorRegistrationController: rejectRegistration()
+deactivate ConfirmationModalView
 
-Admin -> InstructorRegistrationController: processRejection()
-InstructorRegistrationController -->> InstructorRegistrationView: Update Registration Status
-InstructorRegistrationView -->> Admin: Show Success Popup (Rejection Done)
+InstructorRegistrationController -->> InstructorRegistrationView: Return Success Message
+deactivate InstructorRegistrationController
+InstructorRegistrationView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate InstructorRegistrationView
-deactivate InstructorRegistrationController
 @enduml

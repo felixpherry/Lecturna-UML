@@ -37,13 +37,16 @@ deactivate DashboardView
 ClassChatPageView -->> User: Show Class Chat Page
 
 User -> ClassChatPageView: Input Chat in Chatbox
-ClassChatPageView -> ChatController: sendChat(message)
+User -> ClassChatPageView: Click Send Button
+
 activate ChatController
-ChatController -> ChatController: Validate Input Data
-alt Valid Input Data
-    ChatController -->> ClassChatPageView: Show Updated Class Chat Page
-else Invalid Input Data
-    ChatController -->> ClassChatPageView: Show Error Message
+ClassChatPageView -> ChatController: sendChat()
+alt invalid
+    ChatController -->> ClassChatPageView: Return Error Message
+    ClassChatPageView -->> User: showErrorPopup()
+else valid
+    ChatController -->> ClassChatPageView: Return Success Message
+    ClassChatPageView -->> User: Update Chat List
 end
 
 deactivate User

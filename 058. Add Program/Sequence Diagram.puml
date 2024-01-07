@@ -20,11 +20,6 @@ participant AddProgramPageView [
   :AddProgramPage
 ]
 
-participant ProgramDetailsPageView [
-  <<view>>
-  :ProgramDetailsPage
-]
-
 participant ProgramController [
   <<controller>>
   :ProgramController
@@ -41,13 +36,15 @@ DashboardView -->> Admin: Show Dashboard Page
 
 Admin -> DashboardView: Visit Programs Page
 activate ProgramsView
-ProgramsView -->> Admin: Show Programs Page
+DashboardView -> ProgramsView: Redirect to Programs Page
 deactivate DashboardView
+ProgramsView -->> Admin: Show Programs Page
 
 Admin -> ProgramsView: Click Add Button
 
 activate AddProgramPageView
 ProgramsView -> AddProgramPageView: Redirect to Add Program Page
+AddProgramPageView -->> Admin: Show Add Program Page
 
 Admin -> AddProgramPageView: Fill Program Form
 Admin -> AddProgramPageView: Click Save Button
@@ -55,15 +52,15 @@ Admin -> AddProgramPageView: Click Save Button
 activate ProgramController
 AddProgramPageView -> ProgramController: addProgram()
 alt invalid
-    ProgramController -->> AddProgramPageView: Return Validation Result
-    AddProgramPageView -->> Admin: Show Error Message
+    ProgramController -->> AddProgramPageView: Return Error Message
+    AddProgramPageView -->> Admin: showErrorPopup()
 else valid
     ProgramController -->> AddProgramPageView: Return Validation Result
+    deactivate ProgramController
+    AddProgramPageView -->> Admin: showSuccessPopup()
     AddProgramPageView -->> Admin: Redirect to Program Details Page
-    AddProgramPageView -->> Admin: Show Success Popup (Program Added)
 end
 
-deactivate ProgramController
 deactivate Admin
 deactivate ProgramsView
 deactivate AddProgramPageView

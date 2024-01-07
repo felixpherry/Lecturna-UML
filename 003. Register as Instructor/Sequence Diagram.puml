@@ -35,11 +35,11 @@ InstructorRegistrationController -->> InstructorRegistrationPageView: Return Err
 InstructorRegistrationPageView -->> Guest: showErrorPopup()
 else valid
 InstructorRegistrationController -->> InstructorRegistrationPageView: Return Success Message
+deactivate InstructorRegistrationController
 InstructorRegistrationPageView -->> Guest: showSuccessPopup()
 InstructorRegistrationPageView -->> Guest: Redirect to Home Page
 end
 
 deactivate Guest
 deactivate InstructorRegistrationPageView
-deactivate InstructorRegistrationController
 @enduml

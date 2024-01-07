@@ -44,25 +44,25 @@ PeriodView -->> Admin: Show Period Page
 Admin -> PeriodView: Click Add Button
 
 activate AddPeriodModalView
-PeriodView -> AddPeriodModalView: Show Modal with Period Form
+PeriodView -> AddPeriodModalView: Open Period Form Modal
+AddPeriodModalView -->> Admin: Show Period Form Modal
 
 Admin -> AddPeriodModalView: Fill Period Form
 Admin -> AddPeriodModalView: Click Save Button
 
 activate PeriodController
 AddPeriodModalView -> PeriodController: addPeriod()
+deactivate AddPeriodModalView
 alt invalid
-    PeriodController -->> AddPeriodModalView: Return Validation Result
-    AddPeriodModalView -->> Admin: Show Error Message
+    PeriodController -->> PeriodView: Return Error Message
+    PeriodView -->> Admin: showErrorPopup()
 else valid
-    PeriodController -->> AddPeriodModalView: Return Validation Result
-    AddPeriodModalView -->> Admin: Close Modal
-    AddPeriodModalView -->> Admin: Show Success Popup (Period Added)
+    PeriodController -->> PeriodView: Return Success Message
+    PeriodView -->> Admin: showSuccessPopup()
 end
 
 deactivate PeriodController
 
 deactivate Admin
 deactivate PeriodView
-deactivate AddPeriodModalView
 @enduml

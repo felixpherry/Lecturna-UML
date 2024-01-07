@@ -40,10 +40,10 @@ Admin -> CourseDetailsView: Click "Publish Course" Button
 
 activate CourseController
 CourseDetailsView -> CourseController: publishCourse()
-CourseController -->> CourseDetailsView: Return Publishing Result
+CourseController -->> CourseDetailsView: Return Success Message
 deactivate CourseController
 
-CourseDetailsView -->> Admin: Show Success Popup (Course Published)
+CourseDetailsView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate CourseDetailsView

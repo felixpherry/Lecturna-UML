@@ -43,18 +43,20 @@ SessionDetailsView -->> Admin: Show Session Details Page
 
 Admin -> SessionDetailsView: Click "Delete Session" Button
 activate ConfirmationModalView
-SessionDetailsView -> ConfirmationModalView: Show Confirmation Modal
+SessionDetailsView -> ConfirmationModalView: Open Confirmation Modal
+ConfirmationModalView -->> Admin: Show Confirmation Modal
 
-Admin -> ConfirmationModalView: Click Confirm Button on Modal
+Admin -> ConfirmationModalView: Click Confirm Button
 
 activate SessionController
 ConfirmationModalView -> SessionController: deleteSession()
 deactivate ConfirmationModalView
 
-SessionController -->> Admin: Redirect to Course Details Page
-SessionController -->> Admin: Show Success Popup (Session Deleted)
+SessionController -->> SessionDetailsView: Return Success Message
+deactivate SessionController
+SessionDetailsView -->> Admin: showSuccessPopup()
+SessionDetailsView -->> Admin: Redirect to Course Details Page
 
 deactivate Admin
 deactivate SessionDetailsView
-deactivate SessionController
 @enduml

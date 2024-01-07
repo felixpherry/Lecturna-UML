@@ -44,25 +44,25 @@ GradeView -->> Admin: Show Grade Page
 Admin -> GradeView: Click Edit Button on Grade
 
 activate EditGradeModalView
-GradeView -> EditGradeModalView: Show Modal with Edit Form
+GradeView -> EditGradeModalView: Open Edit Grade Form Modal
+EditGradeModalView -->> Admin: Show Edit Grade Form Modal
 
 Admin -> EditGradeModalView: Edit Data in Form
 Admin -> EditGradeModalView: Click Save Button
 
 activate GradeController
 EditGradeModalView -> GradeController: editGrade()
+deactivate EditGradeModalView
 alt invalid
-    GradeController -->> EditGradeModalView: Return Validation Result
-    EditGradeModalView -->> Admin: Show Error Message
+    GradeController -->> GradeView: Return Error Message
+    GradeView -->> Admin: showErrorPopup()
 else valid
-    GradeController -->> EditGradeModalView: Return Validation Result
-    EditGradeModalView -->> Admin: Close Modal
-    EditGradeModalView -->> Admin: Show Success Popup (Grade Edited)
+    GradeController -->> GradeView: Return Success Message
+    GradeView -->> Admin: showSuccessPopup()
 end
 
 deactivate GradeController
 
 deactivate Admin
 deactivate GradeView
-deactivate EditGradeModalView
 @enduml

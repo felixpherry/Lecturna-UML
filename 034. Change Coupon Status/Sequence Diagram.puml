@@ -41,8 +41,8 @@ Admin -> CouponView: Click Change Status Button on a Coupon
 activate CouponController
 CouponView -> CouponController: changeCouponStatus()
 CouponController -->> CouponView: Return Success Message
-CouponView -->> Admin: Show Success Popup (Status Changed)
 deactivate CouponController
+CouponView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate CouponView

@@ -16,7 +16,9 @@ participant DashboardView [
   :Dashboard
 ]
 
+activate DashboardView
 HomePageView -> DashboardView: Redirect to Dashboard Page
+DashboardView -->> User: Show Dashboard Page
 
 deactivate User
 deactivate HomePageView

@@ -40,7 +40,7 @@ Admin -> PeriodView: Click Change Status Button on Period
 
 activate PeriodController
 PeriodView -> PeriodController: changePeriodStatus()
-PeriodController -->> Admin: Show Success Popup (Status Changed)
+PeriodController -->> Admin: showSuccessPopup()
 deactivate PeriodController
 
 deactivate Admin

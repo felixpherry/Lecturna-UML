@@ -28,11 +28,9 @@ ConfirmationModalView -->> Student: Show Confirmation Modal
 Student -> ConfirmationModalView: Confirm Enrollment
 activate CourseEnrollmentController
 ConfirmationModalView -> CourseEnrollmentController: enrollCourse()
+deactivate ConfirmationModalView
 CourseEnrollmentController -->> EnrollmentsPageView: Return Success Message
 deactivate CourseEnrollmentController
-
-EnrollmentsPageView -> ConfirmationModalView: closeModal()
-deactivate ConfirmationModalView
 EnrollmentsPageView -->> Student: showSuccessPopup()
 deactivate Student
 deactivate EnrollmentsPageView

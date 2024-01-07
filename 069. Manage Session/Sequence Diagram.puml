@@ -15,11 +15,6 @@ participant CourseDetailsView [
   :CourseDetailsPage
 ]
 
-participant SessionController [
-  <<controller>>
-  :SessionController
-]
-
 activate Admin
 activate LoginPageView
 Admin -> LoginPageView: Login as Admin
@@ -37,13 +32,6 @@ deactivate DashboardView
 CourseDetailsView -->> Admin: Show Course Details Page
 
 Admin -> CourseDetailsView: View All Sessions in the Course
-
-activate SessionController
-CourseDetailsView -> SessionController: viewAllSessions()
-SessionController -->> CourseDetailsView: Return Session Data
-deactivate SessionController
-
-CourseDetailsView -->> Admin: Display All Sessions in the Course
 
 deactivate Admin
 deactivate CourseDetailsView

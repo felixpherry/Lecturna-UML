@@ -44,24 +44,23 @@ ShiftView -->> Admin: Show Shift Page
 Admin -> ShiftView: Click Edit Button on Shift
 
 activate EditShiftModalView
-ShiftView -> EditShiftModalView: Show Modal with Shift Form
+ShiftView -> EditShiftModalView: Open Shift Form Modal
+EditShiftModalView -->> Admin: Show Shift Form Modal
 
 Admin -> EditShiftModalView: Edit Data in Form
 Admin -> EditShiftModalView: Click Save Button on Modal
 
 activate ShiftController
 EditShiftModalView -> ShiftController: editShift()
+deactivate EditShiftModalView
 alt invalid
-    ShiftController -->> EditShiftModalView: Return Validation Result
-    EditShiftModalView -->> Admin: Show Error Message
+    ShiftController -->> ShiftView: Return Error Message
+    ShiftView -->> Admin: showErrorPopup()
 else valid
-    ShiftController -->> EditShiftModalView: Return Validation Result
+    ShiftController -->> ShiftView: Return Success Message
     deactivate ShiftController
 
-    Admin -> EditShiftModalView: Close Modal
-
-    EditShiftModalView -->> Admin: Show Success Popup (Shift Edited)
-    deactivate EditShiftModalView
+    ShiftView -->> Admin: showSuccessPopup()
 end
 
 deactivate Admin

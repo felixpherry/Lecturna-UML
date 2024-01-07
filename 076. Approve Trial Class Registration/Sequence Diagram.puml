@@ -34,26 +34,26 @@ deactivate LoginPageView
 
 DashboardView -->> Admin: Show Dashboard Page
 
-Admin -> DashboardView: Visit Trial Class Registration Page
+Admin -> DashboardView: Visit Trial Class Registration List Page
 activate TrialClassRegistrationView
-DashboardView -> TrialClassRegistrationView: Redirect to Trial Class Registration Page
+DashboardView -> TrialClassRegistrationView: Redirect to Trial Class Registration List Page
 deactivate DashboardView
 
-TrialClassRegistrationView -->> Admin: Show Trial Class Registration Page
+TrialClassRegistrationView -->> Admin: Show Trial Class Registration List Page
 
-Admin -> TrialClassRegistrationView: Select Trial Class Registration to Approve
-TrialClassRegistrationView -> TrialClassController: approveTrialClassRegistration()
+Admin -> TrialClassRegistrationView: Click Approve Button on a Trial Class Registration
 activate ApprovalConfirmationModalView
-TrialClassController -->> ApprovalConfirmationModalView: Show Approval Confirmation Modal
+TrialClassRegistrationView -> ApprovalConfirmationModalView: Open Confirmation Modal
+ApprovalConfirmationModalView -->> Admin: Show Confirmation Modal
+Admin -> ApprovalConfirmationModalView: Confirm Approval
+activate TrialClassController
+ApprovalConfirmationModalView -> TrialClassController: approveRegistration()
 deactivate ApprovalConfirmationModalView
 
-ApprovalConfirmationModalView -->> Admin: Confirm Approval
-
-Admin -> TrialClassController: confirmApproval()
-TrialClassController -->> TrialClassRegistrationView: Update Registration Status
-TrialClassRegistrationView -->> Admin: Show Success Popup (Approval Done)
+TrialClassController -->> TrialClassRegistrationView: Return Success Message
+deactivate TrialClassController
+TrialClassRegistrationView -->> Admin: showSuccessPopup()
 
 deactivate Admin
 deactivate TrialClassRegistrationView
-deactivate TrialClassController
 @enduml

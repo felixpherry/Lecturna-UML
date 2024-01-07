@@ -10,7 +10,7 @@ activate HomePageView
 User -> HomePageView: Visit Home Page
 HomePageView -->> User: Show Home Page
 User -> HomePageView: Click Avatar on Navigation Bar
-HomePageView -> HomePageView: Show Logout Dropdown Menu
+HomePageView -->> User: Show Dropdown Menu
 
 User -> HomePageView: Click Logout Button in Dropdown Menu
 
@@ -22,10 +22,10 @@ participant AuthController [
 activate AuthController
 HomePageView -> AuthController: logoutUser()
 AuthController -->> HomePageView: Return Success Message
+deactivate AuthController
 HomePageView -->> User: Show Success Popup
 HomePageView -->> User: Redirect to Home Page
 
 deactivate User
 deactivate HomePageView
-deactivate AuthController
 @enduml

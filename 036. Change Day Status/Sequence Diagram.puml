@@ -41,7 +41,7 @@ Admin -> DayView: Click Change Status Button on a Day
 activate DayController
 DayView -> DayController: changeDayStatus()
 DayController -->> DayView: Return Success Message
-DayView -->> Admin: Show Success Popup (Status Changed)
+DayView -->> Admin: showSuccessPopup()
 deactivate DayController
 
 deactivate Admin

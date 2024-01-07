@@ -40,9 +40,9 @@ participant AccountsController [
 activate AccountsController
 AccountsView -> AccountsController: banUser()
 AccountsController -->> AccountsView: Return Success Message
-AccountsView -->> Admin: Show Success Popup (User Banned)
+deactivate AccountsController
+AccountsView -->> Admin: Show Success Popup
 
 deactivate Admin
 deactivate AccountsView
-deactivate AccountsController
 @enduml
